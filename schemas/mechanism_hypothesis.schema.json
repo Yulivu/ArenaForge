@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mechanism_hypothesis.schema.json",
+  "type": "object",
+  "required": ["candidate", "score", "evidence_ids"],
+  "properties": {
+    "candidate": {
+      "enum": ["external_loading", "internal_feedback", "inconclusive"]
+    },
+    "score": {"type": "number"},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "rationale": {"type": "string"}
+  },
+  "additionalProperties": false
+}
+

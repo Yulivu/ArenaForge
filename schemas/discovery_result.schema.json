@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "discovery_result.schema.json",
+  "type": "object",
+  "required": ["signal", "mechanism", "confidence", "evidence_ids"],
+  "properties": {
+    "signal": {
+      "enum": ["positive", "negative", "boundary", "inconclusive"]
+    },
+    "mechanism": {
+      "enum": ["external_loading", "internal_feedback", "inconclusive"]
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "threshold_interval": {
+      "type": ["array", "null"],
+      "items": {"type": "number"},
+      "minItems": 2,
+      "maxItems": 2
+    }
+  },
+  "additionalProperties": false
+}
+
