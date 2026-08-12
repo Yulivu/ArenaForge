@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/evaluation.schema.json",
+  "title": "ArenaForge Evaluation Summary v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "arena_id", "policies", "seeds", "runs"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "arena_id": {"type": "string", "minLength": 1},
+    "policies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "enum": ["declared", "random", "adaptive"]}
+    },
+    "seeds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "integer"}
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "policy",
+          "seed",
+          "run_id",
+          "outcome",
+          "ledger_events",
+          "budget_remaining"
+        ],
+        "properties": {
+          "policy": {"type": "string", "enum": ["declared", "random", "adaptive"]},
+          "seed": {"type": "integer"},
+          "run_id": {"type": "string", "minLength": 1},
+          "outcome": {
+            "type": "string",
+            "enum": ["supported", "confounded", "boundary", "inconclusive"]
+          },
+          "ledger_events": {"type": "integer", "minimum": 1},
+          "budget_remaining": {"type": "integer", "minimum": 0}
+        }
+      }
+    }
+  }
+}

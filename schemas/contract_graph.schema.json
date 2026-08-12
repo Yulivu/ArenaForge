@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/contract_graph.schema.json",
+  "title": "ArenaForge Contract Graph v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "arena_id", "nodes", "edges", "compiler"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "arena_id": {"type": "string", "minLength": 1},
+    "nodes": {"type": "array", "items": {"type": "object"}},
+    "edges": {"type": "array", "items": {"type": "object"}},
+    "compiler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "valid", "errors", "warnings"],
+      "properties": {
+        "version": {"type": "string"},
+        "valid": {"type": "boolean"},
+        "errors": {"type": "array", "items": {"type": "object"}},
+        "warnings": {"type": "array", "items": {"type": "object"}}
+      }
+    }
+  }
+}

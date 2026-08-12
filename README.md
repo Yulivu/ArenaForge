@@ -1,55 +1,75 @@
 # ArenaForge
 
-`ArenaForge` is the first runnable reference arena for the GOAI
-Type-2 project:
+ArenaForge is a contract-first runtime for executable scientific exploration.
+It turns a research question, competing hypotheses, observations, actions, and
+precommitted discovery signals into a reproducible run.
 
-> An agent chooses observations and small interventions to distinguish
-> competing mechanisms behind an ecological regime shift.
+The core is domain-neutral. A domain-specific environment is supplied through
+an adapter; the runtime owns contracts, scheduling, provenance, evidence, gates,
+replay, and export.
 
-The current implementation is an engineering MVP. It contains a deterministic
-lake simulator, a constrained action API, an append-only exploration ledger, a
-small mechanism-probe agent, and a CLI. It does not claim a new ecological
-result yet.
-
-## Run
-
-From this directory:
+## Quickstart
 
 ```bash
-python -m arenaforge run --seed 7 --output runs/demo
+python -m pip install -e ".[dev]"
+arenaforge validate --arena arena/reference-science-arena.yaml
+arenaforge compile --arena arena/reference-science-arena.yaml --output /tmp/contract_graph.json
+arenaforge run --arena arena/reference-science-arena.yaml --runs-dir /tmp/arenaforge-runs --run-id demo-001
+arenaforge evaluate --arena arena/reference-science-arena.yaml --runs-dir /tmp/arenaforge-eval --output /tmp/arenaforge-eval/evaluation.json
+arenaforge status --run-dir /tmp/arenaforge-runs/demo-001
+arenaforge replay --run-dir /tmp/arenaforge-runs/demo-001
+arenaforge export --run-dir /tmp/arenaforge-runs/demo-001 --target goai --output /tmp/arenaforge-goai
 ```
 
-The command writes:
+Run tests:
 
-- `runs/demo/events.jsonl`
-- `runs/demo/result.json`
+```bash
+python -m pytest
+```
 
-## Scope
+## Runtime outputs
 
-The v0 arena contains two hidden mechanisms:
+Each run produces:
 
-- `external_loading`: change is primarily driven by external nutrient input;
-- `internal_feedback`: low oxygen activates internal nutrient recycling.
+- `arena.snapshot.yaml`
+- `contract_graph.json`
+- `evidence.graph.json`
+- `discovery_ledger.jsonl`
+- `problem_certificate.json`
+- `report.md`
+- `run_manifest.json`
 
-The agent can sample the lake or run a small intervention. The evaluator
-checks whether the final mechanism claim is supported by the observed response.
+An evaluation run additionally produces `evaluation.json` and
+`evaluation.md`, comparing the declared, random, and adaptive policies over
+multiple seeds.
 
-## Repository layout
+The bundled reference adapter is a deterministic contract fixture. It exists to
+exercise the runtime and replay path; it is not a scientific result and is not
+the final competition dataset.
+
+## Layout
 
 ```text
-arena/       frozen arena contract
-schemas/     action, observation, hypothesis and event schemas
-src/         simulator, environment, planner, verifier and ledger
-tests/       local smoke tests
-runs/        generated runs, ignored by source control when appropriate
+arena/       executable arena contracts
+data/        frozen manifests and challenge fixtures
+schemas/     versioned JSON schemas
+src/         validator, compiler, runtime, ledger, evidence and export
+docs/        architecture, roadmap and competition materials
+tests/       contract and end-to-end tests
 ```
 
-## Current limitations
+## Documentation
 
-- The planner is deterministic and heuristic; the LLM adapter is not included
-  in this first scaffold.
-- The ecological model is intentionally small and must be calibrated against
-  public ecological literature and time-series data before formal evaluation.
-- Discovery thresholds are provisional until the arena evaluation protocol is
-  frozen.
+- `docs/pre-delivery-roadmap.md`
+- `docs/architecture.md`
+- `docs/goai-problem-statement.md`
+- `docs/ruc-technical-note.md`
+- `docs/demo-script.md`
+- `docs/reproducibility.md`
+- `docs/third-party-and-data-notices.md`
 
+## Project boundary
+
+ArenaForge is not a generic chat assistant, citation auditor, or a single-domain
+scientific simulator. The reference runtime is reusable; concrete scientific
+arenas are adapters and independently versioned inputs.

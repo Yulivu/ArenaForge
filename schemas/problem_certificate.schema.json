@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/problem_certificate.schema.json",
+  "title": "ArenaForge Problem Certificate v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "certificate_id", "run_id", "arena_id", "question", "hypotheses", "outcome", "evidence_ids", "provenance"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "certificate_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "arena_id": {"type": "string", "minLength": 1},
+    "question": {"type": "string", "minLength": 20},
+    "hypotheses": {"type": "array", "minItems": 2, "items": {"type": "object"}},
+    "outcome": {"type": "string", "enum": ["supported", "confounded", "boundary", "inconclusive"]},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["arena_hash", "ledger_head_hash", "generated_at"],
+      "properties": {
+        "arena_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "ledger_head_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "generated_at": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

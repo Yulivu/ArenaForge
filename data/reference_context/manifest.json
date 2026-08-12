@@ -1,0 +1,22 @@
+{
+  "manifest_version": "0.2",
+  "context_id": "reference-context-v0",
+  "status": "runtime_contract_fixture",
+  "license_note": "Synthetic fixture for runtime validation only.",
+  "sources": [
+    {
+      "source_id": "fixture:observation-a",
+      "title": "Observation record A",
+      "kind": "record",
+      "uri": "fixture://observation-a",
+      "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "source_id": "fixture:observation-b",
+      "title": "Observation record B",
+      "kind": "record",
+      "uri": "fixture://observation-b",
+      "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ]
+}

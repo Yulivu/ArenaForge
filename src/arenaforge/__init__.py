@@ -1,7 +1,3 @@
-"""GOAI Ecology Probe reference arena."""
+"""ArenaForge contract-first scientific exploration runtime."""
 
-from .environment import LakeEnvironment
-from .planner import MechanismProbeAgent
-
-__all__ = ["LakeEnvironment", "MechanismProbeAgent"]
-
+__version__ = "0.2.0"

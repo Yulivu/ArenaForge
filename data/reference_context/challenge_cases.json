@@ -1,0 +1,18 @@
+{
+  "challenge_set_version": "0.2",
+  "status": "runtime_contract_fixture",
+  "cases": [
+    {
+      "case_id": "case-a",
+      "observation": "The first mechanism produces the expected directional change.",
+      "supports": ["mechanism_a"],
+      "conflicts": []
+    },
+    {
+      "case_id": "case-b",
+      "observation": "The competing mechanism also explains part of the observed change.",
+      "supports": ["mechanism_b"],
+      "conflicts": ["mechanism_a"]
+    }
+  ]
+}
