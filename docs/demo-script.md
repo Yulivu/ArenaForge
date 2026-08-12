@@ -2,15 +2,15 @@
 
 ## 1. Introduce the problem
 
-Show `arena/reference-science-arena.yaml`. Explain that the arena declares a
-question, competing hypotheses, actions, budgets, feedback, and discovery
-signals before execution.
+Show `arena/diabetes-predictor-arena.yaml`. Explain that the arena declares a
+BMI-versus-blood-pressure question, competing hypotheses, actions, budgets,
+feedback, and discovery signals before execution.
 
 ## 2. Validate and compile
 
 ```bash
-arenaforge validate --arena arena/reference-science-arena.yaml
-arenaforge compile --arena arena/reference-science-arena.yaml --output /tmp/contract_graph.json
+arenaforge validate --arena arena/diabetes-predictor-arena.yaml
+arenaforge compile --arena arena/diabetes-predictor-arena.yaml --output /tmp/contract_graph.json
 ```
 
 Show the generated graph and point out problem, hypotheses, actions, evidence,
@@ -20,12 +20,14 @@ signals, and stop rules.
 
 ```bash
 arenaforge run \
-  --arena arena/reference-science-arena.yaml \
+  --arena arena/diabetes-predictor-arena.yaml \
   --runs-dir /tmp/arenaforge-runs \
   --run-id demo-001
 ```
 
 Show the action sequence, budget consumption, evidence graph, and certificate.
+Point out the held-out R2 and RMSE values for BMI and blood pressure, plus the
+precommitted practical margin.
 
 ## 4. Verify and replay
 

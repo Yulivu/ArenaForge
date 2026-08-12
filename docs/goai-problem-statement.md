@@ -9,7 +9,10 @@ ArenaForge: Contract-First Scientific Exploration Runtime
 Scientific exploration is often performed through loosely specified sequences of
 search, analysis, intervention, and interpretation. This makes it difficult to
 compare competing explanations, preserve failed paths, or reproduce how a
-conclusion was reached.
+conclusion was reached. A concrete instance is comparing plausible baseline
+predictors under a fixed public dataset and a precommitted held-out protocol,
+instead of allowing a system to choose a favorable analysis after seeing the
+result.
 
 ## System
 
@@ -24,17 +27,20 @@ The arena declares:
 - baselines, stop rules, and budget;
 - reproducibility metadata.
 
-The runtime executes the contract through a domain adapter and emits a complete
-run bundle.
+The current reference arena compares BMI and average blood pressure as
+single-feature predictors of a one-year disease progression measure in the
+scikit-learn diabetes dataset. The runtime executes the contract through a
+domain adapter and emits a complete run bundle.
 
 ## Agent interaction
 
 The agent or planner can:
 
-1. inspect the frozen context;
-2. run hypothesis-specific probes;
-3. compare results;
-4. revise or certify the current problem state.
+1. inspect the frozen dataset context;
+2. fit the BMI probe;
+3. fit the blood-pressure probe;
+4. compare held-out R2 and RMSE;
+5. certify a scoped result.
 
 Each action has a precondition, input, output, cost, and ledger event.
 

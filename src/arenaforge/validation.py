@@ -252,6 +252,42 @@ def _validate_context_manifest(
             "context.manifest.sources",
             "source_id values must be unique",
         )
+    dataset_spec = document.get("dataset_spec")
+    if not isinstance(dataset_spec, dict):
+        add(
+            "CONTEXT_MANIFEST_INVALID",
+            "context.manifest.dataset_spec",
+            "dataset_spec must be an object",
+        )
+    else:
+        for field in ("loader", "target", "array_sha256"):
+            if not isinstance(dataset_spec.get(field), str) or not dataset_spec[field]:
+                add(
+                    "CONTEXT_MANIFEST_INVALID",
+                    f"context.manifest.dataset_spec.{field}",
+                    "required non-empty string is missing",
+                )
+        for field in ("n_samples", "n_features"):
+            if not isinstance(dataset_spec.get(field), int) or dataset_spec[field] < 1:
+                add(
+                    "CONTEXT_MANIFEST_INVALID",
+                    f"context.manifest.dataset_spec.{field}",
+                    "required positive integer is missing",
+                )
+        if not isinstance(dataset_spec.get("feature_names"), list) or not all(
+            isinstance(item, str) and item for item in dataset_spec.get("feature_names", [])
+        ):
+            add(
+                "CONTEXT_MANIFEST_INVALID",
+                "context.manifest.dataset_spec.feature_names",
+                "feature_names must be a non-empty list of strings",
+            )
+        if not isinstance(dataset_spec.get("scaled"), bool):
+            add(
+                "CONTEXT_MANIFEST_INVALID",
+                "context.manifest.dataset_spec.scaled",
+                "scaled must be boolean",
+            )
 
 
 def _validate_challenge_set(
@@ -266,6 +302,36 @@ def _validate_challenge_set(
             "challenge_set_version and cases are required",
         )
         return
+    protocol = document.get("protocol")
+    if not isinstance(protocol, dict):
+        add(
+            "CHALLENGE_SET_INVALID",
+            "context.challenge_set.protocol",
+            "protocol must be an object",
+        )
+    else:
+        if not isinstance(protocol.get("train_fraction"), (int, float)) or not (
+            0 < protocol["train_fraction"] < 1
+        ):
+            add(
+                "CHALLENGE_SET_INVALID",
+                "context.challenge_set.protocol.train_fraction",
+                "train_fraction must be between 0 and 1",
+            )
+        if not isinstance(protocol.get("metric"), str) or not protocol["metric"]:
+            add(
+                "CHALLENGE_SET_INVALID",
+                "context.challenge_set.protocol.metric",
+                "metric must be a non-empty string",
+            )
+        if not isinstance(protocol.get("practical_margin"), (int, float)) or protocol[
+            "practical_margin"
+        ] < 0:
+            add(
+                "CHALLENGE_SET_INVALID",
+                "context.challenge_set.protocol.practical_margin",
+                "practical_margin must be non-negative",
+            )
     cases = document.get("cases")
     if not isinstance(cases, list) or not cases:
         add(
@@ -296,6 +362,26 @@ def _validate_challenge_set(
                 "CHALLENGE_SET_INVALID",
                 f"context.challenge_set.cases.{index}.observation",
                 "observation must be a non-empty string",
+            )
+        if not isinstance(case.get("seed"), int):
+            add(
+                "CHALLENGE_SET_INVALID",
+                f"context.challenge_set.cases.{index}.seed",
+                "seed must be an integer",
+            )
+        if case.get("expected_winner") not in hypothesis_ids:
+            add(
+                "CHALLENGE_SET_INVALID",
+                f"context.challenge_set.cases.{index}.expected_winner",
+                "expected_winner must be a known hypothesis id",
+            )
+        if not isinstance(case.get("expected_min_r2_margin"), (int, float)) or case[
+            "expected_min_r2_margin"
+        ] < 0:
+            add(
+                "CHALLENGE_SET_INVALID",
+                f"context.challenge_set.cases.{index}.expected_min_r2_margin",
+                "expected_min_r2_margin must be non-negative",
             )
         for field in ("supports", "conflicts"):
             values = case.get(field)

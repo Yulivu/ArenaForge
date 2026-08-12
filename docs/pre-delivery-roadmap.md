@@ -8,12 +8,10 @@ extra interpretation.
 
 ## Current status
 
-The repository now contains a working generic ArenaForge runtime and a
-deterministic reference fixture. Phases 1-3 are implemented at engineering-MVP
-level, and Phase 5 has a repeatable policy-evaluation scaffold. Phases 4 and 6
-remain the delivery blockers: the runtime-only fixture must be replaced by a
-real, compliant scientific arena, then the final competition materials and
-bundle must be produced from that arena.
+The repository now contains a working generic ArenaForge runtime and a concrete
+public-data reference arena. Phases 1-5 are implemented at first competition
+prototype level. Phase 6 is partly complete: the document skeletons exist, but
+final competition media and a broader held-out challenge report remain.
 
 ## Delivery standard
 
@@ -38,7 +36,8 @@ Before submission, the project must provide:
 - Final competition story:
   - GOAI: open exploration arena;
   - RUC: real research workflow with traceable evidence.
-- Final first arena: one runnable reference arena used to validate the generic runtime.
+- Final first arena: BMI versus blood pressure prediction on a frozen public
+  diabetes dataset.
 - Final scope boundary:
   - no multi-arena platform;
   - no generic agent shell;
@@ -71,7 +70,7 @@ Before submission, the project must provide:
 - Required fields are explicit.
 - Schema and runtime expectations match.
 
-**Status: complete for the reference fixture; final domain contract pending.**
+**Status: complete for the first concrete arena.**
 
 ## Phase 3: Freeze the runtime core
 
@@ -104,13 +103,12 @@ Before submission, the project must provide:
 
 ### Exit criteria
 
-- The fixture is explicitly marked as runtime-only until replaced by licensed
-  competition data.
+- The context is explicitly tied to a public dataset with loader and digest.
 - Source ids are stable and traceable.
 - Challenge cases are frozen.
 - The run can be replayed in a clean directory.
 
-**Status: pending. The current context is explicitly synthetic and runtime-only.**
+**Status: complete for the first concrete arena; broader held-out cases remain.**
 
 ## Phase 5: Close the evaluation loop
 
@@ -131,7 +129,8 @@ Before submission, the project must provide:
 - The comparison output records policy, seed, outcome, event count, and
   remaining budget for every run.
 
-**Status: scaffold complete; meaningful results require the final arena.**
+**Status: complete for the first concrete arena; additional metric and error
+  reporting remain for final submission.
 
 ## Phase 6: Prepare submission materials
 
@@ -152,7 +151,8 @@ Before submission, the project must provide:
 - Submission names, titles, and ids match.
 - Nothing in the package refers to retired directions.
 
-**Status: document skeleton complete; final submission text and media pending.**
+**Status: technical submission bundle complete; final competition-specific
+formatting and demo media remain.**
 
 ## Phase 7: Final pre-submit checks
 
@@ -170,14 +170,13 @@ Before submission, the project must provide:
 - A reviewer can follow the flow without hidden context.
 - The repo can be zipped and handed in.
 
-**Status: not yet complete.**
+**Status: technical pre-submit gate complete; external form submission and video
+delivery remain.**
 
 ## Next order of work
 
-1. Select and freeze the real domain-specific reference arena for GOAI Type-2.
-2. Implement its adapter, compliant context manifest, challenge cases, and
-   held-out evaluation protocol.
-3. Run declared, random, and adaptive policies across multiple seeds and record
-   accuracy, invalid-action rate, cost, and outcome calibration.
-4. Convert the current document skeletons into the final GOAI and RUC materials.
-5. Produce the demo video, clean submission bundle, and final pre-submit audit.
+1. Convert the current GOAI and RUC documents to the competition templates and
+   page limits.
+2. Record the demo using `docs/demo-script.md`.
+3. Run `python scripts/build_submission.py` from a clean checkout and attach the
+   generated bundle to the submission.

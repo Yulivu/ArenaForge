@@ -4,7 +4,7 @@
   "title": "ArenaForge Problem Certificate v0.2",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "certificate_id", "run_id", "arena_id", "question", "hypotheses", "outcome", "evidence_ids", "provenance"],
+  "required": ["schema_version", "certificate_id", "run_id", "arena_id", "question", "hypotheses", "outcome", "interpretation", "decision", "metrics", "evidence_ids", "provenance"],
   "properties": {
     "schema_version": {"const": "0.2"},
     "certificate_id": {"type": "string", "minLength": 1},
@@ -13,6 +13,31 @@
     "question": {"type": "string", "minLength": 20},
     "hypotheses": {"type": "array", "minItems": 2, "items": {"type": "object"}},
     "outcome": {"type": "string", "enum": ["supported", "confounded", "boundary", "inconclusive"]},
+    "interpretation": {"type": "string", "minLength": 1},
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["winner", "loser", "comparison_metric", "threshold", "r2_margin", "rmse_margin", "claim_scope"],
+      "properties": {
+        "winner": {"type": "string", "minLength": 1},
+        "loser": {"type": "string", "minLength": 1},
+        "comparison_metric": {"type": "string", "minLength": 1},
+        "threshold": {"type": "number"},
+        "r2_margin": {"type": "number"},
+        "rmse_margin": {"type": "number"},
+        "claim_scope": {"type": "string", "minLength": 1}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["bmi_r2", "bp_r2", "bmi_rmse", "bp_rmse"],
+      "properties": {
+        "bmi_r2": {"type": "number"},
+        "bp_r2": {"type": "number"},
+        "bmi_rmse": {"type": "number"},
+        "bp_rmse": {"type": "number"}
+      }
+    },
     "evidence_ids": {"type": "array", "items": {"type": "string"}},
     "provenance": {
       "type": "object",

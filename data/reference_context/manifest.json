@@ -1,22 +1,31 @@
 {
   "manifest_version": "0.2",
-  "context_id": "reference-context-v0",
-  "status": "runtime_contract_fixture",
-  "license_note": "Synthetic fixture for runtime validation only.",
+  "context_id": "sklearn-diabetes-context-v1",
+  "status": "frozen_public_dataset",
+  "license_note": "Use follows the scikit-learn project license and dataset documentation.",
   "sources": [
     {
-      "source_id": "fixture:observation-a",
-      "title": "Observation record A",
-      "kind": "record",
-      "uri": "fixture://observation-a",
-      "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "source_id": "dataset:sklearn-diabetes",
+      "title": "scikit-learn diabetes regression dataset",
+      "kind": "public_dataset",
+      "uri": "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html",
+      "content_sha256": "84ec38030d0ff6dfdc32f475c5633e39e7ada9dbc328d3deb29bb757eec6a331"
     },
     {
-      "source_id": "fixture:observation-b",
-      "title": "Observation record B",
-      "kind": "record",
-      "uri": "fixture://observation-b",
-      "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      "source_id": "docs:sklearn-diabetes-loader",
+      "title": "scikit-learn load_diabetes loader documentation",
+      "kind": "documentation",
+      "uri": "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_diabetes.html",
+      "content_sha256": "84ec38030d0ff6dfdc32f475c5633e39e7ada9dbc328d3deb29bb757eec6a331"
     }
-  ]
+  ],
+  "dataset_spec": {
+    "loader": "sklearn.datasets.load_diabetes",
+    "scaled": true,
+    "n_samples": 442,
+    "n_features": 10,
+    "feature_names": ["age", "sex", "bmi", "bp", "s1", "s2", "s3", "s4", "s5", "s6"],
+    "target": "one-year disease progression measure",
+    "array_sha256": "84ec38030d0ff6dfdc32f475c5633e39e7ada9dbc328d3deb29bb757eec6a331"
+  }
 }

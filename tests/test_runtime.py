@@ -11,28 +11,28 @@ from arenaforge.validation import ArenaValidationError, load_and_validate_arena
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ARENA = ROOT / "arena" / "reference-science-arena.yaml"
+ARENA = ROOT / "arena" / "diabetes-predictor-arena.yaml"
 
 
 def test_reference_arena_validates_and_compiles() -> None:
     arena = load_and_validate_arena(ARENA)
     graph = compile_contract_graph(ARENA)
-    assert arena["arena_id"] == "reference-science-arena"
+    assert arena["arena_id"] == "diabetes-predictor-arena"
     assert graph["compiler"]["valid"] is True
     assert any(node["type"] == "action" for node in graph["nodes"])
     assert {
         edge["from"]
         for edge in graph["edges"]
         if edge["relation"] == "consumes"
-    } >= {"artifact:mechanism_a_result", "artifact:mechanism_b_result"}
+    } >= {"artifact:bmi_probe_result", "artifact:bp_probe_result"}
 
 
 def test_invalid_arena_is_rejected(tmp_path: Path) -> None:
     invalid = tmp_path / "invalid.yaml"
     invalid.write_text(
         ARENA.read_text(encoding="utf-8").replace(
-            "arena_id: reference-science-arena",
-            "arena_id: reference-science-arena\nunknown_field: true",
+            "arena_id: diabetes-predictor-arena",
+            "arena_id: diabetes-predictor-arena\nunknown_field: true",
         ),
         encoding="utf-8",
     )
@@ -60,8 +60,11 @@ def test_end_to_end_run_replay_and_export(tmp_path: Path) -> None:
     manifest = json.loads((run_dir / "run_manifest.json").read_text(encoding="utf-8"))
     assert manifest["policy"] == "declared"
     assert manifest["policy_seed"] is None
+    assert manifest["adapter_seed"] == 7
     certificate = json.loads((run_dir / "problem_certificate.json").read_text(encoding="utf-8"))
     assert certificate["outcome"] in {"supported", "confounded", "boundary", "inconclusive"}
+    assert certificate["decision"]["winner"] == "bmi_primary"
+    assert certificate["metrics"]["bmi_r2"] > certificate["metrics"]["bp_r2"]
 
 
 def test_policy_run_is_recorded_and_replayable(tmp_path: Path) -> None:
@@ -80,6 +83,7 @@ def test_policy_run_is_recorded_and_replayable(tmp_path: Path) -> None:
     manifest = json.loads((run_dir / "run_manifest.json").read_text(encoding="utf-8"))
     assert manifest["policy"] == "random"
     assert manifest["policy_seed"] == 17
+    assert manifest["adapter_seed"] == 17
 
 
 def test_status_rejects_tampered_artifact(tmp_path: Path) -> None:
@@ -105,3 +109,19 @@ def test_evaluation_writes_policy_comparison(tmp_path: Path) -> None:
     assert summary["policies"] == ["declared", "random", "adaptive"]
     assert len(summary["runs"]) == 6
     assert (tmp_path / "evaluation.md").exists()
+    assert all(row["outcome"] == "supported" for row in summary["runs"])
+    assert all(row["challenge_passed"] for row in summary["runs"])
+
+
+def test_evaluation_rejects_undeclared_seed(tmp_path: Path) -> None:
+    try:
+        evaluate_arena(
+            ARENA,
+            tmp_path / "evaluation-runs",
+            tmp_path / "evaluation.json",
+            seeds=(999,),
+        )
+    except ValueError as error:
+        assert "not declared in the frozen challenge set" in str(error)
+    else:
+        raise AssertionError("undeclared challenge seed should be rejected")

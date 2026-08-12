@@ -12,10 +12,10 @@ replay, and export.
 
 ```bash
 python -m pip install -e ".[dev]"
-arenaforge validate --arena arena/reference-science-arena.yaml
-arenaforge compile --arena arena/reference-science-arena.yaml --output /tmp/contract_graph.json
-arenaforge run --arena arena/reference-science-arena.yaml --runs-dir /tmp/arenaforge-runs --run-id demo-001
-arenaforge evaluate --arena arena/reference-science-arena.yaml --runs-dir /tmp/arenaforge-eval --output /tmp/arenaforge-eval/evaluation.json
+arenaforge validate --arena arena/diabetes-predictor-arena.yaml
+arenaforge compile --arena arena/diabetes-predictor-arena.yaml --output /tmp/contract_graph.json
+arenaforge run --arena arena/diabetes-predictor-arena.yaml --runs-dir /tmp/arenaforge-runs --run-id demo-001
+arenaforge evaluate --arena arena/diabetes-predictor-arena.yaml --runs-dir /tmp/arenaforge-eval --output /tmp/arenaforge-eval/evaluation.json
 arenaforge status --run-dir /tmp/arenaforge-runs/demo-001
 arenaforge replay --run-dir /tmp/arenaforge-runs/demo-001
 arenaforge export --run-dir /tmp/arenaforge-runs/demo-001 --target goai --output /tmp/arenaforge-goai
@@ -26,6 +26,15 @@ Run tests:
 ```bash
 python -m pytest
 ```
+
+Build the technical submission bundle:
+
+```bash
+python scripts/build_submission.py
+```
+
+The command creates `dist/ArenaForge-submission/` with the source tree, frozen
+arena, evaluation report, and a verified demo export.
 
 ## Runtime outputs
 
@@ -43,9 +52,9 @@ An evaluation run additionally produces `evaluation.json` and
 `evaluation.md`, comparing the declared, random, and adaptive policies over
 multiple seeds.
 
-The bundled reference adapter is a deterministic contract fixture. It exists to
-exercise the runtime and replay path; it is not a scientific result and is not
-the final competition dataset.
+The bundled reference adapter executes a reproducible comparison on the public
+scikit-learn diabetes dataset. The result is an observational prediction
+certificate, not a causal claim.
 
 ## Layout
 
@@ -53,6 +62,7 @@ the final competition dataset.
 arena/       executable arena contracts
 data/        frozen manifests and challenge fixtures
 schemas/     versioned JSON schemas
+scripts/     reproducible submission and build commands
 src/         validator, compiler, runtime, ledger, evidence and export
 docs/        architecture, roadmap and competition materials
 tests/       contract and end-to-end tests

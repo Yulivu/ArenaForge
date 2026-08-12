@@ -27,13 +27,16 @@ that process explicit, budgeted, and replayable.
 
 ## Current implementation boundary
 
-The repository includes a deterministic reference adapter to validate the
-runtime. It is a systems demonstration, not a claim about a scientific domain.
-The final competition arena must replace the fixture context with licensed,
-frozen, domain-relevant sources and a documented evaluation protocol.
+The repository includes a deterministic public-data adapter for a concrete
+scientific exploration task. It compares BMI and average blood pressure as
+single-feature predictors of a one-year disease progression measure on a frozen
+scikit-learn dataset. The result is deliberately scoped as observational
+prediction and does not claim causality.
 
 ## Completion requirements
 
-A competition-ready version must include at least one domain adapter, frozen
-context, baseline comparison, replayable runs, and a complete evidence-backed
-submission bundle.
+A competition-ready version must include the domain adapter, frozen context,
+challenge cases, baseline comparison, replayable runs, and a complete
+evidence-backed submission bundle. This repository now contains that first
+concrete arena; further work is to broaden the held-out challenge protocol and
+prepare final competition media.

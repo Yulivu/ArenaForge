@@ -1,18 +1,39 @@
 {
   "challenge_set_version": "0.2",
-  "status": "runtime_contract_fixture",
+  "status": "frozen_public_dataset_cases",
+  "protocol": {
+    "train_fraction": 0.7,
+    "metric": "held_out_r2",
+    "practical_margin": 0.05,
+    "scope": "single-feature observational prediction; not causal inference"
+  },
   "cases": [
     {
-      "case_id": "case-a",
-      "observation": "The first mechanism produces the expected directional change.",
-      "supports": ["mechanism_a"],
-      "conflicts": []
+      "case_id": "seed-7",
+      "seed": 7,
+      "observation": "BMI and average blood pressure are evaluated on the same frozen 70/30 split.",
+      "supports": ["bmi_primary"],
+      "conflicts": ["bp_primary"],
+      "expected_winner": "bmi_primary",
+      "expected_min_r2_margin": 0.05
     },
     {
-      "case_id": "case-b",
-      "observation": "The competing mechanism also explains part of the observed change.",
-      "supports": ["mechanism_b"],
-      "conflicts": ["mechanism_a"]
+      "case_id": "seed-17",
+      "seed": 17,
+      "observation": "The same comparison is repeated with an independent declared seed.",
+      "supports": ["bmi_primary"],
+      "conflicts": ["bp_primary"],
+      "expected_winner": "bmi_primary",
+      "expected_min_r2_margin": 0.05
+    },
+    {
+      "case_id": "seed-27",
+      "seed": 27,
+      "observation": "The held-out comparison is repeated to test result stability.",
+      "supports": ["bmi_primary"],
+      "conflicts": ["bp_primary"],
+      "expected_winner": "bmi_primary",
+      "expected_min_r2_margin": 0.05
     }
   ]
 }

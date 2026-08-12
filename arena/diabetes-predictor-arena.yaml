@@ -1,0 +1,105 @@
+schema_version: "0.2"
+arena_id: diabetes-predictor-arena
+title: BMI Versus Blood Pressure Predictor Arena
+domain: observational biomedical prediction
+problem:
+  question: "On a frozen public diabetes dataset, which single baseline variable provides stronger held-out prediction of one-year disease progression: BMI or average blood pressure?"
+  objective: "Compare two predeclared predictors under an identical split and issue a scoped, non-causal evidence certificate."
+  scope: "The result concerns single-feature observational prediction on the frozen scikit-learn diabetes dataset and does not establish causation."
+  hypotheses:
+    - id: bmi_primary
+      statement: "BMI provides stronger held-out single-feature prediction of disease progression than average blood pressure."
+    - id: bp_primary
+      statement: "Average blood pressure provides stronger held-out single-feature prediction of disease progression than BMI."
+context:
+  manifest: data/reference_context/manifest.json
+  challenge_set: data/reference_context/challenge_cases.json
+observations:
+  - id: baseline_observation
+    type: observation
+    schema: dataset_observation
+actions:
+  - id: inspect_dataset
+    kind: observe
+    preconditions: [problem_defined, budget_remaining]
+    inputs: [problem, context]
+    outputs: [context_observation]
+    cost: {budget: actions, units: 1}
+  - id: fit_bmi_probe
+    kind: intervene
+    preconditions: [context_observation, budget_remaining]
+    inputs: [context_observation, bmi_primary]
+    outputs: [bmi_probe_result]
+    cost: {budget: actions, units: 2}
+  - id: fit_bp_probe
+    kind: intervene
+    preconditions: [context_observation, budget_remaining]
+    inputs: [context_observation, bp_primary]
+    outputs: [bp_probe_result]
+    cost: {budget: actions, units: 2}
+  - id: compare_predictors
+    kind: compare
+    preconditions: [bmi_probe_result, bp_probe_result]
+    inputs: [bmi_probe_result, bp_probe_result]
+    outputs: [comparison_result]
+    cost: {budget: actions, units: 1}
+  - id: issue_certificate
+    kind: certify
+    preconditions: [comparison_result]
+    inputs: [comparison_result, evidence_graph]
+    outputs: [problem_certificate]
+    cost: {budget: actions, units: 1}
+feedback:
+  - id: dataset_check
+    applies_to: [context_observation]
+    evaluator: deterministic.dataset_validator
+  - id: predictor_check
+    applies_to: [bmi_probe_result, bp_probe_result]
+    evaluator: deterministic.single_feature_evaluator
+  - id: comparison_check
+    applies_to: [comparison_result]
+    evaluator: deterministic.comparison_validator
+  - id: certificate_check
+    applies_to: [problem_certificate]
+    evaluator: deterministic.certificate_validator
+discovery_signals:
+  - id: stronger_predictor_supported
+    kind: supported
+    required_evidence:
+      artifacts: [bmi_probe_result, bp_probe_result, comparison_result, problem_certificate]
+      min_r2_margin: 0.05
+  - id: predictors_boundary
+    kind: boundary
+    required_evidence:
+      artifacts: [bmi_probe_result, bp_probe_result, comparison_result]
+      max_absolute_r2_margin: 0.05
+  - id: inconclusive
+    kind: inconclusive
+    required_evidence:
+      artifacts: [comparison_result]
+      allow_budget_exhaustion: true
+baselines:
+  - id: declared_order
+    description: "Runs the predeclared BMI and blood-pressure probes in contract order."
+  - id: random_order
+    description: "Chooses eligible probe actions with a seeded random policy."
+  - id: adaptive_order
+    description: "Chooses eligible actions by stage priority while preserving the same contract."
+stop_rules:
+  - id: stop_supported
+    when: stronger_predictor_supported
+    outcome: supported
+  - id: stop_boundary
+    when: predictors_boundary
+    outcome: boundary
+  - id: stop_inconclusive
+    when: inconclusive
+    outcome: inconclusive
+reproducibility:
+  seed: 7
+  budget: 8
+  adapter_version: diabetes-scikit-learn-0.1
+  tool_versions:
+    runtime: "0.2.0"
+    scikit_learn: "1.8.0"
+    dataset: "load_diabetes scaled=True"

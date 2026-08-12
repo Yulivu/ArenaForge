@@ -30,7 +30,12 @@
           "run_id",
           "outcome",
           "ledger_events",
-          "budget_remaining"
+          "budget_remaining",
+          "winner",
+          "r2_margin",
+          "bmi_r2",
+          "bp_r2",
+          "challenge_passed"
         ],
         "properties": {
           "policy": {"type": "string", "enum": ["declared", "random", "adaptive"]},
@@ -41,7 +46,12 @@
             "enum": ["supported", "confounded", "boundary", "inconclusive"]
           },
           "ledger_events": {"type": "integer", "minimum": 1},
-          "budget_remaining": {"type": "integer", "minimum": 0}
+          "budget_remaining": {"type": "integer", "minimum": 0},
+          "winner": {"type": "string", "minLength": 1},
+          "r2_margin": {"type": ["number", "null"]},
+          "bmi_r2": {"type": ["number", "null"]},
+          "bp_r2": {"type": ["number", "null"]},
+          "challenge_passed": {"type": "boolean"}
         }
       }
     }

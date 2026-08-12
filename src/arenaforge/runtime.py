@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from .adapter import ReferenceFixtureAdapter
+from .adapter import create_adapter
 from .compiler import compile_contract_graph
 from .io import sha256_file, write_json
 from .state import EvidenceGraph, Ledger, read_events, verify_ledger
@@ -28,17 +28,24 @@ def _artifact_refs(run_dir: Path) -> list[dict[str, str]]:
 
 
 def _write_report(run_dir: Path, certificate: dict[str, Any], ledger_events: int) -> None:
+    decision = certificate.get("decision", {})
+    metrics = certificate.get("metrics", {})
     report = (
         f"# ArenaForge Run {certificate['run_id']}\n\n"
         "## Outcome\n\n"
         f"- Outcome: `{certificate['outcome']}`\n"
-        f"- Acceptance: `accepted`\n"
+        f"- Winner: `{decision.get('winner', 'none')}`\n"
+        f"- Comparison metric: `{decision.get('comparison_metric', 'n/a')}`\n"
+        f"- R2 margin: `{decision.get('r2_margin', 'n/a')}`\n"
         f"- Evidence items: `{len(certificate['evidence_ids'])}`\n"
         f"- Ledger events: `{ledger_events}`\n\n"
+        "## Metrics\n\n"
+        f"- BMI held-out R2: `{metrics.get('bmi_r2', 'n/a')}`\n"
+        f"- BP held-out R2: `{metrics.get('bp_r2', 'n/a')}`\n"
+        f"- BMI RMSE: `{metrics.get('bmi_rmse', 'n/a')}`\n"
+        f"- BP RMSE: `{metrics.get('bp_rmse', 'n/a')}`\n\n"
         "## Interpretation\n\n"
-        "The reference adapter demonstrates how competing hypotheses are "
-        "observed, probed, compared, and converted into a precommitted certificate. "
-        "This fixture validates the runtime contract; it is not a domain result.\n"
+        f"{certificate.get('interpretation', 'No interpretation recorded.')}\n"
     )
     (run_dir / "report.md").write_text(report, encoding="utf-8", newline="\n")
 
@@ -76,12 +83,14 @@ def run_arena(
     ledger = Ledger(run_dir / "discovery_ledger.jsonl", run_id)
     evidence_graph = EvidenceGraph(run_id)
     expected_adapter_version = arena["reproducibility"]["adapter_version"]
-    adapter = ReferenceFixtureAdapter(seed=int(arena["reproducibility"]["seed"]))
+    adapter_seed = (
+        int(policy_seed)
+        if policy_seed is not None
+        else int(arena["reproducibility"]["seed"])
+    )
+    adapter = create_adapter(arena, seed=adapter_seed)
     if adapter.version != expected_adapter_version:
-        raise ValueError(
-            "arena adapter_version does not match the configured adapter: "
-            f"{expected_adapter_version!r} != {adapter.version!r}"
-        )
+        raise ValueError(f"adapter version mismatch: {adapter.version!r}")
     budget = int(arena["reproducibility"]["budget"])
 
     ledger.append(
@@ -93,6 +102,7 @@ def run_arena(
             "budget": budget,
             "policy": policy,
             "policy_seed": policy_seed,
+            "adapter_seed": adapter_seed,
             "started_at": _now(),
         },
     )
@@ -189,18 +199,13 @@ def run_arena(
             },
         )
 
-    if "comparison_result" not in results:
+    comparison = results.get("comparison_result", {})
+    if not comparison:
         outcome = "inconclusive"
         interpretation = "The comparison action did not complete within the frozen budget."
-    elif conflict_ids:
-        outcome = "confounded"
-        interpretation = "The competing evidence conflicts with the broad mechanism claim."
-    elif support_ids:
-        outcome = "supported"
-        interpretation = "The available probes support one mechanism without conflict."
     else:
-        outcome = "inconclusive"
-        interpretation = "The run produced no sufficient evidence for a discovery signal."
+        outcome = comparison.get("outcome", "inconclusive")
+        interpretation = comparison.get("interpretation", "No interpretation recorded.")
 
     evidence_ids = sorted(set(support_ids + conflict_ids))
     certificate = {
@@ -211,6 +216,9 @@ def run_arena(
         "question": arena["problem"]["question"],
         "hypotheses": arena["problem"]["hypotheses"],
         "outcome": outcome,
+        "interpretation": interpretation,
+        "decision": comparison.get("decision", {}),
+        "metrics": comparison.get("metrics", {}),
         "evidence_ids": evidence_ids,
         "provenance": {
             "arena_hash": sha256_file(arena_path),
@@ -247,6 +255,7 @@ def run_arena(
         "arena_id": arena["arena_id"],
         "policy": policy,
         "policy_seed": policy_seed,
+        "adapter_seed": adapter_seed,
         "artifacts": _artifact_refs(run_dir),
     }
     validate_schema_document(manifest, "run_manifest.schema.json")
@@ -257,6 +266,8 @@ def run_arena(
         "run_dir": str(run_dir),
         "arena_id": arena["arena_id"],
         "outcome": outcome,
+        "decision": comparison.get("decision", {}),
+        "metrics": comparison.get("metrics", {}),
         "policy": policy,
         "policy_seed": policy_seed,
         "ledger_events": ledger.sequence,
