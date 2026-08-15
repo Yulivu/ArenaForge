@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    {
+      "hypothesis_id": "canonical-pytheus",
+      "label": "PyTheus canonical topology",
+      "claim": "The canonical high-fidelity topology remains the strongest under the declared transmission-loss sweep.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'candidate_id': 'pytheus_canonical', 'prune_threshold': 0.0}) + '\\n', encoding='utf-8')\""
+    },
+    {
+      "hypothesis_id": "sparse-topology",
+      "label": "Sparse edge pruning",
+      "claim": "Removing weak edges may sacrifice a small amount of ideal fidelity while improving loss robustness.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'candidate_id': 'sparse_edge_pruning', 'prune_threshold': 0.15}) + '\\n', encoding='utf-8')\""
+    },
+    {
+      "hypothesis_id": "random-reference",
+      "label": "Random sign reference",
+      "claim": "A random-sign reference should fail to preserve the target state and acts as a negative control.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'candidate_id': 'random_sign_reference', 'prune_threshold': 0.0}) + '\\n', encoding='utf-8')\""
+    }
+  ]
+}

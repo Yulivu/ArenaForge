@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "run_id": "qo-loss-replay",
+  "contract_sha256": "0dee36883cce04246973292c928552456468d3ac0983cbfdfbd721352cb3aa84",
+  "ledger_head_hash": "052e2744e90f11071e5fa78d8016ab1873257eb93d8693bf66d4b7f4d23de92b",
+  "confirmation": {
+    "confirmed_by": "arenaforge-replay",
+    "confirmed_at": 1786815987.0161633,
+    "contract_sha256": "0dee36883cce04246973292c928552456468d3ac0983cbfdfbd721352cb3aa84"
+  },
+  "outcome": "improved",
+  "scope": {
+    "project_root": "examples/quantum_optics_open_exploration",
+    "metric": "edge_count_under_quality_tolerance",
+    "metric_output_key": "edge_count",
+    "metric_aliases": [
+      "edge_count",
+      "robust_score",
+      "fidelity",
+      "count_rate"
+    ],
+    "direction": "minimize",
+    "claim": "Under a strict 55-edge construction budget and a 2% quality tolerance, what is the simplest three-photon, four-dimensional GHZ preparation graph that remains acceptable across the declared transmission-loss sweep?",
+    "non_claims": [
+      "This artifact does not establish causality or universal generalization."
+    ]
+  },
+  "baseline": {
+    "candidate_id": "pytheus_canonical",
+    "score": 74,
+    "robust_score": 0.7631856114921269,
+    "edge_count": 74,
+    "budget_feasible": false,
+    "quality_acceptable": true
+  },
+  "final": {
+    "candidate_id": "sparse_threshold_150",
+    "score": 49,
+    "robust_score": 0.739677892744063,
+    "edge_count": 49,
+    "budget_feasible": true,
+    "quality_acceptable": true
+  },
+  "margin": 25.0,
+  "integrity": {
+    "protected_paths_clean": true,
+    "changed_protected_paths": []
+  },
+  "evidence_ids": [
+    "qo-loss-replay:sparse_threshold_150",
+    "qo-loss-replay:sparse_threshold_120",
+    "qo-loss-replay:sparse_threshold_080",
+    "qo-loss-replay:sparse_threshold_200",
+    "qo-loss-replay:sparse_threshold_040",
+    "qo-loss-replay:sparse_threshold_020",
+    "qo-loss-replay:sparse_threshold_010",
+    "qo-loss-replay:sparse_threshold_005",
+    "qo-loss-replay:random_sign_reference"
+  ],
+  "supported_hypotheses": [
+    "sparse_threshold_150",
+    "sparse_threshold_120",
+    "sparse_threshold_080"
+  ],
+  "refuted_hypotheses": [
+    "sparse_threshold_200",
+    "sparse_threshold_040",
+    "sparse_threshold_020",
+    "sparse_threshold_010",
+    "sparse_threshold_005",
+    "random_sign_reference"
+  ],
+  "inconclusive_hypotheses": []
+}

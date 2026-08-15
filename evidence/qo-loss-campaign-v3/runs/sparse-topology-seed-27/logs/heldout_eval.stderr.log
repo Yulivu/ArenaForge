@@ -1,0 +1,2 @@
+examples/quantum_optics_open_exploration\examples\quantum_optics_open_exploration\.arenaforge\campaigns\qo-loss-campaign-v3\runs\sparse-topology-seed-27\workspace\vendor\pytheus\pytheus\main.py:13: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources

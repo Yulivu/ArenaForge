@@ -1,0 +1,24 @@
+# ArenaForge Research Runtime provider example.
+#
+# This config controls the provider-backed autonomous runtime. It is separate
+# from the SSH/HPC queue manifest.
+
+llm:
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  reasoning_effort: high
+
+max_cycles: 20
+executor_max_turns: 50
+
+timeout:
+  executor: 172800
+  run_training_max: 604800
+
+ui:
+  interaction_mode: review
+
+search:
+  enabled: true
+  builtin_backend: alphaxiv
+  auto_search_on_add: false

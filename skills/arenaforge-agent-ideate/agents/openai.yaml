@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Ideation Gate"
+  short_description: "Drafts constrained ArenaForge research ideas"
+  default_prompt: "Use $arenaforge-agent-ideate after TreeView constraints to draft valid ArenaForge ideas."

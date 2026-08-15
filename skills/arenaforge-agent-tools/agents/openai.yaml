@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge State Tools"
+  short_description: "Provides deterministic ArenaForge helper tools"
+  default_prompt: "Use $arenaforge-agent-tools to emulate ArenaForge tree, eval, merge, and report tools locally."

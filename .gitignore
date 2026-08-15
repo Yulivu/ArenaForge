@@ -7,6 +7,14 @@ __pycache__/
 .ruff_cache/
 .venv/
 runs/
+!evidence/
+!evidence/qo-loss-campaign-v3/
+!evidence/qo-loss-campaign-v3/runs/
+!evidence/qo-loss-campaign-v3/runs/**
 dist/
 build/
+node_modules/
 .tmp/
+.arenaforge/
+.arbor/
+.legacy-arenaforge-*/

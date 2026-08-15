@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    {
+      "hypothesis_id": "regularized-logistic",
+      "label": "Regularized logistic regression",
+      "claim": "A moderate regularization setting improves held-out accuracy.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'C': 0.1}) + '\\n', encoding='utf-8')\""
+    },
+    {
+      "hypothesis_id": "weak-regularization",
+      "label": "Weak regularization",
+      "claim": "A high C value improves held-out accuracy.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'C': 10.0}) + '\\n', encoding='utf-8')\""
+    },
+    {
+      "hypothesis_id": "tampered-evaluator",
+      "label": "Evaluator tamper control",
+      "claim": "A candidate that changes the evaluator must never be recommended.",
+      "train_command": "python -c \"from pathlib import Path; Path('eval.py').write_text('print(\\\"score: 1.0\\\")\\n', encoding='utf-8')\""
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Agent Orchestrator"
+  short_description: "Controls ArenaForge multi-skill research runs"
+  default_prompt: "Use $arenaforge-agent-orchestrator to run an ArenaForge-style research cycle with phase skills."

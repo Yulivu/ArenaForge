@@ -1,62 +1,99 @@
-# ArenaForge GOAI Problem Statement
+# ArenaForge：GOAI 题目类型二问题定义骨架
 
-## Title
+## 作品定位
 
-ArenaForge: Contract-First Scientific Exploration Runtime
+ArenaForge 是一个面向未结构化科学问题的 Agent 持续探索与证据交付系统。
+它把科学直觉转成可观察、可行动、可评价、可回放的研究环境，并记录从
+假设到结果的完整证据链。
 
-## Real problem
+本次提交包含一个具体的 `Reference Arena #1：Quantum Optics`，用于证明
+ArenaForge 能够在真实物理模拟环境中运行。量子光学不是 ArenaForge 的产品边界，
+只是当前第一个可复现示例。
 
-Scientific exploration is often performed through loosely specified sequences of
-search, analysis, intervention, and interpretation. This makes it difficult to
-compare competing explanations, preserve failed paths, or reproduce how a
-conclusion was reached. A concrete instance is comparing plausible baseline
-predictors under a fixed public dataset and a precommitted held-out protocol,
-instead of allowing a system to choose a favorable analysis after seeing the
-result.
+## Reference Arena #1：Quantum Optics
 
-## System
+下面的问题属于当前 reference arena，不是 ArenaForge 的通用产品定义。
 
-ArenaForge compiles a research question into an executable exploration arena.
-The arena declares:
+## 最小科学问题
 
-- the problem and competing hypotheses;
-- the fixed context;
-- observations and actions;
-- feedback evaluators;
-- precommitted discovery signals;
-- baselines, stop rules, and budget;
-- reproducibility metadata.
+在固定三光子四维 GHZ 目标态、辅助光子预算和探测器约束下，若实验连接数最多为 55 条，能否找到一个在所有损耗扫描点都保持可接受质量、同时连接数最少的拓扑？
 
-The current reference arena compares BMI and average blood pressure as
-single-feature predictors of a one-year disease progression measure in the
-scikit-learn diabetes dataset. The runtime executes the contract through a
-domain adapter and emits a complete run bundle.
+这里的“可接受质量”是预先冻结的约束，而不是事后调权：
 
-## Agent interaction
+```text
+edge_count <= 55
+fidelity_relative_drop <= 2%
+count_rate_relative_drop <= 2%
+```
 
-The agent or planner can:
+在满足这些条件的候选中，目标是最小化 `edge_count`；`robust_score` 只作为
+并列时的次级指标。这样可以直接回答一个实际工程问题：当实验装置无法承受
+canonical 拓扑的复杂度时，是否有更简单、质量没有明显退化的替代方案。
 
-1. inspect the frozen dataset context;
-2. fit the BMI probe;
-3. fit the blood-pressure probe;
-4. compare held-out R2 and RMSE;
-5. certify a scoped result.
+## 环境接口
 
-Each action has a precondition, input, output, cost, and ledger event.
+### 固定规则
 
-## Discovery signals
+- 目标态为 `|000> + |111> + |222> + |333>`；
+- 辅助光子预算为 3；
+- 使用 PyTheus 生成和评估候选图；
+- 在 transmission `1.0, 0.95, 0.9, 0.8, 0.7` 上统一评估；
+- 连接数预算固定为 `55`；
+- 质量容差固定为 `2%`；
+- 同时记录 fidelity、count rate、edge count、robust score、预算可行性和质量可接受性；
+- 损耗模型是公开声明的 per-edge transmission proxy，不是实验室标定。
 
-- `supported`: one explanation is supported by the precommitted probes;
-- `confounded`: a competing explanation or conflict evidence remains active;
-- `boundary`: the broad claim must be narrowed to a stated scope;
-- `inconclusive`: the budget or evidence is insufficient to distinguish claims.
+### Agent 可操作空间
 
-The result is not considered a discovery merely because the agent produced a
-longer report. It must satisfy the declared evidence and signal contract.
+- 改变实验图的连接保留方式；
+- 改变图边权和符号；
+- 提出稀疏化、鲁棒性或结构调整假设；
+- 根据历史结果决定继续、放弃或提出新的候选。
 
-## Competition value
+### Agent 观察
 
-ArenaForge provides an inspectable open exploration environment rather than a
-generic chat interface. A reviewer can validate the arena contract, replay the
-run, inspect the evidence graph, verify the ledger, and reproduce the exported
-certificate.
+Agent 每轮可读取当前候选图、edge count、历史 loss-sweep、fidelity、
+count rate、robust score、seed、剩余预算、失败原因和受保护路径状态。
+评估器实现和损耗协议不属于可观察后门，也不属于 Agent 可修改范围。
+
+### 反馈
+
+每个候选返回完整损耗扫描、结构规模、得分、训练/评估日志和运行状态。评估器和损耗协议属于受保护部分，候选不能通过修改评估器制造分数。
+
+## 最小参照系
+
+| 参照 | 作用 |
+|---|---|
+| canonical PyTheus topology | 性能参照，但 74 条连接超过预算 |
+| threshold sweep | 对多个剪枝阈值进行真实候选搜索 |
+| random sign reference | 检验无结构符号扰动是否会破坏目标态 |
+
+## 当前可复核运行事实
+
+本次 replay 使用真实 PyTheus 评估器完成 8 个剪枝阈值、规范图和负对照的统一运行：
+
+| 分支 | 连接数 | robust score | 最大质量下降 | 结论 |
+|---|---:|---:|---:|---|
+| canonical PyTheus | `74` | `0.763186` | `0%` | 性能参照，但超出预算 |
+| threshold `0.150` | `49` | `0.739678` | `1.92%` | 满足协议，推荐 |
+| threshold `0.120` | `51` | `0.748234` | `1.73%` | 满足协议 |
+| threshold `0.080` | `53` | `0.755348` | `1.57%` | 满足协议 |
+| threshold `0.200` | `48` | `0.726835` | `2.44%` | 质量容差失败 |
+| random sign reference | `74` | `0.000000` | `99.98%` | 反证对照 |
+
+推荐候选比 canonical 少 `25` 条连接，减少约 `33.8%`；最大质量下降为
+`1.92%`，没有超过预先声明的 `2%` 容差。它不是物理性能全面提升，而是
+在固定质量约束下得到的更简单可行拓扑。
+
+## 必须由参赛团队补充
+
+GOAI 官方模板要求参赛团队自行撰写最终问题定义，且禁止使用 AI 代写。因此正式提交前需要补充：
+
+- 真实科学背景和证据；
+- 研究价值；
+- 团队信息；
+- 参考文献；
+- 最终 4 页 PDF；
+- 代码仓库与 Demo 地址。
+
+ArenaForge 提供的是可运行环境、参照系、探索日志、复现命令和事实结果。

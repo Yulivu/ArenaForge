@@ -1,42 +1,43 @@
 # ArenaForge Technical Note
 
-## Definition
+## Product Definition
 
-ArenaForge is a reusable runtime for structured scientific exploration. Its
-core contribution is the contract and execution layer that connects a problem
-definition to executable probes and a provenance-preserving result.
+ArenaForge is a general ML research execution system. It converts an existing
+project and a research question into a controlled campaign, then returns a
+reproducible decision package instead of a bare score or agent transcript.
 
-## Runtime flow
+## Execution Flow
 
 ```text
-problem + hypotheses
-  -> arena contract
-  -> validation
-  -> contract graph
-  -> adapter-backed actions
-  -> ledger + evidence graph
-  -> problem certificate
-  -> replayable export
+existing ML project
+  -> Project Profile and Research Contract
+  -> baseline and candidate hypotheses
+  -> isolated code branches
+  -> local or SSH GPU execution
+  -> dev / held-out evaluation
+  -> evidence graph and hash ledger
+  -> Problem Certificate
 ```
 
-## Why it is useful
+## Evidence Model
 
-Researchers need to know not only what an agent concluded, but which
-observations and interventions separated competing explanations. ArenaForge makes
-that process explicit, budgeted, and replayable.
+Every experiment records the hypothesis, code change, command, return code,
+logs, metric, split, environment, and decision. The system preserves four
+states:
 
-## Current implementation boundary
+```text
+supported
+refuted
+inconclusive
+invalid
+```
 
-The repository includes a deterministic public-data adapter for a concrete
-scientific exploration task. It compares BMI and average blood pressure as
-single-feature predictors of a one-year disease progression measure on a frozen
-scikit-learn dataset. The result is deliberately scoped as observational
-prediction and does not claim causality.
+`invalid` is important: a score obtained after violating protected-path or
+protocol constraints cannot become a recommended result.
 
-## Completion requirements
+## Completion Standard
 
-A competition-ready version must include the domain adapter, frozen context,
-challenge cases, baseline comparison, replayable runs, and a complete
-evidence-backed submission bundle. This repository now contains that first
-concrete arena; further work is to broaden the held-out challenge protocol and
-prepare final competition media.
+The competition version is complete when a new user can bring classification
+and regression repositories, run one common product flow without custom
+adapters, execute locally and on an SSH GPU host, resume/replay runs, inspect
+the complete evidence chain, and export a review-ready bundle.

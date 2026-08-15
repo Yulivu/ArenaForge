@@ -1,0 +1,759 @@
+{
+  "arena": "quantum-optics-loss-robustness",
+  "research_question": "Under a strict 55-edge construction budget and a 2% quality tolerance, what is the simplest three-photon, four-dimensional GHZ preparation graph that remains acceptable across the declared transmission-loss sweep?",
+  "baseline": "pytheus_canonical",
+  "candidates": [
+    {
+      "candidate_id": "sparse_threshold_150",
+      "source_graph": "artifacts/sparse_threshold_150.json",
+      "pytheus_loss": null,
+      "edge_count": 49,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9547065353639416,
+          "fidelity": 0.9840842245425184
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9310637176141737,
+          "fidelity": 0.9840842245425186
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.8873997131466999,
+          "fidelity": 0.9840842245425188
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.6797179003451514,
+          "fidelity": 0.9840842245425188
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.3053163313868006,
+          "fidelity": 0.9840842245425184
+        }
+      ],
+      "robust_score": 0.739677892744063,
+      "edge_budget": 55,
+      "budget_feasible": true,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.015051475078745158,
+          "count_rate_relative_drop": 0.015230962560401795
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.015051475078745158,
+          "count_rate_relative_drop": 0.01537541196863701
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.015051475078744825,
+          "count_rate_relative_drop": 0.015642183876844573
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.015051475078744714,
+          "count_rate_relative_drop": 0.016911047650949418
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.015051475078745158,
+          "count_rate_relative_drop": 0.019198511254097883
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": true
+    },
+    {
+      "candidate_id": "sparse_threshold_120",
+      "source_graph": "artifacts/sparse_threshold_120.json",
+      "pytheus_loss": null,
+      "edge_count": 51,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9605010525758344,
+          "fidelity": 0.9902419897358558
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9365739637684338,
+          "fidelity": 0.990241989735856
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.8924038622542919,
+          "fidelity": 0.9902419897358559
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.6826499836693872,
+          "fidelity": 0.990241989735856
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.3059065165405841,
+          "fidelity": 0.9902419897358556
+        }
+      ],
+      "robust_score": 0.7482338541607636,
+      "edge_budget": 55,
+      "budget_feasible": true,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.008888301650364472,
+          "count_rate_relative_drop": 0.009253983325617776
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.008888301650364472,
+          "count_rate_relative_drop": 0.009548180440925313
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.00888830165036436,
+          "count_rate_relative_drop": 0.010091276868280374
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.008888301650364139,
+          "count_rate_relative_drop": 0.012670319663707463
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.008888301650364583,
+          "count_rate_relative_drop": 0.017302594075880307
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": true
+    },
+    {
+      "candidate_id": "sparse_threshold_080",
+      "source_graph": "artifacts/sparse_threshold_080.json",
+      "pytheus_loss": null,
+      "edge_count": 53,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9652950826432117,
+          "fidelity": 0.9953382883027617
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.941131553514887,
+          "fidelity": 0.9953382883027619
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.8965407552958365,
+          "fidelity": 0.9953382883027619
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.6850680857733056,
+          "fidelity": 0.9953382883027619
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.30639114370198206,
+          "fidelity": 0.9953382883027618
+        }
+      ],
+      "robust_score": 0.755347619593225,
+      "edge_budget": 55,
+      "budget_feasible": true,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.0037875271121222687,
+          "count_rate_relative_drop": 0.0043089953109416435
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.0037875271121222687,
+          "count_rate_relative_drop": 0.004728408344106372
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.0037875271121220466,
+          "count_rate_relative_drop": 0.005502383115463916
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.0037875271121219356,
+          "count_rate_relative_drop": 0.009172972510120614
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.0037875271121221576,
+          "count_rate_relative_drop": 0.015745772535326608
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": true
+    },
+    {
+      "candidate_id": "sparse_threshold_200",
+      "source_graph": "artifacts/sparse_threshold_200.json",
+      "pytheus_loss": null,
+      "edge_count": 48,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9459490559641365,
+          "fidelity": 0.9747821181098213
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9227327239037161,
+          "fidelity": 0.9747821181098215
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.8798286154971601,
+          "fidelity": 0.9747821181098215
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.675267021953044,
+          "fidelity": 0.9747821181098216
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.3044150557237961,
+          "fidelity": 0.9747821181098213
+        }
+      ],
+      "robust_score": 0.7268350711185662,
+      "edge_budget": 55,
+      "budget_feasible": true,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.02436175135494989,
+          "count_rate_relative_drop": 0.024264203917292226
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.02436175135494989,
+          "count_rate_relative_drop": 0.02418565888822588
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.024361751354949668,
+          "count_rate_relative_drop": 0.02404050656902712
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.024361751354949446,
+          "count_rate_relative_drop": 0.023348437887852236
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.02436175135494989,
+          "count_rate_relative_drop": 0.022093778952455456
+        }
+      ],
+      "quality_acceptable": false,
+      "protocol_feasible": false
+    },
+    {
+      "candidate_id": "sparse_threshold_040",
+      "source_graph": "artifacts/sparse_threshold_040.json",
+      "pytheus_loss": null,
+      "edge_count": 57,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9683113076741079,
+          "fidelity": 0.9983489941414829
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9441478774795901,
+          "fidelity": 0.9983489941414826
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.8995470999336124,
+          "fidelity": 0.9983489941414828
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.687847450111996,
+          "fidelity": 0.9983489941414829
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.3080210797192604,
+          "fidelity": 0.9983489941414828
+        }
+      ],
+      "robust_score": 0.7603175982581273,
+      "edge_budget": 55,
+      "budget_feasible": false,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.0007741770340851106,
+          "count_rate_relative_drop": 0.001197793166248462
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.0007741770340856657,
+          "count_rate_relative_drop": 0.0015385657104299844
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.0007741770340852216,
+          "count_rate_relative_drop": 0.00216756251735839
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.0007741770340849996,
+          "count_rate_relative_drop": 0.005153124901970174
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.0007741770340852216,
+          "count_rate_relative_drop": 0.01050974842536223
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": false
+    },
+    {
+      "candidate_id": "sparse_threshold_020",
+      "source_graph": "artifacts/sparse_threshold_020.json",
+      "pytheus_loss": null,
+      "edge_count": 65,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9690513171442122,
+          "fidelity": 0.9987231083270655
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9451654521205523,
+          "fidelity": 0.9987231083270658
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.90103767142442,
+          "fidelity": 0.9987231083270653
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.690884742106531,
+          "fidelity": 0.9987231083270657
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.31091751878783547,
+          "fidelity": 0.9987231083270655
+        }
+      ],
+      "robust_score": 0.7624365467332361,
+      "edge_budget": 55,
+      "budget_feasible": false,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.0003997342719191943,
+          "count_rate_relative_drop": 0.0004344817332823103
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.0003997342719190833,
+          "count_rate_relative_drop": 0.0004624535253090478
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.00039973427191930533,
+          "count_rate_relative_drop": 0.0005141298243681591
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.00039973427191886124,
+          "count_rate_relative_drop": 0.0007602316099598605
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.0003997342719191943,
+          "count_rate_relative_drop": 0.0012051962004069328
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": false
+    },
+    {
+      "candidate_id": "sparse_threshold_010",
+      "source_graph": "artifacts/sparse_threshold_010.json",
+      "pytheus_loss": null,
+      "edge_count": 70,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9694072193858133,
+          "fidelity": 0.9990179905018496
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9455673781635874,
+          "fidelity": 0.9990179905018491
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.901517355071488,
+          "fidelity": 0.9990179905018494
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.6916052291584983,
+          "fidelity": 0.9990179905018495
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.31152913784565905,
+          "fidelity": 0.9990179905018493
+        }
+      ],
+      "robust_score": 0.7631750820599577,
+      "edge_budget": 55,
+      "budget_feasible": false,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.0001045931083524243,
+          "count_rate_relative_drop": 6.73725799439362e-05
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.00010459310835309044,
+          "count_rate_relative_drop": 3.740606931257329e-05
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.00010459310835264635,
+          "count_rate_relative_drop": -1.7964495995670404e-05
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.0001045931083524243,
+          "count_rate_relative_drop": -0.0002818225432998922
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.00010459310835275737,
+          "count_rate_relative_drop": -0.0007595754832234736
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": false
+    },
+    {
+      "candidate_id": "sparse_threshold_005",
+      "source_graph": "artifacts/sparse_threshold_005.json",
+      "pytheus_loss": null,
+      "edge_count": 72,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9694684401079585,
+          "fidelity": 0.9991156483003678
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9456007537861659,
+          "fidelity": 0.9991156483003677
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.9015027779697888,
+          "fidelity": 0.9991156483003679
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.6914244778110972,
+          "fidelity": 0.9991156483003679
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.3113095160240942,
+          "fidelity": 0.999115648300368
+        }
+      ],
+      "robust_score": 0.7631856711953847,
+      "edge_budget": 55,
+      "budget_feasible": false,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 6.849539053499498e-06,
+          "count_rate_relative_drop": 4.2240946396265855e-06
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 6.849539053832565e-06,
+          "count_rate_relative_drop": 2.110462782090039e-06
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 6.849539053388476e-06,
+          "count_rate_relative_drop": -1.7946868537954686e-06
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 6.849539053277454e-06,
+          "count_rate_relative_drop": -2.039842505596745e-05
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 6.849539053277454e-06,
+          "count_rate_relative_drop": -5.4059965683084243e-05
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": false
+    },
+    {
+      "candidate_id": "pytheus_canonical",
+      "source_graph": "artifacts/pytheus_canonical.json",
+      "pytheus_loss": [
+        0.030527464748302036,
+        0.0008775081711052124
+      ],
+      "edge_count": 74,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.969472535251698,
+          "fidelity": 0.9991224918288948
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9456027494455753,
+          "fidelity": 0.999122491828895
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.9015011600575081,
+          "fidelity": 0.9991224918288948
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.6914103741283976,
+          "fidelity": 0.9991224918288947
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.3112926875520877,
+          "fidelity": 0.9991224918288948
+        }
+      ],
+      "robust_score": 0.7631856114921269,
+      "edge_budget": 55,
+      "budget_feasible": false,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.0,
+          "count_rate_relative_drop": 0.0
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.0,
+          "count_rate_relative_drop": 0.0
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.0,
+          "count_rate_relative_drop": 0.0
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.0,
+          "count_rate_relative_drop": 0.0
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.0,
+          "count_rate_relative_drop": 0.0
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": false
+    },
+    {
+      "candidate_id": "random_sign_reference",
+      "source_graph": "artifacts/random_sign_reference.json",
+      "pytheus_loss": null,
+      "edge_count": 74,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.00017768301350395976,
+          "fidelity": 0.00017780938833567017
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.00017757565812592802,
+          "fidelity": 0.00017780938833567017
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.00017736273873270036,
+          "fidelity": 0.00017780938833567017
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.00017598793632245258,
+          "fidelity": 0.00017780938833567017
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.00016911916334338972,
+          "fidelity": 0.00017780938833567017
+        }
+      ],
+      "robust_score": 3.1213673898586875e-08,
+      "edge_budget": 55,
+      "budget_feasible": false,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.999822034445436,
+          "count_rate_relative_drop": 0.9998167219729873
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.999822034445436,
+          "count_rate_relative_drop": 0.9998122090293942
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.999822034445436,
+          "count_rate_relative_drop": 0.9998032584464768
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.999822034445436,
+          "count_rate_relative_drop": 0.9997454652939735
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.999822034445436,
+          "count_rate_relative_drop": 0.9994567197685456
+        }
+      ],
+      "quality_acceptable": false,
+      "protocol_feasible": false
+    }
+  ],
+  "recommended_candidate": "sparse_threshold_150",
+  "scope": {
+    "target_state": [
+      "000",
+      "111",
+      "222",
+      "333"
+    ],
+    "ancillary_photons": 3,
+    "loss_levels": [
+      1.0,
+      0.95,
+      0.9,
+      0.8,
+      0.7
+    ],
+    "edge_budget": 55,
+    "quality_tolerance": 0.02,
+    "metric": "edge_count_under_quality_tolerance",
+    "metric_direction": "minimize",
+    "search_thresholds": [
+      0.005,
+      0.01,
+      0.02,
+      0.04,
+      0.08,
+      0.12,
+      0.15,
+      0.2
+    ],
+    "feedback": [
+      "fidelity",
+      "count_rate",
+      "edge_count",
+      "robust_score",
+      "budget_feasible",
+      "quality_acceptable"
+    ]
+  }
+}

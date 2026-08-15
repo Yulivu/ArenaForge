@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/research_contract.schema.json",
+  "title": "ArenaForge Research Contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_root",
+    "objective",
+    "baseline_command",
+    "train_command",
+    "eval_command",
+    "metric",
+    "metric_output_key",
+    "metric_aliases",
+    "direction",
+    "dev_eval_command",
+    "heldout_eval_command",
+    "editable_paths",
+    "protected_paths",
+    "backend",
+    "seeds",
+    "budget",
+    "termination",
+    "environment",
+    "generated_by",
+    "schema_version",
+    "contract_sha256"
+  ],
+  "properties": {
+    "project_root": {"type": "string", "minLength": 1},
+    "objective": {"type": "string", "minLength": 1},
+    "baseline_command": {"type": ["string", "null"]},
+    "train_command": {"type": ["string", "null"]},
+    "eval_command": {"type": ["string", "null"]},
+    "metric": {"type": "string", "minLength": 1},
+    "metric_output_key": {"type": "string", "minLength": 1},
+    "metric_aliases": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1
+    },
+    "direction": {"type": "string", "enum": ["maximize", "minimize"]},
+    "dev_eval_command": {"type": ["string", "null"]},
+    "heldout_eval_command": {"type": ["string", "null"]},
+    "editable_paths": {"type": "array", "items": {"type": "string"}},
+    "protected_paths": {"type": "array", "items": {"type": "string"}},
+    "backend": {"type": "string", "enum": ["local", "ssh_gpu"]},
+    "seeds": {"type": "array", "items": {"type": "integer"}},
+    "budget": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["max_experiments", "timeout_seconds"],
+      "properties": {
+        "max_experiments": {"type": "integer", "minimum": 1},
+        "timeout_seconds": {"type": "integer", "minimum": 1}
+      }
+    },
+    "termination": {"type": "object", "additionalProperties": true},
+    "environment": {"type": "object", "additionalProperties": true},
+    "generated_by": {"type": "string", "minLength": 1},
+    "schema_version": {"const": 1},
+    "contract_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

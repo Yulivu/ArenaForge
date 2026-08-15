@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/product_certificate.schema.json",
+  "title": "ArenaForge Product Certificate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "contract_sha256",
+    "ledger_head_hash",
+    "confirmation",
+    "outcome",
+    "scope",
+    "baseline",
+    "final",
+    "margin",
+    "integrity",
+    "evidence_ids",
+    "supported_hypotheses",
+    "refuted_hypotheses",
+    "inconclusive_hypotheses"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "contract_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "ledger_head_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmed_by", "confirmed_at", "contract_sha256"],
+      "properties": {
+        "confirmed_by": {"type": "string", "minLength": 1},
+        "confirmed_at": {"type": "number"},
+        "contract_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "outcome": {"type": "string", "enum": ["improved", "no_improvement", "inconclusive"]},
+    "scope": {
+      "type": "object",
+      "required": [
+        "project_root",
+        "metric",
+        "metric_output_key",
+        "metric_aliases",
+        "direction",
+        "claim",
+        "non_claims"
+      ],
+      "properties": {
+        "project_root": {"type": "string"},
+        "metric": {"type": "string"},
+        "metric_output_key": {"type": "string"},
+        "metric_aliases": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1
+        },
+        "direction": {"type": "string", "enum": ["maximize", "minimize"]},
+        "claim": {"type": "string"},
+        "non_claims": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "baseline": {"type": ["object", "null"]},
+    "final": {"type": ["object", "null"]},
+    "margin": {"type": ["number", "null"]},
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protected_paths_clean", "changed_protected_paths"],
+      "properties": {
+        "protected_paths_clean": {"type": "boolean"},
+        "changed_protected_paths": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "supported_hypotheses": {"type": "array", "items": {"type": "string"}},
+    "refuted_hypotheses": {"type": "array", "items": {"type": "string"}},
+    "inconclusive_hypotheses": {"type": "array", "items": {"type": "string"}},
+    "research_runtime": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "session_dir": {"type": "string"},
+        "process_returncode": {"type": "integer"},
+        "trunk_branch": {"type": ["string", "null"]},
+        "branches": {"type": "array", "items": {"type": "object"}}
+      }
+    }
+  }
+}

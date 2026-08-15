@@ -1,0 +1,39 @@
+{
+  "run_id": "random-reference-seed-17",
+  "hypothesis_id": "random-reference",
+  "label": "Random sign reference",
+  "seed": 17,
+  "status": "completed",
+  "score": 0.007549,
+  "train_result": {
+    "command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'candidate_id': 'random_sign_reference', 'prune_threshold': 0.0}) + '/n', encoding='utf-8')\"",
+    "cwd": "examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3/runs/random-reference-seed-17/workspace",
+    "returncode": 0,
+    "duration_seconds": 0.047,
+    "stdout_path": "logs/train.stdout.log",
+    "stderr_path": "logs/train.stderr.log",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timed_out": false
+  },
+  "eval_result": {
+    "command": "bash eval.sh",
+    "cwd": "examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3/runs/random-reference-seed-17/workspace",
+    "returncode": 0,
+    "duration_seconds": 0.657,
+    "stdout_path": "logs/heldout_eval.stdout.log",
+    "stderr_path": "logs/heldout_eval.stderr.log",
+    "stdout_sha256": "5297c39d12e32a512efe8846bb1497e81638dfcf3517105c5d318b7fef224b37",
+    "stderr_sha256": "b7460bc5786b7f27cd51b48be470361d5796001eb6d29908d1da254843932c82",
+    "timed_out": false
+  },
+  "protocol_violations": [],
+  "workspace": "examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3/runs/random-reference-seed-17/workspace",
+  "workspace_mode": "copy",
+  "branch": null,
+  "base_commit": null,
+  "commit": null,
+  "changed_paths": [],
+  "diff_stat": ".",
+  "code_ref": null
+}

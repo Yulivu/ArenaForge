@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/project_profile.schema.json",
+  "title": "ArenaForge Project Profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_root",
+    "project_name",
+    "train_command",
+    "eval_command",
+    "metric",
+    "metric_output_key",
+    "metric_aliases",
+    "direction",
+    "editable_paths",
+    "protected_paths",
+    "git",
+    "environment",
+    "readiness"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "project_root": {"type": "string", "minLength": 1},
+    "project_name": {"type": "string", "minLength": 1},
+    "train_command": {"type": ["string", "null"]},
+    "eval_command": {"type": ["string", "null"]},
+    "metric": {"type": "string", "minLength": 1},
+    "metric_output_key": {"type": "string", "minLength": 1},
+    "metric_aliases": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1
+    },
+    "direction": {"type": "string", "enum": ["maximize", "minimize"]},
+    "editable_paths": {"type": "array", "items": {"type": "string"}},
+    "protected_paths": {"type": "array", "items": {"type": "string"}},
+    "git": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "branch", "commit", "worktree_ready"],
+      "properties": {
+        "available": {"type": "boolean"},
+        "branch": {"type": ["string", "null"]},
+        "commit": {"type": ["string", "null"]},
+        "worktree_ready": {"type": "boolean"}
+      }
+    },
+    "environment": {"type": "object", "additionalProperties": true},
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["local_ready", "missing", "warnings"],
+      "properties": {
+        "local_ready": {"type": "boolean"},
+        "missing": {"type": "array", "items": {"type": "string"}},
+        "warnings": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

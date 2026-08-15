@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "project_root": "examples/quantum_optics_open_exploration",
+  "project_name": "quantum_optics_open_exploration",
+  "train_command": "python train.py",
+  "eval_command": "bash eval.sh",
+  "metric": "robust_score",
+  "metric_output_key": "score",
+  "metric_aliases": [
+    "score"
+  ],
+  "direction": "maximize",
+  "editable_paths": [
+    "src",
+    "train.py",
+    "run.py",
+    "main.py",
+    "solution.py"
+  ],
+  "protected_paths": [
+    "data",
+    "dataset",
+    "eval.py",
+    "eval.sh",
+    "evaluate.py",
+    "evaluate.sh"
+  ],
+  "git": {
+    "available": true,
+    "branch": "master",
+    "commit": "729fe671ee1857627dfeb99a9c54935e36fab1fd",
+    "worktree_ready": true
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "git_branch": "master",
+    "git_commit": "729fe671ee1857627dfeb99a9c54935e36fab1fd"
+  },
+  "readiness": {
+    "local_ready": true,
+    "missing": [],
+    "warnings": []
+  }
+}

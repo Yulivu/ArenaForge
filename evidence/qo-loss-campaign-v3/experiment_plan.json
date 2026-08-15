@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "campaign_id": "qo-loss-campaign-v3",
+  "baseline": {
+    "hypothesis_id": "baseline",
+    "label": "Baseline",
+    "claim": "Reference behavior before candidate changes.",
+    "train_command": null,
+    "eval_command": "bash eval.sh",
+    "is_baseline": true,
+    "code_ref": "729fe671ee1857627dfeb99a9c54935e36fab1fd"
+  },
+  "candidates": [
+    {
+      "hypothesis_id": "canonical-pytheus",
+      "label": "PyTheus canonical topology",
+      "claim": "The canonical high-fidelity topology remains the strongest under the declared transmission-loss sweep.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'candidate_id': 'pytheus_canonical', 'prune_threshold': 0.0}) + '/n', encoding='utf-8')\"",
+      "eval_command": "bash eval.sh",
+      "is_baseline": false,
+      "code_ref": null
+    },
+    {
+      "hypothesis_id": "sparse-topology",
+      "label": "Sparse edge pruning",
+      "claim": "Removing weak edges may sacrifice a small amount of ideal fidelity while improving loss robustness.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'candidate_id': 'sparse_edge_pruning', 'prune_threshold': 0.15}) + '/n', encoding='utf-8')\"",
+      "eval_command": "bash eval.sh",
+      "is_baseline": false,
+      "code_ref": null
+    },
+    {
+      "hypothesis_id": "random-reference",
+      "label": "Random sign reference",
+      "claim": "A random-sign reference should fail to preserve the target state and acts as a negative control.",
+      "train_command": "python -c \"from pathlib import Path; import json; Path('.arenaforge_candidate.json').write_text(json.dumps({'candidate_id': 'random_sign_reference', 'prune_threshold': 0.0}) + '/n', encoding='utf-8')\"",
+      "eval_command": "bash eval.sh",
+      "is_baseline": false,
+      "code_ref": null
+    }
+  ],
+  "seeds": [
+    17,
+    27
+  ],
+  "estimated_runs": 8,
+  "budget_gate": {
+    "max_runs": 8,
+    "within_budget": true
+  }
+}

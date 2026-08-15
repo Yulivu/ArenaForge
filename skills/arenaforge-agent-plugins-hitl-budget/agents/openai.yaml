@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Plugins HITL Budget"
+  short_description: "Applies ArenaForge plugins, HITL, and budgets"
+  default_prompt: "Use $arenaforge-agent-plugins-hitl-budget to apply ArenaForge plugins, HITL gates, and budgets."

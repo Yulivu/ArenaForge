@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Merge Evaluation"
+  short_description: "Guards ArenaForge merges and evaluation splits"
+  default_prompt: "Use $arenaforge-agent-merge-eval to protect B_test and evaluate ArenaForge merge candidates."

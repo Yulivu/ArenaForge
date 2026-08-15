@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "campaign_id": "qo-loss-campaign-v3",
+  "created_at": 1786806228.0701575,
+  "status": "completed",
+  "project_profile": "project_profile.json",
+  "research_question": "Can a three-photon four-dimensional GHZ preparation graph remain useful under transmission loss without collapsing count rate?",
+  "metric": "robust_score",
+  "direction": "maximize",
+  "secondary_constraints": [],
+  "seeds": [
+    17,
+    27
+  ],
+  "budget": {
+    "max_runs": 8,
+    "timeout_seconds": 3600
+  },
+  "backend": "local",
+  "plan": "experiment_plan.json",
+  "decision": "campaign_decision.json"
+}

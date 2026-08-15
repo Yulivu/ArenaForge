@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/campaign.schema.json",
+  "title": "ArenaForge Experiment Campaign v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "campaign_id",
+    "created_at",
+    "status",
+    "project_profile",
+    "research_question",
+    "metric",
+    "direction",
+    "secondary_constraints",
+    "seeds",
+    "budget",
+    "backend",
+    "plan",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "number"},
+    "status": {
+      "type": "string",
+      "enum": ["draft", "confirmed", "running", "paused", "stopped", "completed", "failed"]
+    },
+    "project_profile": {"type": "string", "minLength": 1},
+    "research_question": {"type": "string", "minLength": 1},
+    "metric": {"type": "string", "minLength": 1},
+    "direction": {"type": "string", "enum": ["maximize", "minimize"]},
+    "secondary_constraints": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": true}
+    },
+    "seeds": {
+      "type": "array",
+      "items": {"type": "integer"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_runs", "timeout_seconds"],
+      "properties": {
+        "max_runs": {"type": "integer", "minimum": 1},
+        "timeout_seconds": {"type": "integer", "minimum": 1}
+      }
+    },
+    "backend": {"type": "string", "enum": ["local", "ssh_gpu"]},
+    "plan": {"type": ["string", "null"]},
+    "decision": {"type": ["string", "null"]}
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "run_id": "baseline-seed-17",
+  "hypothesis_id": "baseline",
+  "label": "Baseline",
+  "seed": 17,
+  "status": "completed",
+  "score": 0.763186,
+  "train_result": null,
+  "eval_result": {
+    "command": "bash eval.sh",
+    "cwd": "examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3/runs/baseline-seed-17/workspace",
+    "returncode": 0,
+    "duration_seconds": 0.672,
+    "stdout_path": "logs/heldout_eval.stdout.log",
+    "stderr_path": "logs/heldout_eval.stderr.log",
+    "stdout_sha256": "05d337912d92c99e03f0ce82e98ae23489d6ced5c72a9cf10daa511b8b19bd37",
+    "stderr_sha256": "b105123eb06f7c5c4cc630a98f2d78c86299f77a52a80d3d962cee82199b3e78",
+    "timed_out": false
+  },
+  "protocol_violations": [],
+  "workspace": "examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3/runs/baseline-seed-17/workspace",
+  "workspace_mode": "copy",
+  "branch": null,
+  "base_commit": null,
+  "commit": null,
+  "changed_paths": [],
+  "diff_stat": ".",
+  "code_ref": "729fe671ee1857627dfeb99a9c54935e36fab1fd"
+}

@@ -1,0 +1,11 @@
+{
+  "command": "bash eval.sh",
+  "cwd": "examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3/runs/baseline-seed-27/workspace",
+  "returncode": 0,
+  "duration_seconds": 0.672,
+  "stdout_path": "logs/heldout_eval.stdout.log",
+  "stderr_path": "logs/heldout_eval.stderr.log",
+  "stdout_sha256": "05d337912d92c99e03f0ce82e98ae23489d6ced5c72a9cf10daa511b8b19bd37",
+  "stderr_sha256": "ed882eb8851c5a6d2800b9e1f77f063f4f56238623d72c891e1933690b1c1605",
+  "timed_out": false
+}

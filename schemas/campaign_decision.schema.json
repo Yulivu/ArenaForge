@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/campaign_decision.schema.json",
+  "title": "ArenaForge Campaign Decision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "campaign_id",
+    "status",
+    "metric",
+    "direction",
+    "baseline",
+    "candidates",
+    "recommended_candidate",
+    "budget",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "campaign_id": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "enum": ["completed", "inconclusive", "failed"]},
+    "metric": {"type": "string", "minLength": 1},
+    "direction": {"type": "string", "enum": ["maximize", "minimize"]},
+    "baseline": {"type": "object", "additionalProperties": true},
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "hypothesis_id",
+          "label",
+          "status",
+          "completed_seeds",
+          "required_seeds",
+          "mean_score",
+          "improvement",
+          "runs",
+          "protocol_violations"
+        ]
+      }
+    },
+    "recommended_candidate": {"type": ["object", "null"], "additionalProperties": true},
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_runs", "used_runs", "stopped_by_budget"],
+      "properties": {
+        "max_runs": {"type": "integer", "minimum": 1},
+        "used_runs": {"type": "integer", "minimum": 0},
+        "stopped_by_budget": {"type": "boolean"}
+      }
+    },
+    "summary": {"type": "string"}
+  }
+}

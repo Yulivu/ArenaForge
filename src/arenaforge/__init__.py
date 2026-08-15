@@ -1,3 +1,4 @@
-"""ArenaForge contract-first scientific exploration runtime."""
+"""ArenaForge open scientific exploration execution product."""
 
-__version__ = "0.2.0"
+__version__ = "0.1.0"
+PRODUCT_NAME = "ArenaForge"

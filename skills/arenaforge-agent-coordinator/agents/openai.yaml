@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Coordinator Loop"
+  short_description: "Runs the ArenaForge Idea Tree control loop"
+  default_prompt: "Use $arenaforge-agent-coordinator to run the ArenaForge Idea Tree coordinator loop."

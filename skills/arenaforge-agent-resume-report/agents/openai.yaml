@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Resume Report"
+  short_description: "Resumes ArenaForge runs and writes reports"
+  default_prompt: "Use $arenaforge-agent-resume-report to resume an ArenaForge run or write REPORT.md."

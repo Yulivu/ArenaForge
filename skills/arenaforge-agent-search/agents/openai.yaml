@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Search Context"
+  short_description: "Adds related-work context to ArenaForge nodes"
+  default_prompt: "Use $arenaforge-agent-search to attach related-work context to validated ArenaForge nodes."

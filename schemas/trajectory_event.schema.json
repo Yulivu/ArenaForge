@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/trajectory_event.schema.json",
+  "title": "ArenaForge Trajectory Event v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "arena_id",
+    "sequence",
+    "event_type",
+    "branch",
+    "event_id",
+    "payload"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "arena_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 1},
+    "event_type": {"type": "string", "minLength": 1},
+    "branch": {"type": "string", "minLength": 1},
+    "event_id": {"type": "string", "minLength": 1},
+    "action_id": {"type": ["string", "null"]},
+    "artifact_id": {"type": ["string", "null"]},
+    "decision": {"type": ["string", "null"]},
+    "reason": {"type": ["string", "null"]},
+    "budget_remaining": {"type": ["integer", "null"]},
+    "selection_reason": {"type": ["string", "null"]},
+    "payload": {"type": "object"}
+  }
+}

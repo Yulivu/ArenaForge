@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Setup Intake"
+  short_description: "Builds ArenaForge contracts and session state"
+  default_prompt: "Use $arenaforge-agent-setup-intake to create the ArenaForge run contract and session state."

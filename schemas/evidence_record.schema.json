@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/evidence_record.schema.json",
+  "title": "ArenaForge Evidence Record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evidence_id", "hypothesis", "status", "result"],
+  "properties": {
+    "evidence_id": {"type": "string", "minLength": 1},
+    "hypothesis": {"type": "string", "minLength": 1},
+    "status": {"type": "string", "enum": ["supported", "refuted", "inconclusive"]},
+    "result": {"type": "object", "additionalProperties": true}
+  }
+}

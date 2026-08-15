@@ -1,17 +1,38 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://arenaforge.local/schemas/run_manifest.schema.json",
-  "title": "ArenaForge Run Manifest v0.2",
+  "title": "ArenaForge Generic Run Manifest v1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "run_id", "arena_id", "policy", "policy_seed", "adapter_seed", "artifacts"],
+  "required": [
+    "schema_version",
+    "run_id",
+    "project_root",
+    "contract",
+    "confirmation",
+    "certificate",
+    "ledger",
+    "environment",
+    "artifacts"
+  ],
   "properties": {
-    "schema_version": {"const": "0.2"},
+    "schema_version": {"const": 1},
     "run_id": {"type": "string", "minLength": 1},
-    "arena_id": {"type": "string", "minLength": 1},
-    "policy": {"type": "string", "enum": ["declared", "random", "adaptive"]},
-    "policy_seed": {"type": ["integer", "null"]},
-    "adapter_seed": {"type": "integer"},
-    "artifacts": {"type": "array", "items": {"type": "object"}}
+    "project_root": {"type": "string", "minLength": 1},
+    "engine": {"type": "string", "minLength": 1},
+    "backend": {"type": "string", "minLength": 1},
+    "session_dir": {"type": "string", "minLength": 1},
+    "contract": {"type": "string", "minLength": 1},
+    "confirmation": {"type": "string", "minLength": 1},
+    "certificate": {"type": "string", "minLength": 1},
+    "ledger": {"type": "string", "minLength": 1},
+    "branch_manifest": {"type": "string", "minLength": 1},
+    "evidence": {"type": "string", "minLength": 1},
+    "process": {"type": "object", "additionalProperties": true},
+    "environment": {"type": "object", "additionalProperties": true},
+    "artifacts": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
   }
 }

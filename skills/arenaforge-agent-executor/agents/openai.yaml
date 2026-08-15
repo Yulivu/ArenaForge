@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArenaForge Executor Dispatch"
+  short_description: "Runs isolated ArenaForge executor workflows"
+  default_prompt: "Use $arenaforge-agent-executor to dispatch and record isolated ArenaForge executor work."

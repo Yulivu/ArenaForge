@@ -1,51 +1,85 @@
-# ArenaForge Demo Script
+# ArenaForge GOAI Demo Script
 
-## 1. Introduce the problem
+## Opening
 
-Show `arena/diabetes-predictor-arena.yaml`. Explain that the arena declares a
-BMI-versus-blood-pressure question, competing hypotheses, actions, budgets,
-feedback, and discovery signals before execution.
+先说明评审看到的不是一个量子实验专用程序，而是 ArenaForge 通用系统；
+本次用 Quantum Optics 作为第一个 Reference Arena：
 
-## 2. Validate and compile
-
-```bash
-arenaforge validate --arena arena/diabetes-predictor-arena.yaml
-arenaforge compile --arena arena/diabetes-predictor-arena.yaml --output /tmp/contract_graph.json
+```text
+物理问题
+  -> 固定实验协议
+  -> Agent 提出候选拓扑
+  -> PyTheus 模拟与损耗扫描
+  -> 多分支比较
+  -> 正负证据和 scoped conclusion
 ```
 
-Show the generated graph and point out problem, hypotheses, actions, evidence,
-signals, and stop rules.
-
-## 3. Run
+## 1. Replay 一个真实探索
 
 ```bash
-arenaforge run \
-  --arena arena/diabetes-predictor-arena.yaml \
-  --runs-dir /tmp/arenaforge-runs \
-  --run-id demo-001
+PYTHONPATH=src python scripts/run_quantum_optics_exploration.py
 ```
 
-Show the action sequence, budget consumption, evidence graph, and certificate.
-Point out the held-out R2 and RMSE values for BMI and blood pressure, plus the
-precommitted practical margin.
+展示：
 
-## 4. Verify and replay
+- canonical、8 个阈值剪枝候选和 random 负对照；
+- fidelity 和 count rate 随 transmission 的变化；
+- edge count、robust score、预算检查和质量门槛；
+- `artifacts/exploration_log.jsonl` 中的逐候选记录。
+
+## 2. 运行 ArenaForge Campaign
 
 ```bash
-arenaforge status --run-dir /tmp/arenaforge-runs/demo-001
-arenaforge replay --run-dir /tmp/arenaforge-runs/demo-001
+PYTHONPATH=src python -m arenaforge campaign-create \
+  --project examples/quantum_optics_open_exploration \
+  --campaign-id qo-loss-campaign-v3 \
+  --question "Find the simplest GHZ preparation graph under a 55-edge budget and 2% per-point quality tolerance." \
+  --metric edge_count \
+  --direction minimize \
+  --seeds 17,27 \
+  --max-runs 8
+
+PYTHONPATH=src python -m arenaforge campaign-plan \
+  --campaign examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3 \
+  --candidates examples/quantum_optics_open_exploration/candidates.example.json
+
+PYTHONPATH=src python -m arenaforge campaign-run \
+  --campaign examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3
 ```
 
-Explain that replay verifies the hash chain before displaying the sequence.
+## 3. 解释结果
 
-## 5. Export
+Replay 当前会得到：
+
+- canonical：`74` 条连接，robust score `0.763186`，超过预算；
+- threshold `0.150`：`49` 条连接，最大质量下降 `1.92%`，满足协议并推荐；
+- threshold `0.200`：`48` 条连接，但最大质量下降 `2.44%`，被拒绝；
+- random sign：质量下降约 `99.98%`，作为负对照失败。
+
+重点解释：系统不是挑最高分，而是在固定质量门槛下寻找更简单的可行拓扑；
+超过预算或超过质量容差的候选都会被保留并明确拒绝。
+
+## 4. 打开 WebUI
 
 ```bash
-arenaforge export \
-  --run-dir /tmp/arenaforge-runs/demo-001 \
-  --target goai \
-  --output /tmp/arenaforge-goai
+PYTHONPATH=src python -m arenaforge web \
+  --run examples/quantum_optics_open_exploration/.arenaforge/campaigns/qo-loss-campaign-v3
 ```
 
-End by showing that the exported bundle contains the arena snapshot, graph,
-ledger, certificate, report, and manifest.
+WebUI 中应展示 Campaign 状态、候选比较、运行日志、证据、完整性状态和导出入口。
+
+## 5. 交付说明
+
+最终附件由以下命令构建：
+
+```bash
+PYTHONPATH=src python scripts/build_goai_submission.py
+```
+
+生成：
+
+```text
+dist/AI4R_OPEN_ArenaForge.zip
+```
+
+正式提交前，参赛团队仍需自行填写官方 4 页问题定义 PDF、团队介绍、公开仓库 URL 和 Demo URL。

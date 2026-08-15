@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arenaforge.local/schemas/hypothesis_node.schema.json",
+  "title": "ArenaForge Hypothesis Node v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "node_id",
+    "parent_id",
+    "hypothesis_id",
+    "statement",
+    "status",
+    "supporting_evidence",
+    "conflicting_evidence",
+    "cost_spent",
+    "decision",
+    "rationale",
+    "children",
+    "updated_step"
+  ],
+  "properties": {
+    "node_id": {"type": "string", "minLength": 1},
+    "parent_id": {"type": ["string", "null"]},
+    "hypothesis_id": {"type": "string", "minLength": 1},
+    "statement": {"type": "string", "minLength": 1},
+    "status": {
+      "type": "string",
+      "enum": ["pending", "running", "supported", "weakened", "confounded", "boundary", "pruned", "merged"]
+    },
+    "supporting_evidence": {"type": "array", "items": {"type": "string"}},
+    "conflicting_evidence": {"type": "array", "items": {"type": "string"}},
+    "cost_spent": {"type": "integer", "minimum": 0},
+    "decision": {"type": "string", "enum": ["none", "retain", "reject", "refine", "stop"]},
+    "rationale": {"type": "string"},
+    "children": {"type": "array", "items": {"type": "string"}},
+    "updated_step": {"type": "integer", "minimum": 0}
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "description": "Three-particle four-dimensional GHZ state under a fixed ancillary-photon budget.",
+  "bulk_thr": 0.01,
+  "edges_tried": 4,
+  "foldername": "arenaforge_qo_ghz_346",
+  "ftol": 1e-06,
+  "loss_func": "cr",
+  "num_anc": 3,
+  "num_pre": 1,
+  "optimizer": "L-BFGS-B",
+  "imaginary": false,
+  "safe_hist": true,
+  "samples": 1,
+  "target_state": ["000", "111", "222", "333"],
+  "thresholds": [0.25, 0.1],
+  "tries_per_edge": 1,
+  "unicolor": false
+}

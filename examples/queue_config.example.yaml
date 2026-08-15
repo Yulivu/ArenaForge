@@ -1,0 +1,34 @@
+# ArenaForge SSH/HPC queue example.
+#
+# The project path is interpreted on the remote host. Build a manifest with:
+#   python -m arenaforge queue-build \
+#     --config examples/queue_config.example.yaml \
+#     --output /tmp/arenaforge-manifest.json
+
+project: arenaforge-demo
+cwd: /root/arenaforge-demo
+timeout_seconds: 3600
+
+remote:
+  scheduler: detached-ssh
+  gpu_count: 1
+
+oom_retry:
+  delay: 120
+  max_attempts: 3
+
+phases:
+  - name: smoke
+    grid:
+      seed: [7, 17]
+      width: [16, 32]
+    template:
+      id: smoke-s${seed}-w${width}
+      command: python train.py --seed ${seed} --width ${width}
+      expected_output: artifacts/smoke-s${seed}-w${width}.json
+  - name: full
+    depends_on: [smoke]
+    template:
+      id: full
+      command: python train.py --full
+      expected_output: artifacts/full.json

@@ -1,0 +1,25 @@
+no in/out nodes given. assuming that target terms correspond to out_nodes. state creation mode
+number of ancillary photons = 3
+no single photon emitters used
+removed_connections not given. assuming no additional constraints
+amplitudes not given, assuming constant values of one
+real numbers used
+heralding_out not given, assuming post-selection
+no information about photon-number resolving detectors given, assuming none are used
+{'|000000>': 0.5, '|111000>': 0.5, '|222000>': 0.5, '|333000>': 0.5}
+start graph has 87 edges.
+start graph has 87 edges after removing.
+total number of target terms 4
+total number of target terms 64
+estimated AST depth of loss expression 14
+count rate done
+total number of target terms 64
+total number of target terms 4
+estimated AST depth of loss expression 14
+fidelity done
+split: heldout
+candidate: pytheus_canonical
+fidelity: 0.999122
+count_rate: 0.969473
+robust_score: 0.763186
+score: 0.763186
