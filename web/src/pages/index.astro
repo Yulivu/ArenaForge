@@ -44,15 +44,15 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
             <p class="text-[12px] text-muted">01 · 输入</p><h3 class="mt-5 text-[19px] font-semibold">研究问题与项目</h3><p class="mt-3 text-[14px] leading-6 text-muted">目标、已有代码或模拟器、约束和预算。</p>
           </article>
           <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
-          <article class="flex-1 border-2 border-forge bg-[#edf4ff] px-5 py-6 shadow-[0_0_0_3px_rgba(0,122,90,0.12)] md:min-h-48">
+          <article class="flex-1 border-2 border-forge bg-[#edf4ff] px-5 py-6 shadow-[0_0_0_3px_rgba(0,113,227,0.12)] md:min-h-48">
             <p class="text-[12px] font-medium text-forge">02 · 协议</p><h3 class="mt-5 text-[19px] font-semibold">研究协议</h3><p class="mt-3 text-[14px] leading-6 text-muted">指标、评价条件、预算和停止条件。</p>
           </article>
           <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
-          <article class="flex-1 border-2 border-forge bg-[#edf4ff] px-5 py-6 shadow-[0_0_0_3px_rgba(0,122,90,0.12)] md:min-h-48">
+          <article class="flex-1 border-2 border-forge bg-[#edf4ff] px-5 py-6 shadow-[0_0_0_3px_rgba(0,113,227,0.12)] md:min-h-48">
             <p class="text-[12px] font-medium text-forge">03 · 执行</p><h3 class="mt-5 text-[19px] font-semibold">候选与执行</h3><p class="mt-3 text-[14px] leading-6 text-muted">生成方案、隔离分支、运行训练或模拟。</p>
           </article>
           <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
-          <article class="flex-1 border-2 border-forge bg-[#edf4ff] px-5 py-6 shadow-[0_0_0_3px_rgba(0,122,90,0.12)] md:min-h-48">
+          <article class="flex-1 border-2 border-forge bg-[#edf4ff] px-5 py-6 shadow-[0_0_0_3px_rgba(0,113,227,0.12)] md:min-h-48">
             <p class="text-[12px] font-medium text-forge">04 · 判断</p><h3 class="mt-5 text-[19px] font-semibold">比较与复核</h3><p class="mt-3 text-[14px] leading-6 text-muted">保留失败边界，在新条件下复核。</p>
           </article>
           <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
@@ -61,6 +61,40 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
           </article>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
+      <div class="reveal grid gap-10 md:grid-cols-[.8fr_1.2fr]">
+        <div>
+          <p class="mb-4 text-[18px] font-semibold text-forge">先说清楚怎么用</p>
+          <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">你带着一个真实问题进来，带着一套可检查的研究结果出去。</h2>
+        </div>
+        <div class="border-y border-black/10">
+          <p class="py-6 text-[18px] leading-8 text-ink">
+            ArenaForge 面向已经有研究问题、已有项目或模拟器的团队。它接住的是研究流程中最容易失控的一段：问题已经值得研究，代码也能运行，但候选方案越来越多，比较条件逐渐漂移，最后很难说明一个结论到底由什么支持。
+          </p>
+          <p class="border-t border-black/10 py-6 text-[18px] leading-8 text-muted">
+            系统先把研究问题整理成一份需要确认的协议，再让 Agent 在这个协议下提出候选、运行实验、比较结果，并把每一次支持、失败和边界都留在同一条证据链里。
+          </p>
+        </div>
+      </div>
+      <div class="reveal mt-14 grid gap-4 md:grid-cols-3">
+        <article class="border border-black/10 bg-paper p-7">
+          <p class="text-[13px] font-medium text-forge">适合开始的时点</p>
+          <h3 class="mt-4 text-[23px] font-semibold text-ink">问题已经明确</h3>
+          <p class="mt-4 text-[15px] leading-7 text-muted">你已经知道要比较什么，或至少知道一个需要验证的研究判断，而不是只有“把结果做得更好”这种没有边界的目标。</p>
+        </article>
+        <article class="border border-black/10 bg-paper p-7">
+          <p class="text-[13px] font-medium text-forge">适合交给系统的工作</p>
+          <h3 class="mt-4 text-[23px] font-semibold text-ink">候选需要反复跑</h3>
+          <p class="mt-4 text-[15px] leading-7 text-muted">问题涉及多个假设、参数、结构或训练策略，单次手工实验无法判断改进是否稳定，失败路径也有研究价值。</p>
+        </article>
+        <article class="border border-black/10 bg-paper p-7">
+          <p class="text-[13px] font-medium text-forge">适合最终交付的时点</p>
+          <h3 class="mt-4 text-[23px] font-semibold text-ink">需要让别人复查</h3>
+          <p class="mt-4 text-[15px] leading-7 text-muted">你要把结果交给合作者、论文、工程负责人或评审，需要说明条件、代码版本、失败边界和结论范围。</p>
+        </article>
       </div>
     </section>
 
@@ -100,6 +134,87 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
           <div><h3 class="text-[22px] font-semibold text-ink">复核与交付</h3><p class="mt-2 text-[14px] text-muted">让别人能看懂，也能重跑。</p></div>
           <p class="text-[15px] leading-7 text-muted">最终候选在未参与搜索的条件下复核，再把推荐理由、反例、代码差异、运行记录和环境信息打包。研究者拿到的是一份可继续写论文或支持决策的结果。</p>
           <p class="text-[15px] leading-7 text-ink"><span class="font-medium text-forge">产物：</span>复核结果、问题证书、可复现结果包</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="border-y border-black/10 bg-paper">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+        <div class="reveal max-w-3xl">
+          <p class="mb-4 text-[18px] font-semibold text-forge">一次 Study 需要什么</p>
+          <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">研究者给出起点，系统把其余信息整理成可确认的执行协议。</h2>
+          <p class="mt-5 text-[17px] leading-8 text-muted">用户不需要先理解配置文件、分支管理或运行队列。第一次输入可以很简单，系统会扫描项目并把高影响的判断集中到确认页面。</p>
+        </div>
+        <div class="reveal mt-12 grid gap-0 border-y border-black/10 md:grid-cols-3 md:divide-x md:divide-black/10">
+          <article class="py-8 md:px-8 md:first:pl-0">
+            <p class="text-[13px] font-medium text-forge">你提供</p>
+            <h3 class="mt-4 text-[24px] font-semibold text-ink">研究起点</h3>
+            <ul class="mt-5 space-y-3 text-[15px] leading-7 text-muted">
+              <li>一个研究问题或待验证判断</li>
+              <li>已有代码、模拟器或可执行项目</li>
+              <li>希望优化或比较的目标</li>
+              <li>已知的资源、数据和修改边界</li>
+            </ul>
+          </article>
+          <article class="border-t border-black/10 py-8 md:border-t-0 md:px-8">
+            <p class="text-[13px] font-medium text-forge">系统整理</p>
+            <h3 class="mt-4 text-[24px] font-semibold text-ink">研究协议</h3>
+            <ul class="mt-5 space-y-3 text-[15px] leading-7 text-muted">
+              <li>baseline、指标和优化方向</li>
+              <li>训练、模拟和评估入口</li>
+              <li>开发集、保留集和统一条件</li>
+              <li>候选预算、随机种子和停止条件</li>
+            </ul>
+          </article>
+          <article class="border-t border-black/10 py-8 md:border-t-0 md:px-8 md:last:pr-0">
+            <p class="text-[13px] font-medium text-forge">你拿到</p>
+            <h3 class="mt-4 text-[24px] font-semibold text-ink">研究交付物</h3>
+            <ul class="mt-5 space-y-3 text-[15px] leading-7 text-muted">
+              <li>已确认的研究简报与执行协议</li>
+              <li>候选、代码差异、命令和运行日志</li>
+              <li>支持、失败、无效和证据不足的判断</li>
+              <li>结果证书、证据图和可复现结果包</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
+      <div class="reveal max-w-3xl">
+        <p class="mb-4 text-[18px] font-semibold text-forge">从输入到交付</p>
+        <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">每一步都有明确的输入、动作和下一步产物。</h2>
+      </div>
+      <div class="reveal mt-12 grid gap-4 md:grid-cols-2">
+        <article class="border border-black/10 p-7">
+          <div class="flex items-baseline justify-between gap-4"><p class="text-[13px] font-medium text-forge">01 · 读懂项目</p><span class="text-[13px] text-muted">输入 → 简报</span></div>
+          <h3 class="mt-5 text-[22px] font-semibold text-ink">扫描入口、依赖和评价方式</h3>
+          <p class="mt-3 text-[15px] leading-7 text-muted">系统读取项目结构、README、训练脚本和评估脚本，识别可以运行的路径、可观察的指标以及需要用户确认的歧义。</p>
+        </article>
+        <article class="border border-black/10 p-7">
+          <div class="flex items-baseline justify-between gap-4"><p class="text-[13px] font-medium text-forge">02 · 固定协议</p><span class="text-[13px] text-muted">简报 → 规则</span></div>
+          <h3 class="mt-5 text-[22px] font-semibold text-ink">先确定什么结果才算成立</h3>
+          <p class="mt-3 text-[15px] leading-7 text-muted">用户确认 baseline、指标方向、数据划分、保护范围和资源预算。确认后，所有候选必须遵守同一套判断规则。</p>
+        </article>
+        <article class="border border-black/10 p-7">
+          <div class="flex items-baseline justify-between gap-4"><p class="text-[13px] font-medium text-forge">03 · 组织候选</p><span class="text-[13px] text-muted">规则 → 方案</span></div>
+          <h3 class="mt-5 text-[22px] font-semibold text-ink">让 Agent 提出可以验证的假设</h3>
+          <p class="mt-3 text-[15px] leading-7 text-muted">每个候选都要说明改什么、为什么值得跑、预期影响是什么，以及用哪项实验来判断。系统保留候选之间的关系，不把它们混成一段对话。</p>
+        </article>
+        <article class="border border-black/10 p-7">
+          <div class="flex items-baseline justify-between gap-4"><p class="text-[13px] font-medium text-forge">04 · 隔离执行</p><span class="text-[13px] text-muted">方案 → 证据</span></div>
+          <h3 class="mt-5 text-[22px] font-semibold text-ink">在独立分支和统一条件下运行</h3>
+          <p class="mt-3 text-[15px] leading-7 text-muted">系统为候选创建隔离工作区，保存 commit、命令、环境、日志和资源状态，可选择本地执行或提交到 SSH GPU 队列。</p>
+        </article>
+        <article class="border border-black/10 p-7">
+          <div class="flex items-baseline justify-between gap-4"><p class="text-[13px] font-medium text-forge">05 · 判断结果</p><span class="text-[13px] text-muted">证据 → 决定</span></div>
+          <h3 class="mt-5 text-[22px] font-semibold text-ink">把有效、失败和越界分开</h3>
+          <p class="mt-3 text-[15px] leading-7 text-muted">系统比较 baseline 和候选的开发集、保留集及约束结果，识别协议违规和失败边界，避免只展示最好的一次分数。</p>
+        </article>
+        <article class="border border-black/10 p-7">
+          <div class="flex items-baseline justify-between gap-4"><p class="text-[13px] font-medium text-forge">06 · 交回研究流程</p><span class="text-[13px] text-muted">决定 → 交付</span></div>
+          <h3 class="mt-5 text-[22px] font-semibold text-ink">生成能继续使用的研究材料</h3>
+          <p class="mt-3 text-[15px] leading-7 text-muted">最终结果包含推荐理由、反例、复核范围、代码版本、运行记录和环境指纹，直接服务于论文实验部分、组内决策或下一轮研究。</p>
         </article>
       </div>
     </section>

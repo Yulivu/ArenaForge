@@ -261,6 +261,9 @@ def main() -> None:
         _run_demo(**demo)
 
     for relative in (
+        "LICENSE",
+        "NOTICE",
+        "CONTRIBUTING.md",
         "README.md",
         "pyproject.toml",
         "docs",
@@ -270,6 +273,7 @@ def main() -> None:
         "tests",
         "third_party",
         "integrations",
+        "web",
         "examples/queue_config.example.yaml",
         "examples/research_runtime_config.example.yaml",
     ):

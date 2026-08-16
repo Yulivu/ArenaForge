@@ -102,7 +102,7 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
           <article class="bg-ink px-5 py-7 md:min-h-64">
             <p class="text-[14px] text-[#a1a1a6]">04 · 判断</p>
             <h3 class="mt-5 text-[24px] font-semibold">49 条通过</h3>
-            <p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">49 条连接候选通过；48 条候选下降 2.44%，成为明确失败边界。</p>
+            <p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">49 条连接候选通过；48 条候选下降 2.32%，成为明确失败边界。</p>
             <p class="mt-6 text-[14px] font-semibold text-[#8abcf5]">得到：推荐与边界</p>
           </article>
           <article class="bg-[#0071e3] px-5 py-7 md:min-h-64">
@@ -209,7 +209,7 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
         </figure>
         <div class="reveal mt-8 grid gap-6 md:grid-cols-3">
           <article><h3 class="text-[20px] font-semibold text-ink">49 条连接可行</h3><p class="mt-2 text-[15px] leading-7 text-muted">反馈引导删减进入可行区域，最大质量下降为 1.92%。</p></article>
-          <article><h3 class="text-[20px] font-semibold text-ink">48 条连接越界</h3><p class="mt-2 text-[15px] leading-7 text-muted">再删一条后质量下降变为 2.44%，因此被明确拒绝。</p></article>
+          <article><h3 class="text-[20px] font-semibold text-ink">48 条连接越界</h3><p class="mt-2 text-[15px] leading-7 text-muted">再删一条后质量下降变为 2.32%，因此被明确拒绝。</p></article>
           <article><h3 class="text-[20px] font-semibold text-ink">第二条策略复现结果</h3><p class="mt-2 text-[15px] leading-7 text-muted">阈值策略也得到相同的 49 条连接结构，作为交叉参照保留。</p></article>
         </div>
       </div>
@@ -272,7 +272,7 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
             <span><b class="block text-[15px]">预算外候选</b><span class="text-muted">sparse_threshold_040</span></span><span class="font-medium text-[#b42318]">拒绝</span><span>57</span><span>1.05%</span><span class="text-muted">质量通过，但超过 55 条连接上限。</span>
           </div>
           <div class="grid grid-cols-[1.6fr_.65fr_.65fr_.85fr_1.35fr] gap-4 border-b border-black/10 px-5 py-5 text-[14px]">
-            <span><b class="block text-[15px]">下一次删减</b><span class="text-muted">sparse_threshold_200</span></span><span class="font-medium text-[#b42318]">拒绝</span><span>48</span><span>2.44%</span><span class="text-muted">已经达到预算，质量下降却越过 2% 门槛。</span>
+            <span><b class="block text-[15px]">下一次删减</b><span class="text-muted">sparse_threshold_200</span></span><span class="font-medium text-[#b42318]">拒绝</span><span>48</span><span>2.32%</span><span class="text-muted">已经达到预算，质量下降却越过 2% 门槛。</span>
           </div>
           <div class="grid grid-cols-[1.6fr_.65fr_.65fr_.85fr_1.35fr] gap-4 px-5 py-5 text-[14px]">
             <span><b class="block text-[15px]">随机扰动参照</b><span class="text-muted">random_sign_reference</span></span><span class="font-medium text-[#b42318]">拒绝</span><span>74</span><span>99.98%</span><span class="text-muted">质量信号不满足协议要求。</span>

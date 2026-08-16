@@ -1,0 +1,12 @@
+ArenaForge
+
+ArenaForge combines product code, research examples, and separately attributed
+third-party components.
+
+The product runtime and documentation are distributed under the Apache License
+2.0 unless a more specific file states otherwise. The complete license text is
+in LICENSE.
+
+Third-party source and attribution notices are retained under third_party/ and
+web/NOTICE. See docs/third-party-and-data-notices.md before redistributing a
+bundle that includes those components.
