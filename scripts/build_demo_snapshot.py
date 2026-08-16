@@ -34,6 +34,16 @@ def main() -> None:
     candidate_rows = []
     for candidate in candidates:
         candidate_id = candidate["candidate_id"]
+        quality_drop = max(
+            (
+                max(
+                    row.get("fidelity_relative_drop", 0.0),
+                    row.get("count_rate_relative_drop", 0.0),
+                )
+                for row in candidate.get("quality_deltas", [])
+            ),
+            default=0.0,
+        )
         if candidate_id == final_id:
             decision = "recommended"
         elif candidate_id == "random_sign_reference":
@@ -49,6 +59,7 @@ def main() -> None:
                 "robust_score": candidate.get("robust_score"),
                 "budget_feasible": candidate.get("budget_feasible"),
                 "quality_acceptable": candidate.get("quality_acceptable"),
+                "quality_drop": quality_drop,
                 "decision": decision,
             }
         )
@@ -71,6 +82,7 @@ def main() -> None:
         "baseline_edges": certificate["baseline"]["edge_count"],
         "recommended_edges": certificate["final"]["edge_count"],
         "max_validation_drop": certificate["validation"]["max_quality_drop"],
+        "validation_rows": certificate["validation"]["rows"],
         "candidates": candidate_rows,
     }
     output = args.output.resolve()

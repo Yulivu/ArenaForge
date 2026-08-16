@@ -11,6 +11,23 @@
   "baseline_edges": 74,
   "recommended_edges": 49,
   "max_validation_drop": 0.01801411924158358,
+  "validation_rows": [
+    {
+      "transmission": 0.98,
+      "fidelity_relative_drop": 0.015051475078744714,
+      "count_rate_relative_drop": 0.0152783460235838
+    },
+    {
+      "transmission": 0.85,
+      "fidelity_relative_drop": 0.015051475078745158,
+      "count_rate_relative_drop": 0.016120818795275604
+    },
+    {
+      "transmission": 0.75,
+      "fidelity_relative_drop": 0.015051475078744825,
+      "count_rate_relative_drop": 0.01801411924158358
+    }
+  ],
   "candidates": [
     {
       "id": "sensitivity_guided_025",
@@ -18,6 +35,7 @@
       "robust_score": 0.739677892744063,
       "budget_feasible": true,
       "quality_acceptable": true,
+      "quality_drop": 0.019198511254097883,
       "decision": "recommended"
     },
     {
@@ -26,6 +44,7 @@
       "robust_score": 0.739677892744063,
       "budget_feasible": true,
       "quality_acceptable": true,
+      "quality_drop": 0.019198511254097883,
       "decision": "supported"
     },
     {
@@ -34,6 +53,7 @@
       "robust_score": 0.7482338541607636,
       "budget_feasible": true,
       "quality_acceptable": true,
+      "quality_drop": 0.017302594075880307,
       "decision": "supported"
     },
     {
@@ -42,6 +62,7 @@
       "robust_score": 0.755347619593225,
       "budget_feasible": true,
       "quality_acceptable": true,
+      "quality_drop": 0.015745772535326608,
       "decision": "supported"
     },
     {
@@ -50,6 +71,7 @@
       "robust_score": 0.7268350711185662,
       "budget_feasible": true,
       "quality_acceptable": false,
+      "quality_drop": 0.02436175135494989,
       "decision": "rejected"
     },
     {
@@ -58,6 +80,7 @@
       "robust_score": 0.7603175982581273,
       "budget_feasible": false,
       "quality_acceptable": true,
+      "quality_drop": 0.01050974842536223,
       "decision": "rejected"
     },
     {
@@ -66,6 +89,7 @@
       "robust_score": 0.7624365467332361,
       "budget_feasible": false,
       "quality_acceptable": true,
+      "quality_drop": 0.0012051962004069328,
       "decision": "rejected"
     },
     {
@@ -74,6 +98,7 @@
       "robust_score": 0.7631750820599577,
       "budget_feasible": false,
       "quality_acceptable": true,
+      "quality_drop": 0.00010459310835309044,
       "decision": "rejected"
     },
     {
@@ -82,6 +107,7 @@
       "robust_score": 0.7631856711953847,
       "budget_feasible": false,
       "quality_acceptable": true,
+      "quality_drop": 6.849539053832565e-06,
       "decision": "rejected"
     },
     {
@@ -90,6 +116,7 @@
       "robust_score": 0.7631856114921269,
       "budget_feasible": false,
       "quality_acceptable": true,
+      "quality_drop": 0.0,
       "decision": "rejected"
     },
     {
@@ -98,6 +125,7 @@
       "robust_score": 3.1213673898586875e-08,
       "budget_feasible": false,
       "quality_acceptable": false,
+      "quality_drop": 0.999822034445436,
       "decision": "refuted"
     }
   ]

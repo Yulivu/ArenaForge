@@ -20,6 +20,11 @@ def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
     return ImageFont.truetype(f"C:/Windows/Fonts/{name}", size=size)
 
 
+def chinese_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
+    name = "msyhbd.ttc" if bold else "msyh.ttc"
+    return ImageFont.truetype(f"C:/Windows/Fonts/{name}", size=size)
+
+
 def rounded_box(draw: ImageDraw.ImageDraw, xy: tuple[int, int, int, int], fill: str, outline: str) -> None:
     draw.rounded_rectangle(xy, radius=20, fill=fill, outline=outline, width=2)
 
@@ -112,14 +117,96 @@ def render_quantum_graph(snapshot: dict) -> None:
     image.save(OUTPUT / "quantum-optics-case.png")
 
 
+def render_candidate_landscape(snapshot: dict) -> None:
+    image = Image.new("RGB", (WIDTH, HEIGHT), "#f5f5f7")
+    draw = ImageDraw.Draw(image)
+    ink, muted, line, forge, red = "#171717", "#6e6e73", "#d2d2d7", "#007a5a", "#b42318"
+    left, top, right, bottom = 155, 245, 1310, 730
+    min_edges, max_edges = 47, 75
+    max_drop = 0.032
+
+    def x(value: float) -> int:
+        return int(left + (value - min_edges) / (max_edges - min_edges) * (right - left))
+
+    def y(value: float) -> int:
+        return int(bottom - min(value, max_drop) / max_drop * (bottom - top))
+
+    draw.text((80, 70), "候选空间", font=chinese_font(23, True), fill=forge)
+    draw.text((80, 116), "预算和质量门槛共同决定候选是否保留。", font=chinese_font(43, True), fill=ink)
+    draw.text((80, 178), "每个点对应一次记录在案的候选评估。", font=chinese_font(20), fill=muted)
+    legend_x, legend_y = 945, 195
+    for index, (color, label) in enumerate(
+        [(forge, "推荐"), ("#2d6385", "通过质量门槛"), (red, "未采用")]
+    ):
+        offset = index * 128
+        draw.ellipse(
+            (legend_x + offset, legend_y, legend_x + offset + 12, legend_y + 12),
+            fill=color,
+        )
+        draw.text((legend_x + offset + 20, legend_y - 5), label, font=chinese_font(14), fill=muted)
+
+    draw.rectangle((left, top, right, bottom), fill="#ffffff", outline=line, width=2)
+    budget_x, gate_y = x(55), y(0.02)
+    draw.rectangle((left, gate_y, budget_x, bottom), fill="#e8f4ef")
+    draw.line((budget_x, top, budget_x, bottom), fill=forge, width=3)
+    draw.line((left, gate_y, right, gate_y), fill=forge, width=3)
+    draw.text((left + 18, gate_y + 16), "可行区域", font=chinese_font(17, True), fill=forge)
+    draw.text((budget_x - 54, bottom + 20), "55 条连接上限", font=chinese_font(16), fill=forge)
+    draw.text((right - 172, gate_y - 31), "2% 质量门槛", font=chinese_font(16), fill=forge)
+
+    for percent in [0.0, 0.01, 0.02, 0.03]:
+        yy = y(percent)
+        draw.line((left, yy, right, yy), fill="#e8e8ed", width=1)
+        draw.text((70, yy - 10), f"{percent * 100:.0f}%", font=font(16), fill=muted)
+    for edge_count in [48, 55, 60, 65, 70, 74]:
+        xx = x(edge_count)
+        draw.line((xx, top, xx, bottom), fill="#efeff1", width=1)
+        draw.text((xx - 11, bottom + 45), str(edge_count), font=font(16), fill=muted)
+    draw.text((left, bottom + 78), "连接数", font=chinese_font(17), fill=muted)
+    draw.text((54, top - 36), "最大质量下降", font=chinese_font(17), fill=muted)
+
+    labels = {
+        "sensitivity_guided_025": "推荐方案",
+        "sparse_threshold_200": "边界失败",
+        "pytheus_canonical": "基线",
+    }
+    visible_candidates = [
+        candidate
+        for candidate in snapshot["candidates"]
+        if candidate["id"] not in {"random_sign_reference", "sensitivity_guided_025"}
+    ]
+    recommended = next(
+        candidate
+        for candidate in snapshot["candidates"]
+        if candidate["id"] == "sensitivity_guided_025"
+    )
+    for candidate in [*visible_candidates, recommended]:
+        xx, yy = x(candidate["edges"]), y(candidate["quality_drop"])
+        if candidate["id"] == "sensitivity_guided_025":
+            color, radius = forge, 13
+        elif candidate["quality_acceptable"] and candidate["budget_feasible"]:
+            color, radius = "#2d6385", 10
+        else:
+            color, radius = red, 9
+        draw.ellipse((xx - radius, yy - radius, xx + radius, yy + radius), fill=color, outline="#ffffff", width=3)
+        label = labels.get(candidate["id"])
+        if label:
+            draw.text((xx + 16, yy - 18), label, font=chinese_font(15, True), fill=ink)
+
+    draw.text((902, 790), "随机扰动：99.98% 质量下降", font=chinese_font(17), fill=red)
+    image.save(OUTPUT / "candidate-landscape.png")
+
+
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     snapshot_path = ROOT / "web" / "public" / "reference-data.json"
     snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
     render_campaign(snapshot)
     render_quantum_graph(snapshot)
+    render_candidate_landscape(snapshot)
     print(f"wrote {OUTPUT.relative_to(ROOT) / 'study-campaign.png'}")
     print(f"wrote {OUTPUT.relative_to(ROOT) / 'quantum-optics-case.png'}")
+    print(f"wrote {OUTPUT.relative_to(ROOT) / 'candidate-landscape.png'}")
 
 
 if __name__ == "__main__":
