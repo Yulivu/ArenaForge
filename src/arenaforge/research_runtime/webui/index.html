@@ -699,7 +699,7 @@ function scienceStartGuideHTML(a,q){
       <div style="max-width:790px;">
         <div style="font-size:11.5px; font-weight:700; letter-spacing:.12em; color:var(--accent2); text-transform:uppercase;">ARENAFORGE · 开放科学探索系统</div>
         <h2 style="font-size:27px; line-height:1.28; margin:8px 0 7px;">把科学问题变成可持续运行的探索</h2>
-        <p style="font-size:14px; color:var(--tx2); line-height:1.65; margin:0; max-width:720px;">ArenaForge 接收一个尚未结构化的科学问题、可运行环境和约束，调用 Agent 持续提出假设、执行行动、读取反馈、保留反证，最后交付可复现的研究证据。<strong style="color:var(--tx);">量子光学只是当前第一个 Reference Arena，不是产品边界。</strong></p>
+        <p style="font-size:14px; color:var(--tx2); line-height:1.65; margin:0; max-width:720px;">ArenaForge 接收一个尚未结构化的科学问题、可运行环境和约束，调用 Agent 持续提出假设、执行行动、读取反馈、保留反证，最后交付可复现的研究证据。<strong style="color:var(--tx);">量子光学是当前第一个 Reference Arena，用于展示这套运行时。</strong></p>
       </div>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <button data-act="nav:protocol" style="all:unset; cursor:pointer; padding:9px 14px; border-radius:8px; background:var(--accent); color:#081018; font-size:12px; font-weight:700;">${ic('target',14)} 查看输入协议</button>
@@ -795,7 +795,7 @@ function scienceMaxQualityDrop(candidate){
 }
 function scienceOutcomeMeta(outcome){
   if(outcome==='improved') return { label:'发现质量约束下的复杂度下降', color:'var(--accent)', detail:'推荐方案满足 55 条连接预算，所有损耗点的质量下降不超过 2%，且连接数少于规范参照。' };
-  if(outcome==='no_improvement') return { label:'未发现可接受的改进', color:'var(--amber)', detail:'当前候选均未超过参照；这是经过统一评估得到的负结果，不是缺少运行。' };
+  if(outcome==='no_improvement') return { label:'未发现可接受的改进', color:'var(--amber)', detail:'统一评估已经完成；当前候选均未超过参照，结果作为负证据保留。' };
   return { label:'结论尚未完成', color:'var(--amber)', detail:'探索尚未满足输出结论所需的证据条件。' };
 }
 function viewScienceCampaign(a){
@@ -837,7 +837,7 @@ function viewScienceCampaign(a){
       <div style="max-width:800px;">
         <div style="font-size:12px; font-weight:700; letter-spacing:.12em; color:var(--accent2); text-transform:uppercase;">ARENAFORGE · 完整 Reference Arena</div>
         <h1 style="font-size:31px; line-height:1.22; margin:9px 0 10px;">Quantum Optics · 量子光学探索示例</h1>
-        <p style="margin:0; color:var(--tx2); font-size:14px; line-height:1.65;">这是一个完整、可独立复现的示例：从问题定义、环境协议、候选探索到最终证据交付全部展示在这里。它用于证明 ArenaForge 的通用运行能力，不是 ArenaForge 的产品边界。</p>
+        <p style="margin:0; color:var(--tx2); font-size:14px; line-height:1.65;">这是一个完整、可独立复现的示例：从问题定义、环境协议、候选探索到最终证据交付全部展示在这里。它展示 ArenaForge 的通用运行能力。</p>
       </div>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <button data-act="nav:protocol" style="all:unset; cursor:pointer; padding:9px 14px; border-radius:8px; background:var(--accent); color:#081018; font-size:12px; font-weight:700;">${ic('target',14)} 查看问题协议</button>
@@ -873,7 +873,7 @@ function viewScienceCampaign(a){
       <div class="af-science-pipeline" style="display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; margin-top:14px;">
         ${['固定问题边界','构造参照与候选','调用真实物理环境','统一指标比较','生成证据结论'].map((label,index)=>`<div style="position:relative; min-height:84px; padding:13px; border-radius:10px; background:var(--card2); border:1px solid var(--line);"><div style="font-family:'IBM Plex Mono',monospace; color:var(--accent2); font-size:11px;">0${index+1}</div><div style="font-size:13px; font-weight:600; margin-top:7px; line-height:1.35;">${label}</div>${index<4?`<span style="position:absolute; right:-8px; top:35px; z-index:2; width:16px; height:16px; display:grid; place-items:center; background:var(--bg); color:var(--tx3);">${ic('arrow-right',12)}</span>`:''}</div>`).join('')}
       </div>
-      <div style="font-size:13px; color:var(--tx2); line-height:1.65; margin-top:14px;">这解决的不是“替人写一个猜测”，而是科研中从直觉到可信结论之间最容易断裂的环节：候选是否在相同条件下被真正执行、失败是否被保留、结论能否追溯到原始运行。</div>
+      <div style="font-size:13px; color:var(--tx2); line-height:1.65; margin-top:14px;">ArenaForge 覆盖科研中从直觉到可信结论之间最容易断裂的环节：候选是否在相同条件下被真正执行、失败是否被保留、结论能否追溯到原始运行。</div>
     </section>
     <section style="padding:20px; border-radius:14px; background:var(--card); border:1px solid var(--line); margin-bottom:18px;">
       <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap;">
@@ -883,7 +883,7 @@ function viewScienceCampaign(a){
       <div class="af-candidate-head" style="display:grid; grid-template-columns:minmax(180px,1.25fr) .62fr .72fr .72fr .85fr; gap:14px; padding:13px 2px 9px; color:var(--tx3); border-bottom:1px solid var(--line); font-size:11px; font-weight:700; letter-spacing:.08em;"><span>候选</span><span>判断</span><span>连接数</span><span>协议检查</span><span>相对参照</span></div>
       ${candidates.map(candidateRow).join('')||emptyRow('暂无候选结果。')}
       <div style="margin-top:14px; padding:12px 14px; border-radius:10px; background:var(--card2); border:1px solid var(--line); font-size:13px; line-height:1.6; color:var(--tx2);">
-        <strong style="color:var(--tx);">结论边界：</strong>推荐方案把连接数从 ${baseline.edge_count??'—'} 降到 ${candidates.find(c=>c.candidate_id===q.recommended_candidate)?.edge_count??'—'}，最大质量下降 ${((scienceMaxQualityDrop(candidates.find(c=>c.candidate_id===q.recommended_candidate)||{})*100).toFixed(2))}%，容差为 ${(qualityTolerance*100).toFixed(0)}%。稳健分数从 ${baselineScore.toFixed(6)} 变为 ${Number((candidates.find(c=>c.candidate_id===q.recommended_candidate)||{}).robust_score||0).toFixed(6)}。${refuted.length?`反证保留：${esc(refuted.map(id=>scienceCandidateLabel({candidate_id:id})).join('、'))}。`:''}这表示“在质量约束内降低复杂度”，不表示所有物理性能都全面提高。
+        <strong style="color:var(--tx);">结论范围：</strong>推荐方案把连接数从 ${baseline.edge_count??'—'} 降到 ${candidates.find(c=>c.candidate_id===q.recommended_candidate)?.edge_count??'—'}，最大质量下降 ${((scienceMaxQualityDrop(candidates.find(c=>c.candidate_id===q.recommended_candidate)||{})*100).toFixed(2))}%，容差为 ${(qualityTolerance*100).toFixed(0)}%。稳健分数从 ${baselineScore.toFixed(6)} 变为 ${Number((candidates.find(c=>c.candidate_id===q.recommended_candidate)||{}).robust_score||0).toFixed(6)}。${refuted.length?`反证保留：${esc(refuted.map(id=>scienceCandidateLabel({candidate_id:id})).join('、'))}。`:''}该结论描述的是固定质量约束下的复杂度下降。
       </div>
     </section>
     ${scienceArenaPanel(a)}
@@ -928,7 +928,7 @@ function viewProductOverview(a){
         <div style="max-width:760px;">
           <div style="font-size:11.5px; font-weight:700; letter-spacing:.13em; color:var(--tx3); text-transform:uppercase;">当前可运行实例</div>
           <h2 style="font-size:23px; line-height:1.3; margin:8px 0 7px;">Reference Arena #1 · Quantum Optics</h2>
-          <p style="font-size:13.5px; color:var(--tx2); line-height:1.65; margin:0;">这是一个完整的、可独立复现的示例，用来证明产品闭环真实运行。它不是 ArenaForge 的产品定义，也不要求用户把未来问题改造成量子光学问题。</p>
+          <p style="font-size:13.5px; color:var(--tx2); line-height:1.65; margin:0;">这是一个完整的、可独立复现的示例，用来展示产品闭环的真实运行。未来项目只需接入各自的研究环境和协议。</p>
         </div>
         <span style="padding:7px 10px; border-radius:7px; background:var(--soft); border:1px solid var(--aline); color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:11px;">${esc(statusText(status))}</span>
       </div>
@@ -1103,7 +1103,7 @@ function viewProtocol(){
       <div style="font-size:11.5px; font-weight:700; letter-spacing:.12em; color:var(--tx3); text-transform:uppercase;">先理解这页在填什么</div>
       <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:12px;">
         <div style="padding:14px; border-radius:12px; background:var(--card2); border:1px solid var(--line);"><div style="font-size:11px; color:var(--tx3); text-transform:uppercase; letter-spacing:.08em;">1. 想验证什么</div><div style="margin-top:6px; font-size:13.5px; color:var(--tx2); line-height:1.55;">一句研究目标，加上指标和方向，决定系统怎样判断“有改进”。</div></div>
-        <div style="padding:14px; border-radius:12px; background:var(--card2); border:1px solid var(--line);"><div style="font-size:11px; color:var(--tx3); text-transform:uppercase; letter-spacing:.08em;">2. 怎么运行</div><div style="margin-top:6px; font-size:13.5px; color:var(--tx2); line-height:1.55;">项目扫描和 AI 会先给训练、评估命令草案；这里是确认点，不是让你从零手写。</div></div>
+        <div style="padding:14px; border-radius:12px; background:var(--card2); border:1px solid var(--line);"><div style="font-size:11px; color:var(--tx3); text-transform:uppercase; letter-spacing:.08em;">2. 怎么运行</div><div style="margin-top:6px; font-size:13.5px; color:var(--tx2); line-height:1.55;">项目扫描和 AI 会先给训练、评估命令草案；研究者在这里确认实际入口。</div></div>
         <div style="padding:14px; border-radius:12px; background:var(--card2); border:1px solid var(--line);"><div style="font-size:11px; color:var(--tx3); text-transform:uppercase; letter-spacing:.08em;">3. AI 能改哪里</div><div style="margin-top:6px; font-size:13.5px; color:var(--tx2); line-height:1.55;">开放算法代码，保护数据、评估器和测试划分，保证实验比较可信。</div></div>
       </div>
     </section>
@@ -1127,7 +1127,7 @@ function viewProtocol(){
     </section>
     <section style="padding:18px; border-radius:14px; background:var(--card); border:1px solid var(--line); margin-bottom:16px;">
       <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start; flex-wrap:wrap;">
-        <div><div style="font-size:11.5px; font-weight:600; letter-spacing:.12em; color:var(--tx3); text-transform:uppercase;">代码修改边界</div><div style="font-size:13px; color:var(--tx2); line-height:1.6; margin-top:8px;">这不是额外任务，而是 AI 的权限开关。开放算法代码，保护数据、评估器、测试划分和提交逻辑。</div></div>
+        <div><div style="font-size:11.5px; font-weight:600; letter-spacing:.12em; color:var(--tx3); text-transform:uppercase;">代码修改边界</div><div style="font-size:13px; color:var(--tx2); line-height:1.6; margin-top:8px;">代码边界定义 AI 的操作权限：开放算法代码，保护数据、评估器、测试划分和提交逻辑。</div></div>
         ${editable?`<button data-act="pick-boundaries" style="all:unset; cursor:pointer; padding:8px 12px; border-radius:8px; border:1px solid var(--line2); color:var(--tx); font-size:12px;">${ic('folder',14)} 从目录选择</button><input id="boundary-directory" type="file" webkitdirectory directory multiple style="display:none;">`:''}
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px;">

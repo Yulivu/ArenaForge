@@ -6,19 +6,18 @@ ArenaForge 是一个面向未结构化科学问题的 Agent 持续探索与证�
 它把科学直觉转成可观察、可行动、可评价、可回放的研究环境，并记录从
 假设到结果的完整证据链。
 
-本次提交包含一个具体的 `Reference Arena #1：Quantum Optics`，用于证明
-ArenaForge 能够在真实物理模拟环境中运行。量子光学不是 ArenaForge 的产品边界，
-只是当前第一个可复现示例。
+本次提交包含 `Reference Arena #1：Quantum Optics`，展示 ArenaForge 在真实
+物理模拟环境中的运行。量子光学是当前第一个可复现示例。
 
 ## Reference Arena #1：Quantum Optics
 
-下面的问题属于当前 reference arena，不是 ArenaForge 的通用产品定义。
+下面定义当前 reference arena 的具体问题。
 
 ## 最小科学问题
 
 在固定三光子四维 GHZ 目标态、辅助光子预算和探测器约束下，若实验连接数最多为 55 条，能否找到一个在所有损耗扫描点都保持可接受质量、同时连接数最少的拓扑？
 
-这里的“可接受质量”是预先冻结的约束，而不是事后调权：
+“可接受质量”在探索开始前冻结为以下约束：
 
 ```text
 edge_count <= 55
@@ -41,7 +40,7 @@ canonical 拓扑的复杂度时，是否有更简单、质量没有明显退化�
 - 连接数预算固定为 `55`；
 - 质量容差固定为 `2%`；
 - 同时记录 fidelity、count rate、edge count、robust score、预算可行性和质量可接受性；
-- 损耗模型是公开声明的 per-edge transmission proxy，不是实验室标定。
+- 损耗模型采用公开声明的 per-edge transmission proxy；结论适用范围随该代理模型定义。
 
 ### Agent 可操作空间
 
@@ -82,8 +81,8 @@ count rate、robust score、seed、剩余预算、失败原因和受保护路径
 | random sign reference | `74` | `0.000000` | `99.98%` | 反证对照 |
 
 推荐候选比 canonical 少 `25` 条连接，减少约 `33.8%`；最大质量下降为
-`1.92%`，没有超过预先声明的 `2%` 容差。它不是物理性能全面提升，而是
-在固定质量约束下得到的更简单可行拓扑。
+`1.92%`，处于预先声明的 `2%` 容差内。结论是：在固定质量约束下得到更简单的
+可行拓扑。
 
 ## 必须由参赛团队补充
 
