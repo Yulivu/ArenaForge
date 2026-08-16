@@ -1,0 +1,12 @@
+ArenaForge product site display layer
+
+The Astro, Tailwind, and GSAP presentation structure in this directory was
+developed from the public apple-style-portfolio template:
+
+  https://github.com/larry-xue/apple-style-portfolio
+  upstream revision: dbcc368a257e49f61f007f64c535b7b8967a21b3
+
+The upstream project declares the MIT License in its package metadata and
+repository documentation. ArenaForge removes its portfolio content, React,
+Three.js, original media, and product branding. This notice is intentionally
+not linked from the public product site.

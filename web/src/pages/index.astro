@@ -1,0 +1,111 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<Layout
+  title="ArenaForge | 开放科学探索"
+  description="ArenaForge 把开放科学问题变成可执行、可复查的研究结果。"
+  active="product"
+>
+  <main>
+    <section class="mx-auto grid min-h-[680px] max-w-7xl items-center gap-12 px-5 py-16 md:grid-cols-[1.03fr_.97fr] md:px-8 md:py-24">
+      <div class="reveal">
+        <p class="mb-5 text-[14px] font-medium text-forge">开放科学探索执行系统</p>
+        <h1 class="max-w-3xl text-[52px] font-semibold leading-[1.08] text-ink md:text-[76px]">
+          ArenaForge 让开放科学问题真正跑起来。
+        </h1>
+        <p class="mt-7 max-w-xl text-[19px] leading-8 text-muted">
+          把研究问题变成实验计划，持续比较候选方案，并交付能复查的研究结果。
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="#workflow" class="rounded-md bg-forge px-5 py-3 text-[15px] font-medium text-white no-underline transition-colors hover:bg-forge-dark">了解 ArenaForge</a>
+          <a href={`${base}case/`} class="rounded-md border border-black/15 px-5 py-3 text-[15px] font-medium text-ink no-underline transition-colors hover:bg-paper">查看验证案例</a>
+        </div>
+      </div>
+      <figure class="reveal m-0 border border-black/10 bg-paper p-3">
+        <img src={`${base}assets/study-campaign.png`} alt="ArenaForge 研究执行概览，展示研究输入、候选实验和结果交付。" class="block h-auto w-full" width="1440" height="900" />
+      </figure>
+    </section>
+
+    <section class="border-y border-black/10 bg-paper">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+        <div class="reveal max-w-2xl">
+          <p class="mb-4 text-[14px] font-medium text-forge">科研流程</p>
+          <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">科研工作从一个问题开始，却不会在提出问题时结束。</h2>
+        </div>
+        <div class="surface-line reveal mt-12 grid overflow-hidden border-y border-black/10 md:grid-cols-5">
+          <article class="min-h-40 border-b border-black/10 px-5 py-6 md:border-b-0 md:border-r">
+            <p class="text-[12px] text-muted">01</p><h3 class="mt-6 text-[18px] font-semibold">研究问题</h3><p class="mt-2 text-[14px] leading-6 text-muted">明确想验证什么。</p>
+          </article>
+          <article class="min-h-40 border-b border-black/10 px-5 py-6 md:border-b-0 md:border-r">
+            <p class="text-[12px] text-muted">02</p><h3 class="mt-6 text-[18px] font-semibold">假设设计</h3><p class="mt-2 text-[14px] leading-6 text-muted">提出值得尝试的路径。</p>
+          </article>
+          <article class="min-h-40 border-b border-black/10 bg-white px-5 py-6 md:border-b-0 md:border-r">
+            <p class="text-[12px] font-medium text-forge">03 · ArenaForge</p><h3 class="mt-6 text-[18px] font-semibold">实验执行</h3><p class="mt-2 text-[14px] leading-6 text-muted">让候选在相同条件下运行。</p>
+          </article>
+          <article class="min-h-40 border-b border-black/10 bg-white px-5 py-6 md:border-b-0 md:border-r">
+            <p class="text-[12px] font-medium text-forge">04 · ArenaForge</p><h3 class="mt-6 text-[18px] font-semibold">结果判断</h3><p class="mt-2 text-[14px] leading-6 text-muted">确认哪些改进经得起比较。</p>
+          </article>
+          <article class="min-h-40 bg-white px-5 py-6">
+            <p class="text-[12px] text-muted">05</p><h3 class="mt-6 text-[18px] font-semibold">论文或决策</h3><p class="mt-2 text-[14px] leading-6 text-muted">用可靠结果继续推进。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
+      <div class="grid gap-12 md:grid-cols-[.8fr_1.2fr]">
+        <div class="reveal">
+          <p class="mb-4 text-[14px] font-medium text-forge">问题所在</p>
+          <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">最费时间的工作，通常发生在实验开始之后。</h2>
+        </div>
+        <div class="reveal grid divide-y divide-black/10 border-y border-black/10">
+          <article class="grid gap-3 py-6 md:grid-cols-[9rem_1fr]"><h3 class="text-[18px] font-semibold">版本变多</h3><p class="text-[16px] leading-7 text-muted">代码、参数和候选方案不断叠加，很快就难以知道每个结果从哪里来。</p></article>
+          <article class="grid gap-3 py-6 md:grid-cols-[9rem_1fr]"><h3 class="text-[18px] font-semibold">条件漂移</h3><p class="text-[16px] leading-7 text-muted">不同实验使用不同数据切分、指标或资源条件，分数无法直接比较。</p></article>
+          <article class="grid gap-3 py-6 md:grid-cols-[9rem_1fr]"><h3 class="text-[18px] font-semibold">结论难查</h3><p class="text-[16px] leading-7 text-muted">失败实验被丢弃，推荐方案缺少上下文，复现和汇报都要重新整理。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-ink text-white">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
+        <div class="reveal max-w-3xl">
+          <p class="mb-4 text-[14px] font-medium text-[#6fd1b4]">ArenaForge 的位置</p>
+          <h2 class="text-[38px] font-semibold leading-tight md:text-[58px]">把假设、实验和判断连成一条可运行的研究链路。</h2>
+        </div>
+        <div class="reveal mt-14 grid divide-y divide-white/15 border-y border-white/15 md:grid-cols-3 md:divide-x md:divide-y-0">
+          <article class="py-7 md:px-7 md:first:pl-0"><p class="text-[13px] text-[#a1a1a6]">研究输入</p><h3 class="mt-4 text-[23px] font-semibold">问题有边界</h3><p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">输入研究问题、可运行项目或模拟器、评价目标、约束和预算。</p></article>
+          <article class="py-7 md:px-7"><p class="text-[13px] text-[#a1a1a6]">实验编排</p><h3 class="mt-4 text-[23px] font-semibold">探索有秩序</h3><p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">生成研究协议，组织候选方案，隔离运行并用统一规则比较。</p></article>
+          <article class="py-7 md:px-7 md:last:pr-0"><p class="text-[13px] text-[#a1a1a6]">结果交付</p><h3 class="mt-4 text-[23px] font-semibold">结论有依据</h3><p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">输出推荐结果、失败记录、证据链和可复现材料。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
+      <div class="reveal grid gap-10 border-y border-black/10 py-12 md:grid-cols-[.9fr_1.1fr]">
+        <div>
+          <p class="mb-4 text-[14px] font-medium text-forge">交付给研究者</p>
+          <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">每次研究都有一份可继续使用的结果。</h2>
+        </div>
+        <div class="grid grid-cols-1 gap-x-8 gap-y-5 text-[16px] text-ink sm:grid-cols-2">
+          <p class="border-b border-black/10 pb-4">Study Brief</p>
+          <p class="border-b border-black/10 pb-4">已确认的研究协议</p>
+          <p class="border-b border-black/10 pb-4">候选实验与运行记录</p>
+          <p class="border-b border-black/10 pb-4">结果判定与失败原因</p>
+          <p class="border-b border-black/10 pb-4 sm:col-span-2">可复现结果包</p>
+        </div>
+      </div>
+      <aside class="reveal mt-10 flex flex-col gap-6 border border-black/10 bg-paper p-7 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-[14px] font-medium text-forge">验证案例</p>
+          <h3 class="mt-2 text-[24px] font-semibold text-ink">在质量约束下简化量子纠缠制备图</h3>
+          <p class="mt-2 max-w-2xl text-[15px] leading-7 text-muted">第一个验证案例测试 ArenaForge 如何在没有标准 benchmark 的科学模拟环境中组织探索和判断。</p>
+        </div>
+        <a href={`${base}case/`} class="shrink-0 rounded-md border border-black/15 px-5 py-3 text-center text-[15px] font-medium text-ink no-underline transition-colors hover:bg-white">进入案例</a>
+      </aside>
+      <p class="reveal mt-6 text-[13px] leading-6 text-muted">配置模型 API 后可启动自主研究运行；配置 SSH 或 GPU 计算资源后可执行远程实验。</p>
+    </section>
+  </main>
+</Layout>

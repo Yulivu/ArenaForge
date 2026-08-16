@@ -1,0 +1,88 @@
+---
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  active: "product" | "case";
+}
+
+const { title, description, active } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
+      <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8" aria-label="主导航">
+        <a href={base} class="text-[18px] font-semibold text-ink no-underline">ArenaForge</a>
+        <div class="flex items-center gap-1 text-[14px]">
+          <a
+            href={base}
+            class:list={[
+              "rounded-md px-3 py-2 no-underline transition-colors",
+              active === "product" ? "bg-paper text-ink" : "text-muted hover:bg-paper hover:text-ink",
+            ]}
+          >
+            产品
+          </a>
+          <a
+            href={`${base}case/`}
+            class:list={[
+              "rounded-md px-3 py-2 no-underline transition-colors",
+              active === "case" ? "bg-paper text-ink" : "text-muted hover:bg-paper hover:text-ink",
+            ]}
+          >
+            验证案例
+          </a>
+          <a
+            href="https://github.com/Yulivu/ArenaForge"
+            target="_blank"
+            rel="noreferrer"
+            class="ml-1 rounded-md px-3 py-2 text-ink no-underline transition-colors hover:bg-paper"
+          >
+            GitHub
+          </a>
+        </div>
+      </nav>
+    </header>
+    <slot />
+    <footer class="border-t border-black/10 bg-white">
+      <div class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-8 text-[13px] text-muted md:flex-row md:items-center md:justify-between md:px-8">
+        <span>ArenaForge · 开放科学探索</span>
+        <a href="https://github.com/Yulivu/ArenaForge" target="_blank" rel="noreferrer" class="text-ink no-underline hover:underline">查看项目仓库</a>
+      </div>
+    </footer>
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray<HTMLElement>(".reveal").forEach((element) => {
+          gsap.to(element, {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 88%",
+              once: true,
+            },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

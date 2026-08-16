@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = ROOT / "examples" / "quantum_optics_open_exploration" / "artifacts"
-OUTPUT = ROOT / "demo" / "reference-data.json"
+DEFAULT_OUTPUT = ROOT / "web" / "public" / "reference-data.json"
 
 
 def read_json(name: str):
@@ -16,6 +17,14 @@ def read_json(name: str):
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUTPUT,
+        help="Path for the generated public snapshot.",
+    )
+    args = parser.parse_args()
     results = read_json("exploration_results.json")
     trace = read_json("search_trace.json")
     certificate = read_json("problem_certificate.json")
@@ -64,8 +73,14 @@ def main() -> None:
         "max_validation_drop": certificate["validation"]["max_quality_drop"],
         "candidates": candidate_rows,
     }
-    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {OUTPUT.relative_to(ROOT)}")
+    output = args.output.resolve()
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    try:
+        display_path = output.relative_to(ROOT)
+    except ValueError:
+        display_path = output
+    print(f"wrote {display_path}")
 
 
 if __name__ == "__main__":
