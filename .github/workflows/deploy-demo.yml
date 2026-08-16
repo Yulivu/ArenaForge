@@ -5,6 +5,8 @@ on:
     branches: [master]
     paths:
       - "demo/**"
+      - "examples/quantum_optics_open_exploration/artifacts/**"
+      - "scripts/build_demo_snapshot.py"
       - ".github/workflows/deploy-demo.yml"
   workflow_dispatch:
 
@@ -28,6 +30,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Build reference snapshot
+        run: python scripts/build_demo_snapshot.py
       - name: Upload static demo
         uses: actions/upload-pages-artifact@v3
         with:

@@ -1,0 +1,104 @@
+{
+  "source": "examples/quantum_optics_open_exploration/artifacts",
+  "candidate_count": 11,
+  "screened_edge_count": 74,
+  "accepted_action_count": 25,
+  "threshold_strategy_count": 8,
+  "supported_count": 4,
+  "refuted_count": 6,
+  "validation_loss_level_count": 3,
+  "boundary_failure_count": 1,
+  "baseline_edges": 74,
+  "recommended_edges": 49,
+  "max_validation_drop": 0.01801411924158358,
+  "candidates": [
+    {
+      "id": "sensitivity_guided_025",
+      "edges": 49,
+      "robust_score": 0.739677892744063,
+      "budget_feasible": true,
+      "quality_acceptable": true,
+      "decision": "recommended"
+    },
+    {
+      "id": "sparse_threshold_150",
+      "edges": 49,
+      "robust_score": 0.739677892744063,
+      "budget_feasible": true,
+      "quality_acceptable": true,
+      "decision": "supported"
+    },
+    {
+      "id": "sparse_threshold_120",
+      "edges": 51,
+      "robust_score": 0.7482338541607636,
+      "budget_feasible": true,
+      "quality_acceptable": true,
+      "decision": "supported"
+    },
+    {
+      "id": "sparse_threshold_080",
+      "edges": 53,
+      "robust_score": 0.755347619593225,
+      "budget_feasible": true,
+      "quality_acceptable": true,
+      "decision": "supported"
+    },
+    {
+      "id": "sparse_threshold_200",
+      "edges": 48,
+      "robust_score": 0.7268350711185662,
+      "budget_feasible": true,
+      "quality_acceptable": false,
+      "decision": "rejected"
+    },
+    {
+      "id": "sparse_threshold_040",
+      "edges": 57,
+      "robust_score": 0.7603175982581273,
+      "budget_feasible": false,
+      "quality_acceptable": true,
+      "decision": "rejected"
+    },
+    {
+      "id": "sparse_threshold_020",
+      "edges": 65,
+      "robust_score": 0.7624365467332361,
+      "budget_feasible": false,
+      "quality_acceptable": true,
+      "decision": "rejected"
+    },
+    {
+      "id": "sparse_threshold_010",
+      "edges": 70,
+      "robust_score": 0.7631750820599577,
+      "budget_feasible": false,
+      "quality_acceptable": true,
+      "decision": "rejected"
+    },
+    {
+      "id": "sparse_threshold_005",
+      "edges": 72,
+      "robust_score": 0.7631856711953847,
+      "budget_feasible": false,
+      "quality_acceptable": true,
+      "decision": "rejected"
+    },
+    {
+      "id": "pytheus_canonical",
+      "edges": 74,
+      "robust_score": 0.7631856114921269,
+      "budget_feasible": false,
+      "quality_acceptable": true,
+      "decision": "rejected"
+    },
+    {
+      "id": "random_sign_reference",
+      "edges": 74,
+      "robust_score": 3.1213673898586875e-08,
+      "budget_feasible": false,
+      "quality_acceptable": false,
+      "decision": "refuted"
+    }
+  ]
+}

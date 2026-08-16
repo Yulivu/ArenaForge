@@ -83,6 +83,26 @@
     .protocol code { display: block; margin-top: 18px; white-space: pre-wrap; color: #fff; font: 14px/1.7 ui-monospace, SFMono-Regular, Consolas, monospace; }
     .result-highlight { padding: 25px; border: 1px solid #cfe4d5; border-radius: 11px; background: #f0f8f2; }
     .result-highlight .metric { color: var(--accent-dark); font-size: 40px; }
+    .campaign-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+    .campaign-card { padding: 17px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); }
+    .campaign-card .metric { font-size: 25px; }
+    .campaign-card p { margin-top: 4px; font-size: 12px; }
+    .campaign-card.good { border-color: #cfe4d5; background: #f5fbf6; }
+    .campaign-card.warn { border-color: #f0d9a9; background: #fffaf0; }
+    .campaign-card.fail { border-color: #ecc9c4; background: #fff8f7; }
+    .campaign-flow { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--panel); }
+    .campaign-stage { min-height: 138px; padding: 18px; border-right: 1px solid var(--line); }
+    .campaign-stage:last-child { border-right: 0; }
+    .campaign-stage .stage-number { color: var(--accent); font: 700 12px ui-monospace, monospace; }
+    .campaign-stage h3 { margin-top: 20px; }
+    .campaign-stage p { font-size: 13px; }
+    .campaign-stage code { display: block; margin-top: 10px; color: var(--accent-dark); font: 12px ui-monospace, monospace; }
+    .scale-note { display: flex; justify-content: space-between; gap: 18px; align-items: center; padding: 15px 17px; border: 1px solid #d5e3f0; border-radius: 9px; background: #f3f8fc; }
+    .scale-note strong { color: var(--blue); }
+    .scale-note p { font-size: 13px; }
+    .candidate-summary { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+    .summary-pill { padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; background: #fbfcfb; color: var(--muted); font-size: 12px; }
+    .summary-pill b { color: var(--ink); }
     .candidate-table { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
     .candidate-row { display: grid; grid-template-columns: 1.4fr .8fr .7fr .75fr; gap: 14px; align-items: center; padding: 15px 17px; border-bottom: 1px solid var(--line); }
     .candidate-row:last-child { border-bottom: 0; }
@@ -101,6 +121,10 @@
       .shell { padding: 0 18px; }
       .hero, .reference-head, .evidence { grid-template-columns: 1fr; }
       .grid.three, .grid.four { grid-template-columns: 1fr 1fr; }
+      .campaign-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .campaign-flow { grid-template-columns: 1fr; }
+      .campaign-stage { border-right: 0; border-bottom: 1px solid var(--line); }
+      .campaign-stage:last-child { border-bottom: 0; }
       .workflow-row { grid-template-columns: 1fr; }
       .workflow-item { border-right: 0; border-bottom: 1px solid var(--line); margin: 0; padding-right: 0; }
       .workflow-item:last-child { border-bottom: 0; }
@@ -111,6 +135,8 @@
       nav { width: 100%; overflow-x: auto; }
       .hero { padding-top: 45px; }
       .grid.three, .grid.four { grid-template-columns: 1fr; }
+      .campaign-grid { grid-template-columns: 1fr 1fr; }
+      .scale-note { align-items: flex-start; flex-direction: column; }
       .candidate-row { grid-template-columns: 1.35fr .7fr .7fr; }
       .candidate-row > :last-child { grid-column: 1 / -1; }
       .candidate-row.header > :last-child { display: none; }
@@ -210,6 +236,50 @@
         </div>
 
         <div class="section">
+          <div class="section-heading">
+            <div><div class="eyebrow">Campaign scale</div><h2>这是一场有阶段、有分支、有失败边界的探索</h2></div>
+            <p>数字来自 Reference Arena 的真实 artifacts。页面把一次研究活动的规模和决策结构完整展开。</p>
+          </div>
+          <div class="campaign-grid">
+            <article class="campaign-card"><div class="metric" data-snapshot="candidate_count">11</div><p>进入比较的候选</p></article>
+            <article class="campaign-card"><div class="metric" data-snapshot="screened_edge_count">74</div><p>边际影响筛查</p></article>
+            <article class="campaign-card good"><div class="metric" data-snapshot="accepted_action_count">25</div><p>连续接受行动</p></article>
+            <article class="campaign-card"><div class="metric" data-snapshot="threshold_strategy_count">8</div><p>阈值策略参照</p></article>
+            <article class="campaign-card good"><div class="metric" data-snapshot="validation_loss_level_count">3</div><p>独立验证损耗点</p></article>
+            <article class="campaign-card fail"><div class="metric" data-snapshot="boundary_failure_count">1</div><p>质量边界反证</p></article>
+          </div>
+          <div class="candidate-summary">
+            <span class="summary-pill">规范图 <b data-snapshot="baseline_edges">74</b> edges</span>
+            <span class="summary-pill">推荐图 <b data-snapshot="recommended_edges">49</b> edges</span>
+            <span class="summary-pill">支持候选 <b data-snapshot="supported_count">4</b></span>
+            <span class="summary-pill">反驳候选 <b data-snapshot="refuted_count">6</b></span>
+            <span class="summary-pill">验证最大下降 <b data-snapshot="max_validation_drop" data-format="percent">1.80%</b></span>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-heading">
+            <div><div class="eyebrow">Exploration campaign</div><h2>从候选空间到可审查结论</h2></div>
+            <p>评委可以沿着这条链路理解工作量：先建立参照，再探索，再撞到边界，最后用未参与搜索的条件复核。</p>
+          </div>
+          <div class="campaign-flow">
+            <article class="campaign-stage"><div class="stage-number">01 · BASELINE</div><h3>建立规范参照</h3><p>固定目标态、拓扑、预算和质量门槛。</p><code>74 edges · 5 loss levels</code></article>
+            <article class="campaign-stage"><div class="stage-number">02 · SCREEN</div><h3>测量边际影响</h3><p>逐条扰动 74 条连接，形成候选动作排序。</p><code>74 probes · robust score</code></article>
+            <article class="campaign-stage"><div class="stage-number">03 · SEARCH</div><h3>连续反馈搜索</h3><p>按真实反馈接受 25 次删边行动。</p><code>25 accepted · 49 edges</code></article>
+            <article class="campaign-stage"><div class="stage-number">04 · FALSIFY</div><h3>记录边界反证</h3><p>第 26 次行动导致质量下降 2.32%，被拒绝并保留。</p><code>48 edges · refuted</code></article>
+            <article class="campaign-stage"><div class="stage-number">05 · VALIDATE</div><h3>独立条件复核</h3><p>使用搜索外的 3 个损耗点验证推荐候选。</p><code>0.98 · 0.85 · 0.75</code></article>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="scale-note">
+            <strong>评审入口</strong>
+            <p>完整候选矩阵、逐步搜索轨迹、日志、ledger 和 certificate 均保存在仓库中；网页负责快速理解，仓库负责逐项核验。</p>
+            <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/tree/master/examples/quantum_optics_open_exploration/artifacts" target="_blank" rel="noreferrer">查看全部 artifacts</a>
+          </div>
+        </div>
+
+        <div class="section">
           <div class="section-heading"><div><div class="eyebrow">Candidate decisions</div><h2>系统为什么推荐这个方案</h2></div><p>推荐条件预先写入预算与质量门槛；每一项判断都可追溯到对应的运行证据。</p></div>
           <div class="candidate-table">
             <div class="candidate-row header"><div>候选假设</div><div>结果</div><div>连接数</div><div>决策依据</div></div>
@@ -268,6 +338,25 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
     buttons.forEach((button) => button.addEventListener("click", () => activate(button.dataset.view)));
+
+    async function loadSnapshot() {
+      try {
+        const response = await fetch("reference-data.json", { cache: "no-store" });
+        if (!response.ok) return;
+        const snapshot = await response.json();
+        document.querySelectorAll("[data-snapshot]").forEach((node) => {
+          const key = node.dataset.snapshot;
+          if (!(key in snapshot)) return;
+          const value = snapshot[key];
+          node.textContent = node.dataset.format === "percent"
+            ? `${(value * 100).toFixed(2)}%`
+            : value;
+        });
+      } catch (_) {
+        // The fallback values in the HTML keep the static demo usable offline.
+      }
+    }
+    loadSnapshot();
   </script>
 </body>
 </html>
