@@ -66,6 +66,11 @@ def main() -> None:
 
     payload = {
         "source": "examples/quantum_optics_open_exploration/artifacts",
+        "research_question": results.get("research_question"),
+        "search_policy": trace.get("policy"),
+        "search_loss_levels": trace.get("search_loss_levels", []),
+        "edge_budget": candidates[0].get("edge_budget"),
+        "quality_tolerance": candidates[0].get("quality_tolerance"),
         "candidate_count": len(candidates),
         "screened_edge_count": trace.get("screened_edge_count", 0),
         "accepted_action_count": trace.get("accepted_action_count", 0),
@@ -80,7 +85,9 @@ def main() -> None:
         ),
         "boundary_failure_count": 1,
         "baseline_edges": certificate["baseline"]["edge_count"],
+        "baseline_robust_score": certificate["baseline"]["robust_score"],
         "recommended_edges": certificate["final"]["edge_count"],
+        "recommended_robust_score": certificate["final"]["robust_score"],
         "max_validation_drop": certificate["validation"]["max_quality_drop"],
         "validation_rows": certificate["validation"]["rows"],
         "candidates": candidate_rows,

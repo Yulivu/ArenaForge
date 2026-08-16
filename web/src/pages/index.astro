@@ -55,6 +55,46 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
       </div>
     </section>
 
+    <section class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
+      <div class="reveal max-w-3xl">
+        <p class="mb-4 text-[14px] font-medium text-forge">ArenaForge 如何工作</p>
+        <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[54px]">研究者给出问题，系统把它推进到可复查的结论。</h2>
+        <p class="mt-5 text-[17px] leading-8 text-muted">每一步都有明确输入、运行动作和阶段产物。研究者负责定义值得研究的问题，ArenaForge 负责把探索组织成可以运行、比较和复核的研究流程。</p>
+      </div>
+      <div class="reveal mt-12 border-y border-black/10">
+        <article class="grid gap-5 border-b border-black/10 py-8 md:grid-cols-[5rem_1.05fr_1.25fr_1fr] md:gap-8">
+          <p class="text-[13px] font-medium text-forge">01</p>
+          <div><h3 class="text-[22px] font-semibold text-ink">研究输入</h3><p class="mt-2 text-[14px] text-muted">把想解决的问题说清楚。</p></div>
+          <p class="text-[15px] leading-7 text-muted">输入研究问题、已有项目或模拟器、评价目标、资源预算和不能改动的范围。系统会把自然语言整理成研究简报，并指出还缺少哪些条件。</p>
+          <p class="text-[15px] leading-7 text-ink"><span class="font-medium text-forge">产物：</span>研究简报、项目检查结果、待确认事项</p>
+        </article>
+        <article class="grid gap-5 border-b border-black/10 py-8 md:grid-cols-[5rem_1.05fr_1.25fr_1fr] md:gap-8">
+          <p class="text-[13px] font-medium text-forge">02</p>
+          <div><h3 class="text-[22px] font-semibold text-ink">研究协议</h3><p class="mt-2 text-[14px] text-muted">把“什么算成功”固定下来。</p></div>
+          <p class="text-[15px] leading-7 text-muted">系统确认 baseline、评价指标、优化方向、训练与评估入口、数据划分、保护范围、随机种子和停止条件。研究者确认后，后续候选都在同一协议下比较。</p>
+          <p class="text-[15px] leading-7 text-ink"><span class="font-medium text-forge">产物：</span>已确认协议、运行预算、评价规则</p>
+        </article>
+        <article class="grid gap-5 border-b border-black/10 py-8 md:grid-cols-[5rem_1.05fr_1.25fr_1fr] md:gap-8">
+          <p class="text-[13px] font-medium text-forge">03</p>
+          <div><h3 class="text-[22px] font-semibold text-ink">候选与执行</h3><p class="mt-2 text-[14px] text-muted">让不同思路真正跑起来。</p></div>
+          <p class="text-[15px] leading-7 text-muted">模型提出候选方案，系统为每个候选创建隔离分支，在本地或远程资源上执行训练、模拟和评估。每次运行都绑定代码版本、命令、环境和日志。</p>
+          <p class="text-[15px] leading-7 text-ink"><span class="font-medium text-forge">产物：</span>候选分支、运行日志、指标和证据记录</p>
+        </article>
+        <article class="grid gap-5 border-b border-black/10 py-8 md:grid-cols-[5rem_1.05fr_1.25fr_1fr] md:gap-8">
+          <p class="text-[13px] font-medium text-forge">04</p>
+          <div><h3 class="text-[22px] font-semibold text-ink">比较与判断</h3><p class="mt-2 text-[14px] text-muted">把有效和无效分开。</p></div>
+          <p class="text-[15px] leading-7 text-muted">系统按协议检查预算、质量门槛和对照结果。通过的候选进入下一轮，越界的候选保留失败原因，重复或没有信息增益的路径停止扩展。</p>
+          <p class="text-[15px] leading-7 text-ink"><span class="font-medium text-forge">产物：</span>候选比较、失败边界、支持或拒绝的判断</p>
+        </article>
+        <article class="grid gap-5 py-8 md:grid-cols-[5rem_1.05fr_1.25fr_1fr] md:gap-8">
+          <p class="text-[13px] font-medium text-forge">05</p>
+          <div><h3 class="text-[22px] font-semibold text-ink">复核与交付</h3><p class="mt-2 text-[14px] text-muted">让别人能看懂，也能重跑。</p></div>
+          <p class="text-[15px] leading-7 text-muted">最终候选在未参与搜索的条件下复核，再把推荐理由、反例、代码差异、运行记录和环境信息打包。研究者拿到的是一份可继续写论文或支持决策的结果。</p>
+          <p class="text-[15px] leading-7 text-ink"><span class="font-medium text-forge">产物：</span>复核结果、问题证书、可复现结果包</p>
+        </article>
+      </div>
+    </section>
+
     <section id="workflow" class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
       <div class="grid gap-12 md:grid-cols-[.8fr_1.2fr]">
         <div class="reveal">

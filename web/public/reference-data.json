@@ -1,5 +1,16 @@
 {
   "source": "examples/quantum_optics_open_exploration/artifacts",
+  "research_question": "Under a strict 55-edge construction budget and a 2% quality tolerance, what is the simplest three-photon, four-dimensional GHZ preparation graph that remains acceptable across the declared transmission-loss sweep?",
+  "search_policy": "marginal-sensitivity-guided-pruning",
+  "search_loss_levels": [
+    1.0,
+    0.95,
+    0.9,
+    0.8,
+    0.7
+  ],
+  "edge_budget": 55,
+  "quality_tolerance": 0.02,
   "candidate_count": 11,
   "screened_edge_count": 74,
   "accepted_action_count": 25,
@@ -9,7 +20,9 @@
   "validation_loss_level_count": 3,
   "boundary_failure_count": 1,
   "baseline_edges": 74,
+  "baseline_robust_score": 0.7631856114921269,
   "recommended_edges": 49,
+  "recommended_robust_score": 0.739677892744063,
   "max_validation_drop": 0.01801411924158358,
   "validation_rows": [
     {
