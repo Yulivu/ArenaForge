@@ -35,33 +35,31 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
           <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">从一个研究问题，到一份可以复查的结果。</h2>
           <p class="mt-5 text-[17px] leading-8 text-muted">研究者提供问题、项目和边界。ArenaForge 负责中间的协议确认、探索执行和证据判断，最后把结果交回论文或决策流程。</p>
         </div>
-        <div class="reveal mt-12 flex flex-col gap-3 md:flex-row md:items-stretch md:gap-0">
+        <div class="reveal mt-12">
+          <div class="mb-4 flex h-11 items-center justify-center bg-forge px-4 text-[16px] font-semibold text-white md:ml-[22%] md:w-[56%]">
+            ArenaForge 负责的核心环节
+          </div>
+          <div class="flex flex-col gap-3 md:flex-row md:items-stretch md:gap-0">
           <article class="flex-1 border border-black/10 bg-white px-5 py-6 md:min-h-48">
             <p class="text-[12px] text-muted">01 · 输入</p><h3 class="mt-5 text-[19px] font-semibold">研究问题与项目</h3><p class="mt-3 text-[14px] leading-6 text-muted">目标、已有代码或模拟器、约束和预算。</p>
           </article>
           <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
-          <div class="relative flex-1 border-2 border-forge bg-[#e7f7f0] px-3 pb-3 pt-12 shadow-[0_0_0_4px_rgba(0,122,90,0.12)]">
-            <div class="absolute inset-x-3 top-0 flex h-9 -translate-y-1/2 items-center justify-center bg-forge px-3 text-[12px] font-semibold tracking-[0.02em] text-white">
-              ArenaForge 负责的核心环节
-            </div>
-            <div class="flex flex-col gap-3 md:flex-row md:items-stretch md:gap-0">
-              <article class="flex-1 border border-forge/40 bg-white/75 px-4 py-5 md:min-h-48">
-                <p class="text-[12px] font-medium text-forge">02 · 协议</p><h3 class="mt-5 text-[19px] font-semibold">研究协议</h3><p class="mt-3 text-[14px] leading-6 text-muted">指标、评价条件、预算和停止条件。</p>
-              </article>
-              <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-9 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
-              <article class="flex-1 border border-forge/40 bg-white/75 px-4 py-5 md:min-h-48">
-                <p class="text-[12px] font-medium text-forge">03 · 执行</p><h3 class="mt-5 text-[19px] font-semibold">候选与执行</h3><p class="mt-3 text-[14px] leading-6 text-muted">生成方案、隔离分支、运行训练或模拟。</p>
-              </article>
-              <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-9 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
-              <article class="flex-1 border border-forge/40 bg-white/75 px-4 py-5 md:min-h-48">
-                <p class="text-[12px] font-medium text-forge">04 · 判断</p><h3 class="mt-5 text-[19px] font-semibold">比较与复核</h3><p class="mt-3 text-[14px] leading-6 text-muted">保留失败边界，在新条件下复核。</p>
-              </article>
-            </div>
-          </div>
+          <article class="flex-1 border-2 border-forge bg-[#e7f7f0] px-5 py-6 shadow-[0_0_0_3px_rgba(0,122,90,0.12)] md:min-h-48">
+            <p class="text-[12px] font-medium text-forge">02 · 协议</p><h3 class="mt-5 text-[19px] font-semibold">研究协议</h3><p class="mt-3 text-[14px] leading-6 text-muted">指标、评价条件、预算和停止条件。</p>
+          </article>
+          <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
+          <article class="flex-1 border-2 border-forge bg-[#e7f7f0] px-5 py-6 shadow-[0_0_0_3px_rgba(0,122,90,0.12)] md:min-h-48">
+            <p class="text-[12px] font-medium text-forge">03 · 执行</p><h3 class="mt-5 text-[19px] font-semibold">候选与执行</h3><p class="mt-3 text-[14px] leading-6 text-muted">生成方案、隔离分支、运行训练或模拟。</p>
+          </article>
+          <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
+          <article class="flex-1 border-2 border-forge bg-[#e7f7f0] px-5 py-6 shadow-[0_0_0_3px_rgba(0,122,90,0.12)] md:min-h-48">
+            <p class="text-[12px] font-medium text-forge">04 · 判断</p><h3 class="mt-5 text-[19px] font-semibold">比较与复核</h3><p class="mt-3 text-[14px] leading-6 text-muted">保留失败边界，在新条件下复核。</p>
+          </article>
           <div class="flex items-center justify-center px-2 py-1 text-[22px] text-forge md:w-10 md:py-0" aria-hidden="true"><span class="md:hidden">↓</span><span class="hidden md:inline">→</span></div>
           <article class="flex-1 border border-black/10 bg-white px-5 py-6 md:min-h-48">
             <p class="text-[12px] text-muted">05 · 输出</p><h3 class="mt-5 text-[19px] font-semibold">论文或决策</h3><p class="mt-3 text-[14px] leading-6 text-muted">带着推荐、失败记录和复现材料继续推进。</p>
           </article>
+          </div>
         </div>
       </div>
     </section>
@@ -109,7 +107,7 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
     <section id="workflow" class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-28">
       <div class="grid gap-12 md:grid-cols-[.8fr_1.2fr]">
         <div class="reveal">
-          <p class="mb-4 text-[14px] font-medium text-forge">问题所在</p>
+          <p class="mb-4 text-[18px] font-semibold text-forge">问题所在</p>
           <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">最费时间的工作，通常发生在实验开始之后。</h2>
         </div>
         <div class="reveal grid divide-y divide-black/10 border-y border-black/10">

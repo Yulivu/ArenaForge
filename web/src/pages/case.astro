@@ -12,53 +12,85 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
   <main>
     <section class="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:grid-cols-[.9fr_1.1fr] md:px-8 md:py-24">
       <div class="reveal self-center">
-        <p class="mb-5 text-[14px] font-medium text-forge">完整验证案例 · 一次实际运行</p>
+        <p class="mb-6 inline-flex bg-forge px-4 py-2 text-[18px] font-semibold text-white">验证案例</p>
         <h1 class="text-[50px] font-semibold leading-[1.06] text-ink md:text-[76px]">在质量门槛内，把 74 条连接压到 49 条。</h1>
-        <p class="mt-6 text-[20px] font-medium leading-8 text-ink">量子纠缠制备图简化</p>
-        <p class="mt-4 max-w-xl text-[18px] leading-8 text-muted">这不是一个单点结果展示。下面完整展开问题如何被固定、候选如何生成、失败如何留下，以及推荐方案如何在新条件下复核。</p>
+        <p class="mt-6 text-[24px] font-semibold leading-8 text-ink">示例：量子纠缠制备图简化</p>
+        <p class="mt-4 max-w-xl text-[19px] leading-8 text-muted">这是 ArenaForge 的一项完整验证案例。页面会说明研究者已经有什么、此刻遇到什么问题、提供哪些输入，以及系统最后交付什么结果。</p>
       </div>
       <figure class="reveal m-0 border border-black/10 bg-paper p-3">
         <img src={`${base}assets/quantum-optics-case.png`} alt="根据推荐候选的真实连接数据绘制的量子纠缠制备图。" class="block h-auto w-full" width="1440" height="900" />
       </figure>
     </section>
 
+    <section class="border-y border-black/10 bg-paper">
+      <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+        <div class="reveal max-w-3xl">
+          <p class="mb-4 text-[16px] font-semibold text-forge">这个示例在研究什么</p>
+          <h2 class="text-[38px] font-semibold leading-tight text-ink md:text-[56px]">已有一个能运行的方案，下一步是把它做得更简单。</h2>
+          <p class="mt-5 text-[18px] leading-8 text-muted">研究者已经有一张可以在模拟环境中运行的规范制备图，知道它能够产生目标态。问题进入了优化阶段：能不能减少实验图中的连接，同时不让质量信号明显下降？这正是一个标准榜单无法直接回答、但需要持续探索的问题。</p>
+        </div>
+        <div class="reveal mt-12 grid gap-px border border-black/10 bg-black/10 md:grid-cols-3">
+          <article class="bg-white px-6 py-7 md:min-h-64">
+            <p class="text-[14px] font-semibold text-forge">已有的东西</p>
+            <h3 class="mt-5 text-[24px] font-semibold text-ink">一张 74 条连接的规范图</h3>
+            <p class="mt-3 text-[16px] leading-7 text-muted">包括三光子、四维 GHZ 目标态、可运行的物理模拟环境，以及可以作为统一参照的 baseline。</p>
+          </article>
+          <article class="bg-white px-6 py-7 md:min-h-64">
+            <p class="text-[14px] font-semibold text-forge">眼前的问题</p>
+            <h3 class="mt-5 text-[24px] font-semibold text-ink">减少连接，质量还能接受吗？</h3>
+            <p class="mt-3 text-[16px] leading-7 text-muted">资源预算要求不超过 55 条连接；在声明的损耗条件下，fidelity 和 count rate 的相对下降都不能超过 2%。</p>
+          </article>
+          <article class="bg-white px-6 py-7 md:min-h-64">
+            <p class="text-[14px] font-semibold text-forge">希望得到的东西</p>
+            <h3 class="mt-5 text-[24px] font-semibold text-ink">一个能被复核的推荐方案</h3>
+            <p class="mt-3 text-[16px] leading-7 text-muted">不仅是更小的图，还要有候选比较、失败边界、独立复核和能回到原始运行记录的结果证书。</p>
+          </article>
+        </div>
+        <div class="reveal mt-8 grid gap-5 border-y border-black/10 py-7 md:grid-cols-[1fr_auto_1fr] md:items-center">
+          <div><p class="text-[14px] font-semibold text-forge">输入给 ArenaForge</p><p class="mt-2 text-[16px] leading-7 text-ink">研究问题、规范图、模拟器、55 条连接预算、2% 质量门槛和评价条件。</p></div>
+          <div class="text-center text-[30px] text-forge" aria-hidden="true">→</div>
+          <div><p class="text-[14px] font-semibold text-forge">输出给研究者</p><p class="mt-2 text-[16px] leading-7 text-ink">49 条连接推荐方案、48 条失败边界、3 条新条件复核结果和结果证书。</p></div>
+        </div>
+      </div>
+    </section>
+
     <section class="border-y border-black/10 bg-ink text-white">
       <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <div class="reveal max-w-3xl">
-          <p class="mb-4 text-[14px] font-medium text-[#6fd1b4]">案例总览</p>
+          <p class="mb-4 text-[18px] font-semibold text-[#6fd1b4]">案例总览</p>
           <h2 class="text-[38px] font-semibold leading-tight md:text-[58px]">一条完整的探索链路。</h2>
           <p class="mt-5 text-[17px] leading-8 text-[#c9c9cd]">从固定问题边界开始，经过协议、筛查、候选比较和独立复核，最后得到一份可以回查的结果证书。</p>
         </div>
         <div class="reveal mt-12 grid gap-px overflow-hidden border border-white/15 bg-white/15 md:grid-cols-5">
-          <article class="bg-ink px-5 py-7 md:min-h-64">
-            <p class="text-[12px] text-[#a1a1a6]">01 · 输入</p>
-            <h3 class="mt-5 text-[22px] font-semibold">74 条连接</h3>
-            <p class="mt-3 text-[14px] leading-6 text-[#c9c9cd]">三光子、四维 GHZ 目标态。预算设为不超过 55 条连接。</p>
-            <p class="mt-6 text-[13px] font-medium text-[#6fd1b4]">得到：问题边界</p>
+          <article class="bg-[#0b6b50] px-5 py-7 md:min-h-64">
+            <p class="text-[14px] text-[#d8f7eb]">01 · 输入</p>
+            <h3 class="mt-5 text-[24px] font-semibold">74 条连接</h3>
+            <p class="mt-3 text-[15px] leading-7 text-[#e1f8ef]">三光子、四维 GHZ 目标态。预算设为不超过 55 条连接。</p>
+            <p class="mt-6 text-[14px] font-semibold text-white">得到：问题边界</p>
           </article>
           <article class="bg-ink px-5 py-7 md:min-h-64">
-            <p class="text-[12px] text-[#a1a1a6]">02 · 协议</p>
-            <h3 class="mt-5 text-[22px] font-semibold">5 个搜索条件</h3>
-            <p class="mt-3 text-[14px] leading-6 text-[#c9c9cd]">传输率 1.00、0.95、0.90、0.80、0.70，两个质量信号均不得下降超过 2%。</p>
-            <p class="mt-6 text-[13px] font-medium text-[#6fd1b4]">得到：统一评价规则</p>
+            <p class="text-[14px] text-[#a1a1a6]">02 · 协议</p>
+            <h3 class="mt-5 text-[24px] font-semibold">5 个搜索条件</h3>
+            <p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">传输率 1.00、0.95、0.90、0.80、0.70，两个质量信号均不得下降超过 2%。</p>
+            <p class="mt-6 text-[14px] font-semibold text-[#6fd1b4]">得到：统一评价规则</p>
           </article>
           <article class="bg-ink px-5 py-7 md:min-h-64">
-            <p class="text-[12px] text-[#a1a1a6]">03 · 搜索</p>
-            <h3 class="mt-5 text-[22px] font-semibold">74 次筛查</h3>
-            <p class="mt-3 text-[14px] leading-6 text-[#c9c9cd]">逐条测试连接影响，接受 25 次删减动作，生成 11 个候选。</p>
-            <p class="mt-6 text-[13px] font-medium text-[#6fd1b4]">得到：候选空间</p>
+            <p class="text-[14px] text-[#a1a1a6]">03 · 搜索</p>
+            <h3 class="mt-5 text-[24px] font-semibold">74 次筛查</h3>
+            <p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">逐条测试连接影响，接受 25 次删减动作，生成 11 个候选。</p>
+            <p class="mt-6 text-[14px] font-semibold text-[#6fd1b4]">得到：候选空间</p>
           </article>
           <article class="bg-ink px-5 py-7 md:min-h-64">
-            <p class="text-[12px] text-[#a1a1a6]">04 · 判断</p>
-            <h3 class="mt-5 text-[22px] font-semibold">49 条通过</h3>
-            <p class="mt-3 text-[14px] leading-6 text-[#c9c9cd]">49 条连接候选通过；48 条候选下降 2.44%，成为明确失败边界。</p>
-            <p class="mt-6 text-[13px] font-medium text-[#6fd1b4]">得到：推荐与边界</p>
+            <p class="text-[14px] text-[#a1a1a6]">04 · 判断</p>
+            <h3 class="mt-5 text-[24px] font-semibold">49 条通过</h3>
+            <p class="mt-3 text-[15px] leading-7 text-[#c9c9cd]">49 条连接候选通过；48 条候选下降 2.44%，成为明确失败边界。</p>
+            <p class="mt-6 text-[14px] font-semibold text-[#6fd1b4]">得到：推荐与边界</p>
           </article>
           <article class="bg-[#0b6b50] px-5 py-7 md:min-h-64">
-            <p class="text-[12px] text-[#c8f0e1]">05 · 复核交付</p>
-            <h3 class="mt-5 text-[22px] font-semibold">1.80% 最大下降</h3>
-            <p class="mt-3 text-[14px] leading-6 text-[#e1f8ef]">在 0.98、0.85、0.75 三个新条件下复核，仍在 2% 门槛内。</p>
-            <p class="mt-6 text-[13px] font-medium text-white">得到：结果证书</p>
+            <p class="text-[14px] text-[#c8f0e1]">05 · 输出</p>
+            <h3 class="mt-5 text-[24px] font-semibold">1.80% 最大下降</h3>
+            <p class="mt-3 text-[15px] leading-7 text-[#e1f8ef]">在 0.98、0.85、0.75 三个新条件下复核，仍在 2% 门槛内。</p>
+            <p class="mt-6 text-[14px] font-semibold text-white">得到：结果证书</p>
           </article>
         </div>
       </div>
