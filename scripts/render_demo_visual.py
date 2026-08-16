@@ -32,7 +32,7 @@ def rounded_box(draw: ImageDraw.ImageDraw, xy: tuple[int, int, int, int], fill: 
 def render_campaign(snapshot: dict) -> None:
     image = Image.new("RGB", (WIDTH, HEIGHT), "#f5f5f7")
     draw = ImageDraw.Draw(image)
-    ink, muted, line, forge = "#171717", "#6e6e73", "#d2d2d7", "#007a5a"
+    ink, muted, line, forge = "#171717", "#6e6e73", "#d2d2d7", "#0071e3"
 
     draw.text((80, 72), "ARENAFORGE STUDY", font=font(24, True), fill=forge)
     draw.text((80, 118), "Research input becomes an executable campaign.", font=font(44, True), fill=ink)
@@ -50,7 +50,7 @@ def render_campaign(snapshot: dict) -> None:
     draw.line((118, 548, 370, 548), fill=line, width=2)
     draw.text((118, 577), "Project or simulator", font=font(18), fill=muted)
 
-    draw.text((595, 292), "EXPLORATION", font=font(19, True), fill="#6fd1b4")
+    draw.text((595, 292), "EXPLORATION", font=font(19, True), fill="#8abcf5")
     draw.text((595, 338), f"{snapshot['candidate_count']} candidates compared", font=font(30, True), fill="#ffffff")
     draw.text((595, 385), f"{snapshot['screened_edge_count']} marginal tests", font=font(22), fill="#c9c9cd")
     draw.text((595, 420), f"{snapshot['accepted_action_count']} accepted actions", font=font(22), fill="#c9c9cd")
@@ -61,8 +61,8 @@ def render_campaign(snapshot: dict) -> None:
         angle = (math.tau * index / dot_count) - math.pi / 2
         x = center[0] + int(math.cos(angle) * 118)
         y = center[1] + int(math.sin(angle) * 90)
-        draw.line((center[0], center[1], x, y), fill="#4d8f7b", width=2)
-        draw.ellipse((x - 11, y - 11, x + 11, y + 11), fill="#6fd1b4")
+        draw.line((center[0], center[1], x, y), fill="#7aaef5", width=2)
+        draw.ellipse((x - 11, y - 11, x + 11, y + 11), fill="#8abcf5")
     draw.ellipse((center[0] - 29, center[1] - 29, center[0] + 29, center[1] + 29), fill="#ffffff")
     draw.text((center[0] - 15, center[1] - 14), "49", font=font(22, True), fill=ink)
 
@@ -95,7 +95,7 @@ def render_quantum_graph(snapshot: dict) -> None:
         5: (1040, 610),
     }
     labels = {0: "S0", 1: "S1", 2: "S2", 3: "S3", 4: "S4", 5: "S5"}
-    draw.text((80, 70), "QUANTUM OPTICS VALIDATION CASE", font=font(23, True), fill="#6fd1b4")
+    draw.text((80, 70), "QUANTUM OPTICS VALIDATION CASE", font=font(23, True), fill="#8abcf5")
     draw.text((80, 116), "Candidate topology after guided pruning", font=font(44, True), fill="#ffffff")
     draw.text((80, 178), "Each visible connection is derived from the recommended artifact.", font=font(21), fill="#b7c0bd")
 
@@ -104,7 +104,7 @@ def render_quantum_graph(snapshot: dict) -> None:
         x1, y1 = positions[start]
         x2, y2 = positions[end]
         magnitude = max(1, int(abs(weight) * 5))
-        color = "#5ed2b0" if weight > 0 else "#7598cf"
+        color = "#8abcf5" if weight > 0 else "#5b7cad"
         draw.line((x1, y1, x2, y2), fill=color, width=magnitude)
 
     for node, (x, y) in positions.items():
@@ -120,7 +120,7 @@ def render_quantum_graph(snapshot: dict) -> None:
 def render_candidate_landscape(snapshot: dict) -> None:
     image = Image.new("RGB", (WIDTH, HEIGHT), "#f5f5f7")
     draw = ImageDraw.Draw(image)
-    ink, muted, line, forge, red = "#171717", "#6e6e73", "#d2d2d7", "#007a5a", "#b42318"
+    ink, muted, line, forge, red = "#171717", "#6e6e73", "#d2d2d7", "#0071e3", "#b42318"
     left, top, right, bottom = 155, 245, 1310, 730
     min_edges, max_edges = 47, 75
     max_drop = 0.032
@@ -147,7 +147,7 @@ def render_candidate_landscape(snapshot: dict) -> None:
 
     draw.rectangle((left, top, right, bottom), fill="#ffffff", outline=line, width=2)
     budget_x, gate_y = x(55), y(0.02)
-    draw.rectangle((left, gate_y, budget_x, bottom), fill="#e8f4ef")
+    draw.rectangle((left, gate_y, budget_x, bottom), fill="#eaf3ff")
     draw.line((budget_x, top, budget_x, bottom), fill=forge, width=3)
     draw.line((left, gate_y, right, gate_y), fill=forge, width=3)
     draw.text((left + 18, gate_y + 16), "可行区域", font=chinese_font(17, True), fill=forge)
