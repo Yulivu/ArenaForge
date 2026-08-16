@@ -2,10 +2,10 @@
   "schema_version": 1,
   "run_id": "qo-loss-replay",
   "contract_sha256": "0dee36883cce04246973292c928552456468d3ac0983cbfdfbd721352cb3aa84",
-  "ledger_head_hash": "052e2744e90f11071e5fa78d8016ab1873257eb93d8693bf66d4b7f4d23de92b",
+  "ledger_head_hash": "3680ea70f30b623e04a6c9c22213e7c26a73712ae668fa2f7dfd4a37c6571d4d",
   "confirmation": {
     "confirmed_by": "arenaforge-replay",
-    "confirmed_at": 1786815987.0161633,
+    "confirmed_at": 1786862401.2427435,
     "contract_sha256": "0dee36883cce04246973292c928552456468d3ac0983cbfdfbd721352cb3aa84"
   },
   "outcome": "improved",

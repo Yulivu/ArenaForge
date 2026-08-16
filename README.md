@@ -1,5 +1,13 @@
 # ArenaForge
 
+## GOAI 在线 Demo
+
+评审可直接打开静态演示：
+
+<https://yulivu.github.io/ArenaForge/>
+
+该页面展示产品总览和 Quantum Optics Reference Arena 的真实回放，不需要本机服务或模型 API。完整代码、证据和复现命令仍在本仓库中。
+
 ArenaForge is an open scientific exploration execution system for turning an
 unstructured research question into a controlled exploration campaign and an
 evidence-backed decision.

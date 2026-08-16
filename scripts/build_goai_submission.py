@@ -136,6 +136,7 @@ def main() -> None:
         "docs/goai-problem-statement.md",
         "docs/reproducibility.md",
         "docs/third-party-and-data-notices.md",
+        "demo",
         "deliverables/goai/PRELIMINARY-CHECKLIST.md",
         "deliverables/goai/README.md",
         "deliverables/goai/problem-definition-template.md",

@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ArenaForge GOAI 题目类型二在线演示：把开放科学问题转化为可持续探索和可审查证据。">
+  <title>ArenaForge | GOAI 在线演示</title>
+  <style>
+    :root {
+      --ink: #17211d;
+      --muted: #68736d;
+      --line: #d9e1dc;
+      --paper: #f7faf8;
+      --panel: #ffffff;
+      --soft: #eef5f0;
+      --accent: #1c7654;
+      --accent-dark: #115239;
+      --blue: #2d6385;
+      --amber: #a66a10;
+      --red: #a84d43;
+      --shadow: 0 18px 45px rgba(29, 50, 39, .08);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); line-height: 1.55; }
+    a { color: inherit; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+    header { position: sticky; top: 0; z-index: 5; background: rgba(247, 250, 248, .94); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+    .nav { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: .01em; }
+    .mark { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 9px; background: var(--accent); color: #fff; font-size: 17px; }
+    nav { display: flex; gap: 7px; }
+    nav button, .button { border: 1px solid transparent; border-radius: 7px; padding: 9px 13px; font: inherit; cursor: pointer; text-decoration: none; }
+    nav button { color: var(--muted); background: transparent; }
+    nav button.active, nav button:hover { color: var(--accent-dark); background: var(--soft); }
+    .button.primary { color: #fff; background: var(--accent); }
+    .button.primary:hover { background: var(--accent-dark); }
+    .button.quiet { color: var(--accent-dark); background: var(--soft); border-color: #d2e6d9; }
+    main { padding-bottom: 80px; }
+    .hero { padding: 74px 0 48px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: end; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { max-width: 760px; margin: 13px 0 18px; font-size: clamp(38px, 6vw, 68px); line-height: 1.04; letter-spacing: -.045em; }
+    h2 { margin: 0 0 10px; font-size: 27px; line-height: 1.15; letter-spacing: -.025em; }
+    h3 { margin: 0 0 5px; font-size: 16px; }
+    p { margin: 0; color: var(--muted); }
+    .hero p { max-width: 640px; font-size: 18px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .hero-note { padding: 22px; border: 1px solid var(--line); border-radius: 11px; background: var(--panel); box-shadow: var(--shadow); }
+    .hero-note strong { display: block; font-size: 19px; margin-bottom: 8px; }
+    .hero-note p { font-size: 14px; }
+    .view { display: none; }
+    .view.active { display: block; animation: enter .25s ease-out; }
+    @keyframes enter { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+    .section { padding: 35px 0; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 18px; }
+    .section-heading p { max-width: 650px; font-size: 14px; }
+    .grid { display: grid; gap: 14px; }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card { padding: 21px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+    .card p { font-size: 14px; }
+    .step { position: relative; min-height: 164px; }
+    .step-num { color: var(--accent); font: 700 13px ui-monospace, monospace; }
+    .step h3 { margin-top: 22px; }
+    .step:not(:last-child)::after { content: "→"; position: absolute; right: -17px; top: 61px; color: #9ca9a1; font-size: 20px; }
+    .metric { font-size: 28px; font-weight: 750; letter-spacing: -.03em; }
+    .metric-label { margin-top: 3px; color: var(--muted); font-size: 13px; }
+    .strip { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+    .tag { display: inline-flex; align-items: center; gap: 5px; padding: 5px 8px; border-radius: 999px; background: var(--soft); color: var(--accent-dark); font-size: 12px; font-weight: 650; }
+    .tag.blue { background: #edf4f8; color: var(--blue); }
+    .tag.amber { background: #fff5e6; color: var(--amber); }
+    .tag.red { background: #fff0ee; color: var(--red); }
+    .workflow { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .workflow-row { display: grid; grid-template-columns: repeat(5, 1fr); }
+    .workflow-item { padding: 20px 16px 21px 0; border-right: 1px solid var(--line); margin-right: 18px; }
+    .workflow-item:last-child { border-right: 0; }
+    .workflow-item strong { display: block; margin: 5px 0; }
+    .workflow-item span { color: var(--muted); font-size: 13px; }
+    .reference-head { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
+    .protocol { background: #18352a; color: #f5fbf6; border-radius: 11px; padding: 25px; }
+    .protocol p { color: #c9ddd0; }
+    .protocol code { display: block; margin-top: 18px; white-space: pre-wrap; color: #fff; font: 14px/1.7 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .result-highlight { padding: 25px; border: 1px solid #cfe4d5; border-radius: 11px; background: #f0f8f2; }
+    .result-highlight .metric { color: var(--accent-dark); font-size: 40px; }
+    .candidate-table { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+    .candidate-row { display: grid; grid-template-columns: 1.4fr .8fr .7fr .75fr; gap: 14px; align-items: center; padding: 15px 17px; border-bottom: 1px solid var(--line); }
+    .candidate-row:last-child { border-bottom: 0; }
+    .candidate-row.header { color: var(--muted); background: #fbfcfb; font-size: 12px; font-weight: 700; }
+    .candidate-row:not(.header) { font-size: 14px; }
+    .candidate-row.recommended { background: #f3faf5; }
+    .candidate-name strong { display: block; }
+    .candidate-name span { color: var(--muted); font-size: 12px; }
+    .evidence { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .evidence-list { display: grid; gap: 9px; margin-top: 15px; }
+    .evidence-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--line); font-size: 14px; }
+    .evidence-item b { color: var(--accent); }
+    .footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; color: var(--accent-dark); }
+    @media (max-width: 820px) {
+      .shell { padding: 0 18px; }
+      .hero, .reference-head, .evidence { grid-template-columns: 1fr; }
+      .grid.three, .grid.four { grid-template-columns: 1fr 1fr; }
+      .workflow-row { grid-template-columns: 1fr; }
+      .workflow-item { border-right: 0; border-bottom: 1px solid var(--line); margin: 0; padding-right: 0; }
+      .workflow-item:last-child { border-bottom: 0; }
+      .step:not(:last-child)::after { display: none; }
+    }
+    @media (max-width: 530px) {
+      .nav { height: auto; padding: 12px 0; align-items: flex-start; flex-direction: column; }
+      nav { width: 100%; overflow-x: auto; }
+      .hero { padding-top: 45px; }
+      .grid.three, .grid.four { grid-template-columns: 1fr; }
+      .candidate-row { grid-template-columns: 1.35fr .7fr .7fr; }
+      .candidate-row > :last-child { grid-column: 1 / -1; }
+      .candidate-row.header > :last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <div class="brand"><span class="mark">A</span><span>ArenaForge</span><span class="tag">GOAI · 开放探索</span></div>
+      <nav aria-label="演示导航">
+        <button class="active" data-view="product">产品总览</button>
+        <button data-view="reference">完整示例</button>
+        <a class="button quiet" href="https://github.com/Yulivu/ArenaForge" target="_blank" rel="noreferrer">查看仓库</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Scientific exploration execution system</div>
+          <h1>把开放科学问题，变成可持续、可复核的探索。</h1>
+          <p>ArenaForge 连接研究问题、可运行环境与 Agent 实验循环。它不替研究者宣称“发现了真理”，而是把候选、运行、失败、证据和边界一起交付。</p>
+          <div class="hero-actions">
+            <button class="button primary" data-view="reference">查看真实参考示例</button>
+            <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/docs/goai-problem-statement.md" target="_blank" rel="noreferrer">查看问题定义</a>
+          </div>
+        </div>
+        <aside class="hero-note">
+          <strong>这不是量子实验工具</strong>
+          <p>Quantum Optics 只是第一个 Reference Arena，用来展示通用系统如何在一个开放科学问题上运行。ArenaForge 的产品对象是“探索活动”，不是某个领域。</p>
+          <div class="strip"><span class="tag">问题 → 协议</span><span class="tag blue">候选 → 证据</span><span class="tag amber">结论有边界</span></div>
+        </aside>
+      </section>
+
+      <section id="product" class="view active">
+        <div class="section workflow">
+          <div class="workflow-row">
+            <div class="workflow-item"><div class="eyebrow">01 · 输入</div><strong>科学问题</strong><span>研究者想知道什么，为什么值得探索。</span></div>
+            <div class="workflow-item"><div class="eyebrow">02 · 固定</div><strong>探索协议</strong><span>观察、行动、反馈、预算和成功标准。</span></div>
+            <div class="workflow-item"><div class="eyebrow">03 · 探索</div><strong>Agent 候选</strong><span>提出相互竞争的假设并执行分支。</span></div>
+            <div class="workflow-item"><div class="eyebrow">04 · 记录</div><strong>证据链</strong><span>代码、命令、结果、失败和反证不丢失。</span></div>
+            <div class="workflow-item"><div class="eyebrow">05 · 输出</div><strong>可审查结论</strong><span>支持、反驳、未决与复现包。</span></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-heading">
+            <div><div class="eyebrow">Product surface</div><h2>用户交付的不是一段答案，而是一场完整探索。</h2></div>
+            <p>同一个协议下比较候选方案，才能知道改进是否真实、失败是否有信息，以及结论能覆盖到哪里。</p>
+          </div>
+          <div class="grid three">
+            <article class="card step"><div class="step-num">A / QUESTION</div><h3>把问题变成协议</h3><p>声明研究目标、可运行环境、反馈信号、资源预算和不可修改边界。</p></article>
+            <article class="card step"><div class="step-num">B / CAMPAIGN</div><h3>让 Agent 持续探索</h3><p>候选方案进入隔离分支，按同一条件执行；通过和失败都进入研究记录。</p></article>
+            <article class="card step"><div class="step-num">C / DECISION</div><h3>把证据交给研究者</h3><p>输出 evidence graph、hash-chained ledger、problem certificate 和 replay bundle。</p></article>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-heading"><div><div class="eyebrow">What the system proves</div><h2>可被评审直接核验的运行事实</h2></div></div>
+          <div class="grid four">
+            <article class="card"><div class="metric">9</div><div class="metric-label">候选假设进入评估</div></article>
+            <article class="card"><div class="metric">2×</div><div class="metric-label">独立种子重复运行</div></article>
+            <article class="card"><div class="metric">49</div><div class="metric-label">推荐方案的连接数</div></article>
+            <article class="card"><div class="metric">25</div><div class="metric-label">相对基线减少的连接</div></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="reference" class="view">
+        <div class="section">
+          <div class="section-heading">
+            <div><div class="eyebrow">Reference Arena #1 · Quantum Optics</div><h2>在固定质量容差下寻找更简单的 GHZ 制备图。</h2></div>
+            <p>这是一个完整的真实回放示例，不是产品边界。页面展示的数值来自仓库中的探索结果、运行日志与 certificate。</p>
+          </div>
+          <div class="reference-head">
+            <article class="protocol">
+              <div class="eyebrow" style="color:#9de0ba">固定探索协议</div>
+              <code>目标：在 55 条连接预算内，
+找到质量下降不超过 2% 的最简单方案。
+
+环境：PyTheus 图结构模拟器
+反馈：robust score / fidelity / count rate
+对照：canonical topology + random reference
+记录：候选、参数、日志、证据、结论</code>
+            </article>
+            <article class="result-highlight">
+              <div class="eyebrow">最终 certificate</div>
+              <div class="metric">49 edges</div>
+              <h3>sparse_threshold_150</h3>
+              <p>相对 74 条连接的 canonical baseline 减少 25 条，同时满足 55 条预算和 2% 质量容差。</p>
+              <div class="strip"><span class="tag">improved</span><span class="tag">supported</span><span class="tag blue">2 seeds completed</span></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-heading"><div><div class="eyebrow">Candidate decisions</div><h2>系统为什么推荐这个方案</h2></div><p>推荐不是“分数最高”，而是在预先声明的预算和质量门槛内可行，并且有可追溯证据。</p></div>
+          <div class="candidate-table">
+            <div class="candidate-row header"><div>候选假设</div><div>结果</div><div>连接数</div><div>决策依据</div></div>
+            <div class="candidate-row recommended"><div class="candidate-name"><strong>sparse_threshold_150</strong><span>中等稀疏化</span></div><div><span class="tag">推荐</span></div><div><b>49</b></div><div>满足预算与质量容差</div></div>
+            <div class="candidate-row"><div class="candidate-name"><strong>sparse_threshold_120</strong><span>保守稀疏化</span></div><div><span class="tag blue">supported</span></div><div>51</div><div>可行，但不如推荐方案简单</div></div>
+            <div class="candidate-row"><div class="candidate-name"><strong>sparse_threshold_200</strong><span>激进稀疏化</span></div><div><span class="tag red">refuted</span></div><div>48</div><div>质量下降超过 2%</div></div>
+            <div class="candidate-row"><div class="candidate-name"><strong>random_sign_reference</strong><span>负对照</span></div><div><span class="tag red">refuted</span></div><div>—</div><div>质量信号崩溃，验证门槛有效</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-heading"><div><div class="eyebrow">Evidence delivery</div><h2>每个结论都能回到原始证据</h2></div></div>
+          <div class="evidence">
+            <article class="card">
+              <h3>证据链</h3>
+              <div class="evidence-list">
+                <div class="evidence-item"><b>01</b><span>问题与约束冻结为 campaign contract。</span></div>
+                <div class="evidence-item"><b>02</b><span>候选进入独立运行目录，保存参数与命令。</span></div>
+                <div class="evidence-item"><b>03</b><span>结果经过统一评估，失败和反证保留。</span></div>
+                <div class="evidence-item"><b>04</b><span>certificate 只对声明的项目、指标和范围下结论。</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <h3>继续核验</h3>
+              <p>下面的链接指向同一仓库中的正式材料，不依赖本机服务。</p>
+              <div class="hero-actions">
+                <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/tree/master/evidence/qo-loss-campaign-v3" target="_blank" rel="noreferrer">打开运行证据</a>
+                <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/examples/quantum_optics_open_exploration/artifacts/problem_certificate.json" target="_blank" rel="noreferrer">查看 certificate</a>
+                <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/docs/demo-script.md" target="_blank" rel="noreferrer">复现命令</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <strong>ArenaForge · GOAI 题目类型二</strong>
+      <div>静态演示展示已完成的真实探索回放；完整运行时、API 模式和本地复现请进入代码仓库。</div>
+      <div class="footer-links">
+        <a href="https://github.com/Yulivu/ArenaForge" target="_blank" rel="noreferrer">GitHub 仓库</a>
+        <a href="https://github.com/Yulivu/ArenaForge/blob/master/docs/goai-deliverables.md" target="_blank" rel="noreferrer">GOAI 交付说明</a>
+        <a href="https://github.com/Yulivu/ArenaForge/blob/master/docs/third-party-and-data-notices.md" target="_blank" rel="noreferrer">第三方与数据说明</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const buttons = document.querySelectorAll("[data-view]");
+    const views = document.querySelectorAll(".view");
+    function activate(view) {
+      views.forEach((node) => node.classList.toggle("active", node.id === view));
+      buttons.forEach((button) => button.classList.toggle("active", button.dataset.view === view));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    buttons.forEach((button) => button.addEventListener("click", () => activate(button.dataset.view)));
+  </script>
+</body>
+</html>
