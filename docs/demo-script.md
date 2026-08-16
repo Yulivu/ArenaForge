@@ -22,10 +22,12 @@ PYTHONPATH=src python scripts/run_quantum_optics_exploration.py
 
 展示：
 
-- canonical、8 个阈值剪枝候选和 random 负对照；
+- 74 次单边扰动形成的边际影响筛查；
+- 25 次通过质量门槛的连续删边行动，以及第 26 次边界失败；
+- 作为策略参照保留的阈值剪枝和 random 负对照；
 - fidelity 和 count rate 随 transmission 的变化；
 - edge count、robust score、预算检查和质量门槛；
-- `artifacts/exploration_log.jsonl` 中的逐候选记录。
+- `artifacts/search_trace.json` 与 `artifacts/exploration_log.jsonl` 中的完整轨迹。
 
 ## 2. 运行 ArenaForge Campaign
 
@@ -52,12 +54,14 @@ PYTHONPATH=src python -m arenaforge campaign-run \
 Replay 当前会得到：
 
 - canonical：`74` 条连接，robust score `0.763186`，超过预算；
-- threshold `0.150`：`49` 条连接，最大质量下降 `1.92%`，满足协议并推荐；
-- threshold `0.200`：`48` 条连接，但最大质量下降 `2.44%`，被拒绝；
+- sensitivity-guided：筛查 `74` 条连接后连续接受 `25` 次删边，得到 `49` 条连接；
+- 第 `26` 次删边会得到 `48` 条连接，但最大质量下降 `2.32%`，触发质量边界；
+- 独立验证损耗点 `0.98, 0.85, 0.75` 的最大质量下降为 `1.80%`；
+- threshold `0.150`：`49` 条连接，作为权重阈值启发式参照保留；
 - random sign：质量下降约 `99.98%`，作为负对照失败。
 
-重点解释：系统在固定质量门槛下寻找更简单的可行拓扑。超过预算或质量容差的
-候选会作为反证保留，并明确标注拒绝原因。
+重点解释：系统先从真实反馈中学习边的边际影响，再连续采取删边行动。质量边界、
+启发式参照和随机负对照都会保留为可核验的反证。
 
 ## 4. 打开 WebUI
 

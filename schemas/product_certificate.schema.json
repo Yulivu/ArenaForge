@@ -85,6 +85,10 @@
     "supported_hypotheses": {"type": "array", "items": {"type": "string"}},
     "refuted_hypotheses": {"type": "array", "items": {"type": "string"}},
     "inconclusive_hypotheses": {"type": "array", "items": {"type": "string"}},
+    "validation": {
+      "type": "object",
+      "additionalProperties": true
+    },
     "research_runtime": {
       "type": "object",
       "additionalProperties": true,

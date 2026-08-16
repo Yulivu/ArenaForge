@@ -1,5 +1,81 @@
 [
   {
+    "evidence_id": "qo-loss-replay:sensitivity_guided_025",
+    "hypothesis": "sensitivity_guided_025",
+    "status": "supported",
+    "result": {
+      "candidate_id": "sensitivity_guided_025",
+      "source_graph": "artifacts/sensitivity_guided_025.json",
+      "pytheus_loss": null,
+      "edge_count": 49,
+      "loss_model": {
+        "name": "per_edge_transmission_proxy",
+        "detector_segment_penalty": true,
+        "disclaimer": "Proxy for arena comparison; laboratory calibration is out of scope."
+      },
+      "loss_sweep": [
+        {
+          "transmission": 1.0,
+          "count_rate": 0.9547065353639416,
+          "fidelity": 0.9840842245425184
+        },
+        {
+          "transmission": 0.95,
+          "count_rate": 0.9310637176141737,
+          "fidelity": 0.9840842245425186
+        },
+        {
+          "transmission": 0.9,
+          "count_rate": 0.8873997131466999,
+          "fidelity": 0.9840842245425188
+        },
+        {
+          "transmission": 0.8,
+          "count_rate": 0.6797179003451514,
+          "fidelity": 0.9840842245425188
+        },
+        {
+          "transmission": 0.7,
+          "count_rate": 0.3053163313868006,
+          "fidelity": 0.9840842245425184
+        }
+      ],
+      "robust_score": 0.739677892744063,
+      "edge_budget": 55,
+      "budget_feasible": true,
+      "quality_tolerance": 0.02,
+      "quality_deltas": [
+        {
+          "transmission": 1.0,
+          "fidelity_relative_drop": 0.015051475078745158,
+          "count_rate_relative_drop": 0.015230962560401795
+        },
+        {
+          "transmission": 0.95,
+          "fidelity_relative_drop": 0.015051475078745158,
+          "count_rate_relative_drop": 0.01537541196863701
+        },
+        {
+          "transmission": 0.9,
+          "fidelity_relative_drop": 0.015051475078744825,
+          "count_rate_relative_drop": 0.015642183876844573
+        },
+        {
+          "transmission": 0.8,
+          "fidelity_relative_drop": 0.015051475078744714,
+          "count_rate_relative_drop": 0.016911047650949418
+        },
+        {
+          "transmission": 0.7,
+          "fidelity_relative_drop": 0.015051475078745158,
+          "count_rate_relative_drop": 0.019198511254097883
+        }
+      ],
+      "quality_acceptable": true,
+      "protocol_feasible": true
+    }
+  },
+  {
     "evidence_id": "qo-loss-replay:sparse_threshold_150",
     "hypothesis": "sparse_threshold_150",
     "status": "supported",

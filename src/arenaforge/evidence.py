@@ -82,6 +82,7 @@ def write_certificate(
     ledger_head: str,
     protected_changes: list[str] | None = None,
     confirmation: dict[str, Any] | None = None,
+    validation: dict[str, Any] | None = None,
 ) -> Path:
     baseline_score = baseline.get("score") if baseline else None
     final_score = final.get("score") if final else None
@@ -140,6 +141,8 @@ def write_certificate(
         "refuted_hypotheses": [item.get("hypothesis") for item in evidence if item.get("status") == "refuted"],
         "inconclusive_hypotheses": [item.get("hypothesis") for item in evidence if item.get("status") == "inconclusive"],
     }
+    if validation is not None:
+        certificate["validation"] = validation
     validate(
         instance=certificate,
         schema=json.loads(_schema_path("product_certificate.schema.json").read_text(encoding="utf-8")),

@@ -171,6 +171,7 @@ def main() -> None:
             "problem-definition-template.md",
             "submission-brief.md",
             "examples/quantum_optics_open_exploration/artifacts/exploration_results.json",
+            "examples/quantum_optics_open_exploration/artifacts/search_trace.json",
             "examples/quantum_optics_open_exploration/artifacts/evidence.json",
             "examples/quantum_optics_open_exploration/artifacts/ledger.jsonl",
             "examples/quantum_optics_open_exploration/artifacts/problem_certificate.json",

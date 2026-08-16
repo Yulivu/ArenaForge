@@ -723,6 +723,8 @@ function scienceArenaPanel(a){
   const q=(a&&a.science_arena)||{};
   if(!q.enabled) return '';
   const candidates=Array.isArray(q.candidates)?q.candidates:[];
+  const exploration=(q.exploration&&typeof q.exploration==='object')?q.exploration:{};
+  const validation=(q.independent_validation&&typeof q.independent_validation==='object')?q.independent_validation:{};
   const baseline=candidates.find(c=>c.candidate_id===q.baseline)||candidates[0]||{};
   const baselineScore=Number(baseline.robust_score||0);
   const sweep=Array.isArray(baseline.loss_sweep)?baseline.loss_sweep:[];
@@ -751,9 +753,17 @@ function scienceArenaPanel(a){
     <div class="af-science-facts" style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-top:18px;">
       ${statCard('目标态', esc((q.scope.target_state||[]).join(' + ')||'GHZ'), '固定环境', 'var(--accent2)', false)}
       ${statCard('连接预算', esc(q.scope.edge_budget??'—'), '最多允许连接', 'var(--tx)', false)}
-      ${statCard('质量容差', `${(Number(q.scope.quality_tolerance||0)*100).toFixed(0)}%`, '每个损耗点', 'var(--amber)', false)}
-      ${statCard('轨迹事件', esc(q.ledger_event_count||0), '可校验证据链', q.ledger_verified===true?'var(--accent)':'var(--tx2)', false)}
+      ${statCard('边重要性筛查', esc(exploration.screened_edge_count??'—'), '真实物理评估', 'var(--accent)', false)}
+      ${statCard('独立验证', validation.quality_acceptable===true?'通过':'—', `${(Number(validation.max_quality_drop||0)*100).toFixed(2)}% 最大下降`, validation.quality_acceptable===true?'var(--accent)':'var(--tx2)', false)}
     </div>
+    <section style="margin-top:14px; padding:15px; border-radius:12px; background:var(--soft); border:1px solid var(--aline);">
+      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:baseline;"><div><div style="font-size:11.5px; font-weight:700; letter-spacing:.1em; color:var(--accent); text-transform:uppercase;">反馈驱动探索轨迹</div><div style="font-size:13px; color:var(--tx2); line-height:1.6; margin-top:6px;">系统先测量每条连接的边际影响，再按影响从小到大连续提出删边行动。每一步都在真实环境中评估；质量门槛触发时停止并保留边界反证。</div></div><span style="font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:12px;">${esc(exploration.policy||'—')}</span></div>
+      <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:13px;">
+        ${statCard('接受行动', esc(exploration.accepted_action_count??'—'), '连续删边', 'var(--accent)', false)}
+        ${statCard('边界行动', esc(exploration.boundary_action?.edge_count??'—')+' 条', exploration.boundary_action?`质量下降 ${((Number(exploration.boundary_action.max_quality_drop||0)*100).toFixed(2))}%`:'等待探索', 'var(--neg)', false)}
+        ${statCard('验证损耗点', esc((validation.loss_levels||[]).join(', ')||'—'), '未参与搜索', validation.quality_acceptable===true?'var(--accent)':'var(--tx2)', false)}
+      </div>
+    </section>
     <div class="af-loss-layout" style="display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin-top:18px;">
       <section style="padding:15px; border-radius:12px; background:var(--card2); border:1px solid var(--line);">
         <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px;">
@@ -786,6 +796,7 @@ function scienceCandidateLabel(candidate){
   if(threshold) return `阈值剪枝（阈值 ${(Number(threshold[1])/1000).toFixed(3)}）`;
   return ({
     pytheus_canonical:'PyTheus 规范图',
+    sensitivity_guided_025:'反馈引导剪枝（25 次接受）',
     random_sign_reference:'随机符号对照',
   })[id] || id || '候选拓扑';
 }

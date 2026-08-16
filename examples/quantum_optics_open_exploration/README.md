@@ -24,6 +24,10 @@ Agent 在带有物理约束、资源预算和质量门槛的环境中持续探�
   -> 形成可复查的推荐
 ```
 
+本示例的主策略会先逐条测量连接的边际影响，再按影响从小到大连续删边。每一步
+均经过真实 PyTheus 评估；第一个触发质量门槛的行动保留为搜索边界。阈值剪枝和
+随机符号扰动同时保留为策略参照与负对照。
+
 ## 环境接口
 
 ### 固定部分
@@ -88,6 +92,7 @@ python scripts/run_quantum_optics_exploration.py
 运行后生成：
 
 - `artifacts/exploration_results.json`
+- `artifacts/search_trace.json`
 - `artifacts/exploration_log.jsonl`
 - `artifacts/evidence.json`
 - `artifacts/ledger.jsonl`

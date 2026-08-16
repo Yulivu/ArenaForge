@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import copy
 import hashlib
+import io
 import json
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -21,6 +24,8 @@ CONFIG = ARENA / "configs" / "ghz_346.json"
 EDGE_BUDGET = 55
 QUALITY_TOLERANCE = 0.02
 SPARSE_THRESHOLDS = (0.005, 0.01, 0.02, 0.04, 0.08, 0.12, 0.15, 0.20)
+SEARCH_LOSS_LEVELS = (1.0, 0.95, 0.9, 0.8, 0.7)
+VALIDATION_LOSS_LEVELS = (0.98, 0.85, 0.75)
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -80,6 +85,19 @@ def _write_evidence(
             "research_question": report["research_question"],
         },
     )
+    exploration = report.get("exploration")
+    if isinstance(exploration, dict):
+        ledger.append(
+            "search_stage_completed",
+            "arenaforge-search-policy",
+            {
+                "policy": exploration.get("policy"),
+                "screened_edge_count": exploration.get("screened_edge_count"),
+                "accepted_action_count": exploration.get("accepted_action_count"),
+                "boundary_action": exploration.get("boundary_action"),
+            },
+            branch="sensitivity-guided-pruning",
+        )
     baseline_id = report["baseline"]
     baseline = next(
         item for item in report["candidates"] if item["candidate_id"] == baseline_id
@@ -132,7 +150,7 @@ def _write_evidence(
         "arenaforge-adjudicator",
         {
             "statement": (
-                "The threshold search found a topology with fewer connections that "
+                "The feedback-guided search found a topology with fewer connections that "
                 "stays within the declared quality tolerance at every loss point."
             ),
             "recommended_candidate": report["recommended_candidate"],
@@ -141,6 +159,14 @@ def _write_evidence(
             "quality_deltas": recommended["quality_deltas"],
         },
     )
+    validation = report.get("independent_validation")
+    if isinstance(validation, dict):
+        ledger.append(
+            "independent_validation_completed",
+            "arenaforge-evaluator",
+            validation,
+            branch=report["recommended_candidate"],
+        )
     contract = _contract(report["research_question"])
     certificate_payload = {
         "certificate": "problem_certificate.json",
@@ -179,14 +205,171 @@ def _write_evidence(
             "confirmed_at": time.time(),
             "contract_sha256": contract["contract_sha256"],
         },
+        validation=report.get("independent_validation"),
     )
     _write(output_dir / "evidence.json", evidence)
 
 
-def _candidates() -> list[dict[str, Any]]:
+def _max_quality_drop(
+    baseline: dict[str, Any],
+    candidate: dict[str, Any],
+) -> tuple[float, list[dict[str, float]]]:
+    deltas: list[dict[str, float]] = []
+    for reference_point, candidate_point in zip(
+        baseline["loss_sweep"], candidate["loss_sweep"], strict=True
+    ):
+        fidelity_drop = 1.0 - candidate_point["fidelity"] / reference_point["fidelity"]
+        count_rate_drop = 1.0 - candidate_point["count_rate"] / reference_point["count_rate"]
+        deltas.append(
+            {
+                "transmission": candidate_point["transmission"],
+                "fidelity_relative_drop": fidelity_drop,
+                "count_rate_relative_drop": count_rate_drop,
+            }
+        )
+    return (
+        max(
+            max(item["fidelity_relative_drop"], item["count_rate_relative_drop"])
+            for item in deltas
+        ),
+        deltas,
+    )
+
+
+def _evaluate_candidate_graph(
+    candidate: dict[str, Any],
+    *,
+    candidate_id: str,
+    scratch_dir: Path,
+    pytheus_root: Path,
+    loss_levels: tuple[float, ...],
+) -> dict[str, Any]:
+    payload = copy.deepcopy(candidate)
+    payload["candidate_id"] = candidate_id
+    payload["loss"] = None
+    path = scratch_dir / f"{candidate_id}.json"
+    _write(path, payload)
+    return _evaluate_graph_quiet(
+        path,
+        pytheus_root=pytheus_root,
+        loss_levels=loss_levels,
+    )
+
+
+def _evaluate_graph_quiet(
+    graph_path: Path,
+    *,
+    pytheus_root: Path,
+    loss_levels: tuple[float, ...],
+) -> dict[str, Any]:
+    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+        return evaluate_graph(
+            graph_path,
+            CONFIG,
+            pytheus_root=pytheus_root,
+            loss_levels=loss_levels,
+        )
+
+
+def _sensitivity_guided_candidate(
+    canonical: dict[str, Any],
+    *,
+    pytheus_root: Path,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Use true environment feedback to build a constrained pruning trajectory."""
+    with tempfile.TemporaryDirectory(prefix="arenaforge-qo-search-") as temp:
+        scratch_dir = Path(temp)
+        baseline = _evaluate_candidate_graph(
+            canonical,
+            candidate_id="screening_baseline",
+            scratch_dir=scratch_dir,
+            pytheus_root=pytheus_root,
+            loss_levels=SEARCH_LOSS_LEVELS,
+        )
+        screening: list[dict[str, Any]] = []
+        for index, edge in enumerate(canonical["graph"]):
+            ablation = copy.deepcopy(canonical)
+            del ablation["graph"][edge]
+            result = _evaluate_candidate_graph(
+                ablation,
+                candidate_id=f"screening_{index:03d}",
+                scratch_dir=scratch_dir,
+                pytheus_root=pytheus_root,
+                loss_levels=SEARCH_LOSS_LEVELS,
+            )
+            max_drop, _deltas = _max_quality_drop(baseline, result)
+            screening.append(
+                {
+                    "stage": "marginal_screen",
+                    "edge": edge,
+                    "edge_count": result["edge_count"],
+                    "robust_score": result["robust_score"],
+                    "max_quality_drop": max_drop,
+                }
+            )
+
+        screening.sort(key=lambda item: (item["max_quality_drop"], item["edge"]))
+        current = copy.deepcopy(canonical)
+        accepted_actions: list[dict[str, Any]] = []
+        boundary_action: dict[str, Any] | None = None
+        for index, item in enumerate(screening):
+            edge = item["edge"]
+            proposal = copy.deepcopy(current)
+            del proposal["graph"][edge]
+            result = _evaluate_candidate_graph(
+                proposal,
+                candidate_id=f"guided_step_{index:03d}",
+                scratch_dir=scratch_dir,
+                pytheus_root=pytheus_root,
+                loss_levels=SEARCH_LOSS_LEVELS,
+            )
+            max_drop, _deltas = _max_quality_drop(baseline, result)
+            action = {
+                "stage": "guided_pruning",
+                "step": index + 1,
+                "edge": edge,
+                "edge_count": result["edge_count"],
+                "robust_score": result["robust_score"],
+                "max_quality_drop": max_drop,
+            }
+            if max_drop <= QUALITY_TOLERANCE:
+                action["decision"] = "accepted"
+                accepted_actions.append(action)
+                current = proposal
+                continue
+            action["decision"] = "rejected"
+            boundary_action = action
+            break
+
+    candidate_id = f"sensitivity_guided_{len(accepted_actions):03d}"
+    final_candidate = copy.deepcopy(current)
+    final_candidate.update(
+        {
+            "candidate_id": candidate_id,
+            "search_policy": "marginal-sensitivity-guided-pruning",
+            "search_loss_levels": list(SEARCH_LOSS_LEVELS),
+            "screened_edge_count": len(screening),
+            "accepted_action_count": len(accepted_actions),
+            "loss": None,
+        }
+    )
+    trace = {
+        "policy": "marginal-sensitivity-guided-pruning",
+        "search_loss_levels": list(SEARCH_LOSS_LEVELS),
+        "screened_edge_count": len(screening),
+        "accepted_action_count": len(accepted_actions),
+        "screening": screening,
+        "accepted_actions": accepted_actions,
+        "boundary_action": boundary_action,
+        "terminal_candidate": candidate_id,
+    }
+    return final_candidate, trace
+
+
+def _candidates(sensitivity_candidate: dict[str, Any]) -> list[dict[str, Any]]:
     canonical = _load(DEFAULT_GRAPH)
     canonical["candidate_id"] = "pytheus_canonical"
-    candidates = [canonical]
+    candidates = [canonical, sensitivity_candidate]
     for threshold in SPARSE_THRESHOLDS:
         sparse = copy.deepcopy(canonical)
         sparse["candidate_id"] = f"sparse_threshold_{int(threshold * 1000):03d}"
@@ -207,6 +390,33 @@ def _candidates() -> list[dict[str, Any]]:
     random_reference["loss"] = None
     candidates.append(random_reference)
     return candidates
+
+
+def _independent_validation(
+    *,
+    baseline_path: Path,
+    final_path: Path,
+    pytheus_root: Path,
+) -> dict[str, Any]:
+    baseline = _evaluate_graph_quiet(
+        baseline_path,
+        pytheus_root=pytheus_root,
+        loss_levels=VALIDATION_LOSS_LEVELS,
+    )
+    final = _evaluate_graph_quiet(
+        final_path,
+        pytheus_root=pytheus_root,
+        loss_levels=VALIDATION_LOSS_LEVELS,
+    )
+    max_drop, rows = _max_quality_drop(baseline, final)
+    return {
+        "loss_levels": list(VALIDATION_LOSS_LEVELS),
+        "max_quality_drop": max_drop,
+        "quality_acceptable": max_drop <= QUALITY_TOLERANCE,
+        "baseline_robust_score": baseline["robust_score"],
+        "candidate_robust_score": final["robust_score"],
+        "rows": rows,
+    }
 
 
 def _attach_protocol_metrics(
@@ -257,15 +467,23 @@ def main() -> None:
 
     output_dir = args.output.parent
     output_dir.mkdir(parents=True, exist_ok=True)
+    canonical = _load(DEFAULT_GRAPH)
+    canonical["candidate_id"] = "pytheus_canonical"
+    sensitivity_candidate, exploration = _sensitivity_guided_candidate(
+        canonical,
+        pytheus_root=args.pytheus_root,
+    )
     results = []
     log = []
-    for candidate in _candidates():
+    candidate_paths: dict[str, Path] = {}
+    for candidate in _candidates(sensitivity_candidate):
         candidate_path = output_dir / f"{candidate['candidate_id']}.json"
         _write(candidate_path, candidate)
-        evaluated = evaluate_graph(
+        candidate_paths[candidate["candidate_id"]] = candidate_path
+        evaluated = _evaluate_graph_quiet(
             candidate_path,
-            CONFIG,
             pytheus_root=args.pytheus_root,
+            loss_levels=SEARCH_LOSS_LEVELS,
         )
         evaluated["source_graph"] = candidate_path.relative_to(ARENA).as_posix()
         results.append(evaluated)
@@ -308,10 +526,19 @@ def main() -> None:
         "baseline": "pytheus_canonical",
         "candidates": ranked,
         "recommended_candidate": ranked[0]["candidate_id"],
+        "exploration": {
+            "policy": exploration["policy"],
+            "search_loss_levels": exploration["search_loss_levels"],
+            "screened_edge_count": exploration["screened_edge_count"],
+            "accepted_action_count": exploration["accepted_action_count"],
+            "boundary_action": exploration["boundary_action"],
+            "terminal_candidate": exploration["terminal_candidate"],
+        },
         "scope": {
             "target_state": ["000", "111", "222", "333"],
             "ancillary_photons": 3,
-            "loss_levels": [1.0, 0.95, 0.9, 0.8, 0.7],
+            "loss_levels": list(SEARCH_LOSS_LEVELS),
+            "validation_loss_levels": list(VALIDATION_LOSS_LEVELS),
             "edge_budget": EDGE_BUDGET,
             "quality_tolerance": QUALITY_TOLERANCE,
             "metric": "edge_count_under_quality_tolerance",
@@ -327,10 +554,46 @@ def main() -> None:
             ],
         },
     }
+    report["independent_validation"] = _independent_validation(
+        baseline_path=candidate_paths[report["baseline"]],
+        final_path=candidate_paths[report["recommended_candidate"]],
+        pytheus_root=args.pytheus_root,
+    )
+    exploration_log = [
+        {
+            "event": "edge_screened",
+            **item,
+        }
+        for item in exploration["screening"]
+    ]
+    exploration_log.extend(
+        {
+            "event": "pruning_action",
+            **item,
+        }
+        for item in exploration["accepted_actions"]
+    )
+    if exploration["boundary_action"] is not None:
+        exploration_log.append(
+            {
+                "event": "pruning_action",
+                **exploration["boundary_action"],
+            }
+        )
+    exploration_log.append(
+        {
+            "event": "independent_validation_completed",
+            **report["independent_validation"],
+        }
+    )
     _write(args.output, report)
+    _write(output_dir / "search_trace.json", exploration)
     _write_evidence(output_dir, report=report)
     (output_dir / "exploration_log.jsonl").write_text(
-        "".join(json.dumps(item, ensure_ascii=False) + "\n" for item in log),
+        "".join(
+            json.dumps(item, ensure_ascii=False) + "\n"
+            for item in [*exploration_log, *log]
+        ),
         encoding="utf-8",
     )
     print(json.dumps({"output": str(args.output), "recommended": ranked[0]["candidate_id"]}, ensure_ascii=False))

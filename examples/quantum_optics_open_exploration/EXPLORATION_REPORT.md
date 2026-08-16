@@ -8,7 +8,8 @@ Under a strict 55-edge construction budget and a 2% quality tolerance at every l
 
 - Target state: `|000> + |111> + |222> + |333>`;
 - Ancillary photon budget: 3;
-- Transmission sweep: `1.0, 0.95, 0.9, 0.8, 0.7`;
+- Search transmission sweep: `1.0, 0.95, 0.9, 0.8, 0.7`;
+- Independent validation sweep: `0.98, 0.85, 0.75`;
 - Seeds: `17, 27`;
 - Robust score: mean over the sweep of `fidelity * count_rate`;
 - Edge budget: at most `55` connections;
@@ -20,31 +21,35 @@ Under a strict 55-edge construction budget and a 2% quality tolerance at every l
 ## Candidate set
 
 1. Canonical PyTheus topology.
-2. Threshold sweep with `0.005, 0.010, 0.020, 0.040, 0.080, 0.120, 0.150, 0.200`.
-3. Deterministic random-sign negative control.
+2. Marginal-sensitivity-guided pruning: screen each of the 74 edges, rank
+   its marginal quality impact, then remove edges sequentially until the
+   quality gate rejects the next action.
+3. Threshold sweep with `0.005, 0.010, 0.020, 0.040, 0.080, 0.120, 0.150, 0.200`
+   as a heuristic reference.
+4. Deterministic random-sign negative control.
 
 ## Results
 
 | Candidate | Edges | Robust score | Max quality drop | Decision |
 |---|---:|---:|---:|---|
 | canonical PyTheus | `74` | `0.763186` | `0.00%` | performance reference, over budget |
-| threshold `0.150` | `49` | `0.739678` | `1.92%` | supported, recommended |
+| sensitivity-guided `025` | `49` | `0.739678` | `1.92%` | supported, recommended |
+| threshold `0.150` | `49` | `0.739678` | `1.92%` | supported heuristic reference |
 | threshold `0.120` | `51` | `0.748234` | `1.73%` | supported |
-| threshold `0.080` | `53` | `0.755348` | `1.57%` | supported |
-| threshold `0.200` | `48` | `0.726835` | `2.44%` | quality gate failed |
+| guided boundary action | `48` | `0.732123` | `2.32%` | rejected at action 26 |
 | random sign reference | `74` | `0.000000` | `99.98%` | refuted negative control |
 
 The recommended candidate removes `25` connections (`33.8%`) while staying within
-the declared `2%` quality tolerance at every transmission point. Its robust score
-is lower than the canonical reference, so this is a constrained complexity result,
-not a claim of universal physical improvement.
+the declared `2%` quality tolerance at every search transmission point. The search
+screens 74 marginal perturbations, accepts 25 sequential actions, and records the
+first rejected action as a quality boundary. The independent validation sweep also
+passes, with a maximum quality drop of `1.80%`.
 
 ## Interpretation
 
-The result does not establish a laboratory claim and does not prove that no better
-topology exists. It only says that the tested threshold search found a candidate
-passing the declared quality gate within the graph, loss proxy, target, budget and
-candidate set.
+The result applies to the declared graph, loss proxy, target state, budget, search
+policy, and evaluation sweeps. The artifact records a constrained topology result
+for that setting.
 
 ## Reproduction
 

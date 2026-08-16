@@ -2,10 +2,10 @@
   "schema_version": 1,
   "run_id": "qo-loss-replay",
   "contract_sha256": "0dee36883cce04246973292c928552456468d3ac0983cbfdfbd721352cb3aa84",
-  "ledger_head_hash": "7a78d86cb3c3c9559f26e31ff11d0bb5898fbb94fc40d1e37a92ea78cfd88f94",
+  "ledger_head_hash": "07c30d6a37dd5cc3eb5a637a7167e529a3072cdc23b5d62c4071b28c59074fcf",
   "confirmation": {
     "confirmed_by": "arenaforge-replay",
-    "confirmed_at": 1786865417.326853,
+    "confirmed_at": 1786873935.624848,
     "contract_sha256": "0dee36883cce04246973292c928552456468d3ac0983cbfdfbd721352cb3aa84"
   },
   "outcome": "improved",
@@ -34,7 +34,7 @@
     "quality_acceptable": true
   },
   "final": {
-    "candidate_id": "sparse_threshold_150",
+    "candidate_id": "sensitivity_guided_025",
     "score": 49,
     "robust_score": 0.739677892744063,
     "edge_count": 49,
@@ -47,6 +47,7 @@
     "changed_protected_paths": []
   },
   "evidence_ids": [
+    "qo-loss-replay:sensitivity_guided_025",
     "qo-loss-replay:sparse_threshold_150",
     "qo-loss-replay:sparse_threshold_120",
     "qo-loss-replay:sparse_threshold_080",
@@ -58,6 +59,7 @@
     "qo-loss-replay:random_sign_reference"
   ],
   "supported_hypotheses": [
+    "sensitivity_guided_025",
     "sparse_threshold_150",
     "sparse_threshold_120",
     "sparse_threshold_080"
@@ -70,5 +72,33 @@
     "sparse_threshold_005",
     "random_sign_reference"
   ],
-  "inconclusive_hypotheses": []
+  "inconclusive_hypotheses": [],
+  "validation": {
+    "loss_levels": [
+      0.98,
+      0.85,
+      0.75
+    ],
+    "max_quality_drop": 0.01801411924158358,
+    "quality_acceptable": true,
+    "baseline_robust_score": 0.7634254936043079,
+    "candidate_robust_score": 0.7397630628047148,
+    "rows": [
+      {
+        "transmission": 0.98,
+        "fidelity_relative_drop": 0.015051475078744714,
+        "count_rate_relative_drop": 0.0152783460235838
+      },
+      {
+        "transmission": 0.85,
+        "fidelity_relative_drop": 0.015051475078745158,
+        "count_rate_relative_drop": 0.016120818795275604
+      },
+      {
+        "transmission": 0.75,
+        "fidelity_relative_drop": 0.015051475078744825,
+        "count_rate_relative_drop": 0.01801411924158358
+      }
+    ]
+  }
 }

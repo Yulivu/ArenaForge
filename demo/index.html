@@ -174,10 +174,10 @@
         <div class="section">
           <div class="section-heading"><div><div class="eyebrow">What the system proves</div><h2>可被评审直接核验的运行事实</h2></div></div>
           <div class="grid four">
-            <article class="card"><div class="metric">9</div><div class="metric-label">候选假设进入评估</div></article>
-            <article class="card"><div class="metric">2×</div><div class="metric-label">独立种子重复运行</div></article>
+            <article class="card"><div class="metric">74</div><div class="metric-label">边际影响的真实评估</div></article>
+            <article class="card"><div class="metric">25</div><div class="metric-label">质量门槛内接受的行动</div></article>
+            <article class="card"><div class="metric">3</div><div class="metric-label">独立验证损耗点</div></article>
             <article class="card"><div class="metric">49</div><div class="metric-label">推荐方案的连接数</div></article>
-            <article class="card"><div class="metric">25</div><div class="metric-label">相对基线减少的连接</div></article>
           </div>
         </div>
       </section>
@@ -202,9 +202,9 @@
             <article class="result-highlight">
               <div class="eyebrow">最终 certificate</div>
               <div class="metric">49 edges</div>
-              <h3>sparse_threshold_150</h3>
-              <p>相对 74 条连接的 canonical baseline 减少 25 条，同时满足 55 条预算和 2% 质量容差。</p>
-              <div class="strip"><span class="tag">improved</span><span class="tag">supported</span><span class="tag blue">2 seeds completed</span></div>
+              <h3>反馈引导剪枝</h3>
+              <p>系统筛查 74 条连接的边际影响，连续接受 25 次删边；第 26 次行动触发质量门槛。最终方案满足 55 条预算，独立验证最大质量下降为 1.80%。</p>
+              <div class="strip"><span class="tag">improved</span><span class="tag">supported</span><span class="tag blue">independent validation passed</span></div>
             </article>
           </div>
         </div>
@@ -213,9 +213,9 @@
           <div class="section-heading"><div><div class="eyebrow">Candidate decisions</div><h2>系统为什么推荐这个方案</h2></div><p>推荐条件预先写入预算与质量门槛；每一项判断都可追溯到对应的运行证据。</p></div>
           <div class="candidate-table">
             <div class="candidate-row header"><div>候选假设</div><div>结果</div><div>连接数</div><div>决策依据</div></div>
-            <div class="candidate-row recommended"><div class="candidate-name"><strong>sparse_threshold_150</strong><span>中等稀疏化</span></div><div><span class="tag">推荐</span></div><div><b>49</b></div><div>满足预算与质量容差</div></div>
-            <div class="candidate-row"><div class="candidate-name"><strong>sparse_threshold_120</strong><span>保守稀疏化</span></div><div><span class="tag blue">supported</span></div><div>51</div><div>可行，但不如推荐方案简单</div></div>
-            <div class="candidate-row"><div class="candidate-name"><strong>sparse_threshold_200</strong><span>激进稀疏化</span></div><div><span class="tag red">refuted</span></div><div>48</div><div>质量下降超过 2%</div></div>
+            <div class="candidate-row recommended"><div class="candidate-name"><strong>sensitivity_guided_025</strong><span>边际影响筛查后的连续删边</span></div><div><span class="tag">推荐</span></div><div><b>49</b></div><div>74 次筛查，25 次行动通过，独立验证通过</div></div>
+            <div class="candidate-row"><div class="candidate-name"><strong>sparse_threshold_150</strong><span>边权阈值启发式参照</span></div><div><span class="tag blue">supported</span></div><div>49</div><div>得到相同可行拓扑，作为策略参照保留</div></div>
+            <div class="candidate-row"><div class="candidate-name"><strong>guided boundary action</strong><span>第 26 次连续删边</span></div><div><span class="tag red">refuted</span></div><div>48</div><div>最大质量下降 2.32%，超过容差</div></div>
             <div class="candidate-row"><div class="candidate-name"><strong>random_sign_reference</strong><span>负对照</span></div><div><span class="tag red">refuted</span></div><div>—</div><div>质量信号崩溃，验证门槛有效</div></div>
           </div>
         </div>
@@ -227,9 +227,9 @@
               <h3>证据链</h3>
               <div class="evidence-list">
                 <div class="evidence-item"><b>01</b><span>问题与约束冻结为 campaign contract。</span></div>
-                <div class="evidence-item"><b>02</b><span>候选进入独立运行目录，保存参数与命令。</span></div>
-                <div class="evidence-item"><b>03</b><span>结果经过统一评估，失败和反证保留。</span></div>
-                <div class="evidence-item"><b>04</b><span>certificate 只对声明的项目、指标和范围下结论。</span></div>
+                <div class="evidence-item"><b>02</b><span>74 次单边扰动形成边际影响排序。</span></div>
+                <div class="evidence-item"><b>03</b><span>连续删边在第 26 次触及质量边界，反证进入 ledger。</span></div>
+                <div class="evidence-item"><b>04</b><span>推荐方案通过未参与搜索的 3 个损耗点验证。</span></div>
               </div>
             </article>
             <article class="card">
@@ -237,6 +237,7 @@
               <p>下面的链接指向同一仓库中的正式材料，不依赖本机服务。</p>
               <div class="hero-actions">
                 <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/tree/master/evidence/qo-loss-campaign-v3" target="_blank" rel="noreferrer">打开运行证据</a>
+                <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/examples/quantum_optics_open_exploration/artifacts/search_trace.json" target="_blank" rel="noreferrer">查看搜索轨迹</a>
                 <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/examples/quantum_optics_open_exploration/artifacts/problem_certificate.json" target="_blank" rel="noreferrer">查看 certificate</a>
                 <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/docs/demo-script.md" target="_blank" rel="noreferrer">复现命令</a>
               </div>
