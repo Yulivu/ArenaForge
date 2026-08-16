@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ArenaForge GOAI 题目类型二在线演示：把开放科学问题转化为可持续探索和可审查证据。">
-  <title>ArenaForge | GOAI 在线演示</title>
+  <meta name="description" content="ArenaForge：把开放科学问题交给可运行的 Agent 探索，并得到可复查的研究结果。">
+  <title>ArenaForge | 开放科学探索</title>
   <style>
     :root {
       --ink: #17211d;
@@ -146,10 +146,10 @@
 <body>
   <header>
     <div class="shell nav">
-      <div class="brand"><span class="mark">A</span><span>ArenaForge</span><span class="tag">GOAI · 开放探索</span></div>
+      <div class="brand"><span class="mark">A</span><span>ArenaForge</span><span class="tag">开放科学探索</span></div>
       <nav aria-label="演示导航">
-        <button class="active" data-view="product">产品总览</button>
-        <button data-view="reference">完整示例</button>
+        <button class="active" data-view="product">产品</button>
+        <button data-view="reference">看一个真实案例</button>
         <a class="button quiet" href="https://github.com/Yulivu/ArenaForge" target="_blank" rel="noreferrer">查看仓库</a>
       </nav>
     </div>
@@ -159,46 +159,46 @@
     <div class="shell">
       <section class="hero">
         <div>
-          <div class="eyebrow">Scientific exploration execution system</div>
-          <h1>把开放科学问题，变成可持续、可复核的探索。</h1>
-          <p>ArenaForge 连接研究问题、可运行环境与 Agent 实验循环，交付候选方案、运行记录、失败证据和结论适用范围。</p>
+          <div class="eyebrow">给研究者的探索执行工具</div>
+          <h1>把一个研究问题，跑成一份能复查的结果。</h1>
+          <p>研究问题已经有了，ArenaForge 接手后面的方案设计、实验执行、结果比较和证据整理。</p>
           <div class="hero-actions">
-            <button class="button primary" data-view="reference">查看真实参考示例</button>
-            <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/docs/goai-problem-statement.md" target="_blank" rel="noreferrer">查看问题定义</a>
+            <button class="button primary" data-view="reference">看它实际跑了什么</button>
+            <a class="button quiet" href="https://github.com/Yulivu/ArenaForge" target="_blank" rel="noreferrer">打开项目</a>
           </div>
         </div>
         <aside class="hero-note">
-          <strong>通用开放科学探索系统</strong>
-          <p>Quantum Optics 是第一个 Reference Arena，用来展示系统在开放科学问题上的完整运行。ArenaForge 围绕探索活动组织协议、执行和证据交付。</p>
-          <div class="strip"><span class="tag">问题 → 协议</span><span class="tag blue">候选 → 证据</span><span class="tag amber">结论有边界</span></div>
+          <strong>给谁用</strong>
+          <p>适合已经有研究问题、代码或模拟环境，却不想手工维护几十轮实验记录的研究者和科研团队。</p>
+          <div class="strip"><span class="tag">提出方案</span><span class="tag blue">跑实验</span><span class="tag amber">留下证据</span></div>
         </aside>
       </section>
 
       <section id="product" class="view active">
         <div class="section workflow">
           <div class="workflow-row">
-            <div class="workflow-item"><div class="eyebrow">01 · 输入</div><strong>科学问题</strong><span>研究者想知道什么，为什么值得探索。</span></div>
-            <div class="workflow-item"><div class="eyebrow">02 · 固定</div><strong>探索协议</strong><span>观察、行动、反馈、预算和成功标准。</span></div>
-            <div class="workflow-item"><div class="eyebrow">03 · 探索</div><strong>Agent 候选</strong><span>提出相互竞争的假设并执行分支。</span></div>
-            <div class="workflow-item"><div class="eyebrow">04 · 记录</div><strong>证据链</strong><span>代码、命令、结果、失败和反证不丢失。</span></div>
-            <div class="workflow-item"><div class="eyebrow">05 · 输出</div><strong>可审查结论</strong><span>支持、反驳、未决与复现包。</span></div>
+            <div class="workflow-item"><div class="eyebrow">01 · 输入</div><strong>研究问题</strong><span>告诉系统想优化什么，以及哪些条件不能动。</span></div>
+            <div class="workflow-item"><div class="eyebrow">02 · 组织</div><strong>实验方案</strong><span>把可行的假设变成可运行的候选。</span></div>
+            <div class="workflow-item"><div class="eyebrow">03 · 执行</div><strong>批量实验</strong><span>在同一评价条件下运行、比较和筛选。</span></div>
+            <div class="workflow-item"><div class="eyebrow">04 · 留痕</div><strong>研究记录</strong><span>代码、参数、日志、失败和分数一起保存。</span></div>
+            <div class="workflow-item"><div class="eyebrow">05 · 交付</div><strong>研究结论</strong><span>说明推荐什么、为什么推荐、结论能覆盖哪里。</span></div>
           </div>
         </div>
 
         <div class="section">
           <div class="section-heading">
-            <div><div class="eyebrow">Product surface</div><h2>用户获得一场完整探索及其可审查结论。</h2></div>
-            <p>同一个协议下比较候选方案，才能知道改进是否真实、失败是否有信息，以及结论能覆盖到哪里。</p>
+            <div><div class="eyebrow">它解决哪段工作</div><h2>研究想法落地后，最费时间的那一段。</h2></div>
+            <p>从确定实验方案，到反复运行、比较结果、找出失败原因，再把过程整理成别人能复查的材料。</p>
           </div>
           <div class="grid three">
-            <article class="card step"><div class="step-num">A / QUESTION</div><h3>把问题变成协议</h3><p>声明研究目标、可运行环境、反馈信号、资源预算和不可修改边界。</p></article>
-            <article class="card step"><div class="step-num">B / CAMPAIGN</div><h3>让 Agent 持续探索</h3><p>候选方案进入隔离分支，按同一条件执行；通过和失败都进入研究记录。</p></article>
-            <article class="card step"><div class="step-num">C / DECISION</div><h3>把证据交给研究者</h3><p>输出 evidence graph、hash-chained ledger、problem certificate 和 replay bundle。</p></article>
+            <article class="card step"><div class="step-num">A / 方案</div><h3>少手工试错</h3><p>Agent 根据研究目标提出候选方案，研究者只需要确认问题、预算和评价规则。</p></article>
+            <article class="card step"><div class="step-num">B / 实验</div><h3>少丢实验信息</h3><p>每个候选都有独立记录，代码改了什么、怎么跑的、结果怎样都能找到。</p></article>
+            <article class="card step"><div class="step-num">C / 结论</div><h3>少做结果整理</h3><p>系统把通过、失败和边界条件整理成一份可以复核和复现的结果。</p></article>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-heading"><div><div class="eyebrow">What the system proves</div><h2>可被评审直接核验的运行事实</h2></div></div>
+          <div class="section-heading"><div><div class="eyebrow">这次案例实际跑了什么</div><h2>数字对应真实运行记录</h2></div></div>
           <div class="grid four">
             <article class="card"><div class="metric">74</div><div class="metric-label">边际影响的真实评估</div></article>
             <article class="card"><div class="metric">25</div><div class="metric-label">质量门槛内接受的行动</div></article>
@@ -211,8 +211,8 @@
       <section id="reference" class="view">
         <div class="section">
           <div class="section-heading">
-            <div><div class="eyebrow">Reference Arena #1 · Quantum Optics</div><h2>在固定质量容差下寻找更简单的 GHZ 制备图。</h2></div>
-            <p>这是一个完整的真实回放示例。页面展示的数值来自仓库中的探索结果、运行日志与 certificate。</p>
+            <div><div class="eyebrow">真实案例 · 量子光学</div><h2>在质量不明显下降的前提下，把制备图做得更简单。</h2></div>
+            <p>这个案例用一个具体问题展示 ArenaForge 如何组织候选、运行评价、保留失败，并做独立复核。</p>
           </div>
           <div class="reference-head">
             <article class="protocol">
@@ -237,8 +237,8 @@
 
         <div class="section">
           <div class="section-heading">
-            <div><div class="eyebrow">Campaign scale</div><h2>这是一场有阶段、有分支、有失败边界的探索</h2></div>
-            <p>数字来自 Reference Arena 的真实 artifacts。页面把一次研究活动的规模和决策结构完整展开。</p>
+            <div><div class="eyebrow">运行规模</div><h2>一次案例，实际比较了 11 个候选方案。</h2></div>
+            <p>从 74 条连接的逐条测试开始，经过策略参照和连续删边，最后用搜索时没有用到的条件复核结果。</p>
           </div>
           <div class="campaign-grid">
             <article class="campaign-card"><div class="metric" data-snapshot="candidate_count">11</div><p>进入比较的候选</p></article>
@@ -259,28 +259,28 @@
 
         <div class="section">
           <div class="section-heading">
-            <div><div class="eyebrow">Exploration campaign</div><h2>从候选空间到可审查结论</h2></div>
-            <p>评委可以沿着这条链路理解工作量：先建立参照，再探索，再撞到边界，最后用未参与搜索的条件复核。</p>
+            <div><div class="eyebrow">实际执行记录</div><h2>从基线到推荐结果，过程都在这里。</h2></div>
+            <p>每一步都回答一个简单问题：现在拿什么比较、下一步试什么、哪里失败、结果是否经得起换条件复核。</p>
           </div>
           <div class="campaign-flow">
-            <article class="campaign-stage"><div class="stage-number">01 · BASELINE</div><h3>建立规范参照</h3><p>固定目标态、拓扑、预算和质量门槛。</p><code>74 edges · 5 loss levels</code></article>
-            <article class="campaign-stage"><div class="stage-number">02 · SCREEN</div><h3>测量边际影响</h3><p>逐条扰动 74 条连接，形成候选动作排序。</p><code>74 probes · robust score</code></article>
-            <article class="campaign-stage"><div class="stage-number">03 · SEARCH</div><h3>连续反馈搜索</h3><p>按真实反馈接受 25 次删边行动。</p><code>25 accepted · 49 edges</code></article>
-            <article class="campaign-stage"><div class="stage-number">04 · FALSIFY</div><h3>记录边界反证</h3><p>第 26 次行动导致质量下降 2.32%，被拒绝并保留。</p><code>48 edges · refuted</code></article>
-            <article class="campaign-stage"><div class="stage-number">05 · VALIDATE</div><h3>独立条件复核</h3><p>使用搜索外的 3 个损耗点验证推荐候选。</p><code>0.98 · 0.85 · 0.75</code></article>
+            <article class="campaign-stage"><div class="stage-number">01 · 基线</div><h3>先跑规范图</h3><p>固定目标态、预算和质量门槛，得到可比较的起点。</p><code>74 edges · 5 loss levels</code></article>
+            <article class="campaign-stage"><div class="stage-number">02 · 测试</div><h3>逐条试连接</h3><p>测试 74 条连接各自的影响，找到更适合删减的对象。</p><code>74 probes · robust score</code></article>
+            <article class="campaign-stage"><div class="stage-number">03 · 搜索</div><h3>保留有效删减</h3><p>按反馈连续接受 25 次删边，方案降到 49 条连接。</p><code>25 accepted · 49 edges</code></article>
+            <article class="campaign-stage"><div class="stage-number">04 · 失败</div><h3>保留失败结果</h3><p>再删一条后质量下降 2.32%，系统拒绝这一步并留下记录。</p><code>48 edges · rejected</code></article>
+            <article class="campaign-stage"><div class="stage-number">05 · 复核</div><h3>换条件再跑</h3><p>用搜索外的 3 个损耗点复核推荐方案，最大下降 1.80%。</p><code>0.98 · 0.85 · 0.75</code></article>
           </div>
         </div>
 
         <div class="section">
           <div class="scale-note">
-            <strong>评审入口</strong>
-            <p>完整候选矩阵、逐步搜索轨迹、日志、ledger 和 certificate 均保存在仓库中；网页负责快速理解，仓库负责逐项核验。</p>
-            <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/tree/master/examples/quantum_optics_open_exploration/artifacts" target="_blank" rel="noreferrer">查看全部 artifacts</a>
+            <strong>想核对细节？</strong>
+            <p>候选矩阵、搜索轨迹、运行日志和最终结果都在仓库里。先看页面，再按文件逐项核对。</p>
+            <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/tree/master/examples/quantum_optics_open_exploration/artifacts" target="_blank" rel="noreferrer">查看运行文件</a>
           </div>
         </div>
 
         <div class="section">
-          <div class="section-heading"><div><div class="eyebrow">Candidate decisions</div><h2>系统为什么推荐这个方案</h2></div><p>推荐条件预先写入预算与质量门槛；每一项判断都可追溯到对应的运行证据。</p></div>
+          <div class="section-heading"><div><div class="eyebrow">最后留下什么</div><h2>推荐、保留和淘汰都有理由。</h2></div><p>推荐方案满足预算和质量要求；被淘汰的方案也保留，方便复查判断依据。</p></div>
           <div class="candidate-table">
             <div class="candidate-row header"><div>候选假设</div><div>结果</div><div>连接数</div><div>决策依据</div></div>
             <div class="candidate-row recommended"><div class="candidate-name"><strong>sensitivity_guided_025</strong><span>边际影响筛查后的连续删边</span></div><div><span class="tag">推荐</span></div><div><b>49</b></div><div>74 次筛查，25 次行动通过，独立验证通过</div></div>
@@ -291,20 +291,20 @@
         </div>
 
         <div class="section">
-          <div class="section-heading"><div><div class="eyebrow">Evidence delivery</div><h2>每个结论都能回到原始证据</h2></div></div>
+          <div class="section-heading"><div><div class="eyebrow">结果怎么核对</div><h2>从结论点回到实验文件。</h2></div></div>
           <div class="evidence">
             <article class="card">
-              <h3>证据链</h3>
+              <h3>这次结果留下了什么</h3>
               <div class="evidence-list">
-                <div class="evidence-item"><b>01</b><span>问题与约束冻结为 campaign contract。</span></div>
-                <div class="evidence-item"><b>02</b><span>74 次单边扰动形成边际影响排序。</span></div>
-                <div class="evidence-item"><b>03</b><span>连续删边在第 26 次触及质量边界，反证进入 ledger。</span></div>
-                <div class="evidence-item"><b>04</b><span>推荐方案通过未参与搜索的 3 个损耗点验证。</span></div>
+                <div class="evidence-item"><b>01</b><span>问题、预算和评价规则固定下来。</span></div>
+                <div class="evidence-item"><b>02</b><span>74 次单边测试形成了删减顺序。</span></div>
+                <div class="evidence-item"><b>03</b><span>第 26 次删减失败，失败原因和分数都被保留。</span></div>
+                <div class="evidence-item"><b>04</b><span>推荐方案在 3 个新损耗点上重新通过。</span></div>
               </div>
             </article>
             <article class="card">
-              <h3>继续核验</h3>
-              <p>下面的链接指向同一仓库中的正式材料，不依赖本机服务。</p>
+              <h3>打开原始记录</h3>
+              <p>页面展示结论，仓库保存完整运行材料。</p>
               <div class="hero-actions">
                 <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/tree/master/evidence/qo-loss-campaign-v3" target="_blank" rel="noreferrer">打开运行证据</a>
                 <a class="button quiet" href="https://github.com/Yulivu/ArenaForge/blob/master/examples/quantum_optics_open_exploration/artifacts/search_trace.json" target="_blank" rel="noreferrer">查看搜索轨迹</a>
@@ -320,12 +320,11 @@
 
   <footer class="footer">
     <div class="shell">
-      <strong>ArenaForge · GOAI 题目类型二</strong>
-      <div>静态演示展示已完成的真实探索回放；完整运行时、API 模式和本地复现请进入代码仓库。</div>
+      <strong>ArenaForge · 开放科学探索</strong>
+      <div>页面展示一次真实运行回放；完整运行时和复现命令请进入项目仓库。</div>
       <div class="footer-links">
         <a href="https://github.com/Yulivu/ArenaForge" target="_blank" rel="noreferrer">GitHub 仓库</a>
-        <a href="https://github.com/Yulivu/ArenaForge/blob/master/docs/goai-deliverables.md" target="_blank" rel="noreferrer">GOAI 交付说明</a>
-        <a href="https://github.com/Yulivu/ArenaForge/blob/master/docs/third-party-and-data-notices.md" target="_blank" rel="noreferrer">第三方与数据说明</a>
+        <a href="https://github.com/Yulivu/ArenaForge/tree/master/examples/quantum_optics_open_exploration" target="_blank" rel="noreferrer">查看完整案例</a>
       </div>
     </div>
   </footer>
