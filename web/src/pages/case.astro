@@ -25,31 +25,31 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
     <section class="border-y border-black/10 bg-paper">
       <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
         <div class="reveal max-w-3xl">
-          <p class="mb-4 text-[18px] font-semibold text-forge">先用一个简单例子理解</p>
-          <h2 class="text-[38px] font-semibold leading-tight text-ink md:text-[56px]">ArenaForge 帮你找出“怎么做更好”。</h2>
-          <p class="mt-5 text-[18px] leading-8 text-muted">作者有鸡蛋和番茄，目标是做出一盘满意的番茄炒鸡蛋。ArenaForge 接到的输入就是这些材料、这个目标，以及“什么算满意”的判断标准。它会比较不同顺序、火候和做法，在同一套标准下记录结果，留下成功的方法和失败的原因，最后交付一个有依据、能重复的做法。</p>
+          <p class="mb-4 text-[18px] font-semibold text-forge">这项案例的研究对象</p>
+          <h2 class="text-[38px] font-semibold leading-tight text-ink md:text-[56px]">已有一套可运行的基线，研究进入结构优化阶段。</h2>
+          <p class="mt-5 text-[18px] leading-8 text-muted">研究者已经有一张可以在模拟环境中运行的 74 条连接规范制备图，也明确了目标态。现在要解决的问题是：在不超过 55 条连接的资源预算内，找到更简单的制备图，同时让 fidelity 和 count rate 的下降保持在 2% 以内。</p>
         </div>
         <div class="reveal mt-12 grid gap-px border border-black/10 bg-black/10 md:grid-cols-3">
           <article class="bg-white px-6 py-7 md:min-h-64">
-            <p class="text-[15px] font-semibold text-forge">输入</p>
-            <h3 class="mt-5 text-[24px] font-semibold text-ink">材料、目标和约束</h3>
-            <p class="mt-3 text-[16px] leading-7 text-muted">鸡蛋、番茄、番茄炒鸡蛋这个目标，以及时间、火候、口味等判断条件。</p>
+            <p class="text-[15px] font-semibold text-forge">研究输入</p>
+            <h3 class="mt-5 text-[24px] font-semibold text-ink">问题、基线和评价条件</h3>
+            <p class="mt-3 text-[16px] leading-7 text-muted">研究问题、可运行的规范制备图、物理模拟环境、55 条连接预算、2% 质量门槛和统一损耗条件。</p>
           </article>
           <article class="bg-white px-6 py-7 md:min-h-64">
-            <p class="text-[15px] font-semibold text-forge">ArenaForge 做的事</p>
-            <h3 class="mt-5 text-[24px] font-semibold text-ink">安排实验并比较做法</h3>
-            <p class="mt-3 text-[16px] leading-7 text-muted">比较先炒蛋还是先炒番茄、火候如何变化，并让每种做法接受同一套判断。</p>
+            <p class="text-[15px] font-semibold text-forge">ArenaForge 的处理</p>
+            <h3 class="mt-5 text-[24px] font-semibold text-ink">固定协议并运行候选</h3>
+            <p class="mt-3 text-[16px] leading-7 text-muted">确认比较规则，逐条筛查连接影响，运行多种删减策略，在相同条件下记录每个候选的结果。</p>
           </article>
           <article class="bg-white px-6 py-7 md:min-h-64">
-            <p class="text-[15px] font-semibold text-forge">输出</p>
-            <h3 class="mt-5 text-[24px] font-semibold text-ink">推荐做法和判断依据</h3>
-            <p class="mt-3 text-[16px] leading-7 text-muted">交付推荐顺序、失败做法、比较结果和一份别人可以照着重做的记录。</p>
+            <p class="text-[15px] font-semibold text-forge">研究输出</p>
+            <h3 class="mt-5 text-[24px] font-semibold text-ink">推荐方案和证据包</h3>
+            <p class="mt-3 text-[16px] leading-7 text-muted">推荐候选、失败边界、独立复核、搜索轨迹、证据关系和结果证书，供后续论文或决策使用。</p>
           </article>
         </div>
         <div class="reveal mt-8 grid gap-5 border-y border-black/10 py-7 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <div><p class="text-[15px] font-semibold text-forge">输入给 ArenaForge</p><p class="mt-2 text-[16px] leading-7 text-ink">鸡蛋、番茄、目标，以及“什么算满意”的评价标准。</p></div>
+          <div><p class="text-[15px] font-semibold text-forge">输入给 ArenaForge</p><p class="mt-2 text-[16px] leading-7 text-ink">已有可运行基线、研究目标、资源约束、评价指标和执行环境。</p></div>
           <div class="text-center text-[30px] text-forge" aria-hidden="true">→</div>
-          <div><p class="text-[15px] font-semibold text-forge">输出给使用者</p><p class="mt-2 text-[16px] leading-7 text-ink">推荐做法、失败原因、比较依据和可重复的结果记录。</p></div>
+          <div><p class="text-[15px] font-semibold text-forge">输出给论文或决策流程</p><p class="mt-2 text-[16px] leading-7 text-ink">推荐方案、失败原因、比较依据、独立复核结果和可复查的交付材料。</p></div>
         </div>
       </div>
     </section>
@@ -57,13 +57,13 @@ const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL :
     <section class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
       <div class="reveal grid gap-10 md:grid-cols-[.85fr_1.15fr] md:items-start">
         <div>
-          <p class="mb-4 text-[18px] font-semibold text-forge">回到科研案例</p>
-          <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">把鸡蛋和番茄换成一张实验图。</h2>
+          <p class="mb-4 text-[18px] font-semibold text-forge">案例边界</p>
+          <h2 class="text-[36px] font-semibold leading-tight text-ink md:text-[52px]">ArenaForge 从研究决策点开始接入。</h2>
         </div>
         <div class="grid gap-6 border-y border-black/10 py-6">
-          <p class="text-[17px] leading-8 text-muted">这次示例里，材料是一张已经可以运行的 74 条连接规范制备图，目标是在三光子、四维 GHZ 任务中找到更简单的方案。</p>
-          <p class="text-[17px] leading-8 text-muted">“什么算满意”被写成 55 条连接预算和 2% 质量门槛。ArenaForge 再按同样的顺序工作：固定评价规则，运行多种删减方案，比较结果与失败边界，最后在新条件下复核推荐方案。</p>
-          <p class="text-[17px] font-medium leading-8 text-ink">所以这个页面展示的不是一个孤立的 49，而是一条从研究输入到论文或决策材料的完整路径。</p>
+          <p class="text-[17px] leading-8 text-muted">输入已经包含可运行的基线和目标态，研究者不需要从零搭建模拟器。当前任务是围绕结构简化提出候选，并判断哪些改动值得保留。</p>
+          <p class="text-[17px] leading-8 text-muted">ArenaForge 先把预算、质量门槛、损耗条件和停止规则固定下来，再执行候选搜索。结果判断同时考虑通过的方案、越界方案和搜索外条件下的复核。</p>
+          <p class="text-[17px] font-medium leading-8 text-ink">页面展示的是一条完整的研究执行链：输入进入协议确认，协议驱动探索执行，运行记录进入证据判断，最终交回论文或决策流程。</p>
         </div>
       </div>
     </section>
