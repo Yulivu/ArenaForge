@@ -143,7 +143,7 @@ ArenaForge 聚焦 B、C、D 三个环节：协议化、候选实验管理和统�
 - Quantum Optics Reference Arena #1；
 - 该问题的最小参照系、发现信号和成功判据；
 - Campaign v3 的多 seed 运行、负对照和 scoped negative result；
-- 可解压复跑的 `AI4R_OPEN_ArenaForge.zip`；
+- 可解压复跑的 `AI4R_OPEN_<队伍名>.zip`，本次准备为 `AI4R_OPEN_MAPLE.zip`；
 
 ### 尚不能由仓库自动替代的最终提交内容
 

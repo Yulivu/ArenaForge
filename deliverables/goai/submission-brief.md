@@ -46,7 +46,7 @@ ArenaForge 的探索、判定和证据交付能力；结论范围由当前图结
 
 - 代码仓库：提交时填写公开仓库地址。
 - Demo：提交时填写可访问 WebUI 地址。
-- 附件：`AI4R_OPEN_ArenaForge.zip`。
+- 附件：按队伍名生成，例如本次提交使用 `AI4R_OPEN_MAPLE.zip`。
 
 ## 参赛团队需要补写
 

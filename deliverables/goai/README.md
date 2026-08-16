@@ -8,7 +8,8 @@
 - 初赛上传检查清单；
 - ArenaForge 作品摘要骨架及 Quantum Optics Reference Arena 说明；
 - 官方问题定义的填写模板；
-- 生成 `AI4R_OPEN_ArenaForge.zip` 的构建脚本。
+- 生成 `AI4R_OPEN_<队伍名>.zip` 的构建脚本，例如：
+  `python scripts/build_goai_submission.py --team-name MAPLE`。
 
 ## 还需要参赛团队完成
 

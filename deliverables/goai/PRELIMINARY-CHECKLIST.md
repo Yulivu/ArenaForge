@@ -55,7 +55,7 @@ ArenaForge 只能用于整理材料、检查结构、核对页数、检查引用
 - [x] 已形成问题、环境、参照系和发现信号骨架
 - [x] 已完成最小验证计划和 replay 命令
 - [x] 已生成探索结果、evidence、ledger 和 problem certificate
-- [x] 已生成 `AI4R_OPEN_ArenaForge.zip`
+- [x] 已生成 `AI4R_OPEN_MAPLE.zip`
 - [x] 已在干净临时目录解压并复跑 ZIP
 
 ## 仍需参赛团队完成

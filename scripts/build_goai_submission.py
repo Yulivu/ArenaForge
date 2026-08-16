@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import os
 import shutil
@@ -120,6 +121,26 @@ def _run_arena() -> None:
 
 
 def main() -> None:
+    global PACKAGE, ZIP_PATH
+    parser = argparse.ArgumentParser(
+        description="Build the GOAI open-exploration preliminary submission bundle."
+    )
+    parser.add_argument(
+        "--team-name",
+        default="ArenaForge",
+        help="Team name used in the required AI4R_OPEN_<team>.zip filename.",
+    )
+    args = parser.parse_args()
+    team_name = args.team_name.strip()
+    if not team_name or any(
+        character not in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-"
+        for character in team_name
+    ):
+        raise ValueError("team name must contain only letters, numbers, '_' or '-'")
+    package_name = f"AI4R_OPEN_{team_name}"
+    PACKAGE = DIST / package_name
+    ZIP_PATH = DIST / f"{package_name}.zip"
+
     _run_arena()
     if PACKAGE.exists():
         shutil.rmtree(PACKAGE)
@@ -156,9 +177,12 @@ def main() -> None:
 
     manifest = {
         "submission_filename": ZIP_PATH.name,
+        "team_name": team_name,
         "track": "GOAI 赛道三",
         "problem_type": "题目类型二：开放探索赛题",
         "product": "ArenaForge",
+        "repository_url": "https://github.com/Yulivu/ArenaForge",
+        "demo_url": "https://yulivu.github.io/ArenaForge/",
         "reference_arena_title": "Quantum Optics Reference Arena #1",
         "reference_arena": "quantum-optics-loss-robustness",
         "evidence_campaign": "evidence/qo-loss-campaign-v3",

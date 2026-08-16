@@ -40,7 +40,7 @@ def main() -> None:
         raise FileNotFoundError(archive)
 
     with tempfile.TemporaryDirectory(prefix="arenaforge-goai-verify-") as temp:
-        root = Path(temp) / "AI4R_OPEN_ArenaForge"
+        root = Path(temp) / archive.stem
         with zipfile.ZipFile(archive) as handle:
             handle.extractall(Path(temp))
         for relative in REQUIRED:
